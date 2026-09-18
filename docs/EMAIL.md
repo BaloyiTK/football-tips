@@ -1,18 +1,18 @@
 # Email sending
 
-Football Tips uses Nodemailer with standard SMTP.
+Football Tips runs on Next.js App Router and uses Nodemailer with standard SMTP.
 
-This keeps the application independent from a specific email API provider. To move to another SMTP host later, change the Vercel environment variables instead of rewriting the email code.
+Vercel stores all production secrets as Environment Variables. Nothing sensitive is committed to GitHub or exposed to the browser.
 
 ## Files
 
-- `api/lib/email.js` - reusable Nodemailer SMTP module
-- `api/send-email.js` - protected Vercel API endpoint
-- `.env.example` - required environment variables
+- `lib/email.js` - server-only Nodemailer SMTP module
+- `app/api/send-email/route.js` - protected Next.js Route Handler
+- `.env.example` - variable names only; no real secrets
 
 ## Vercel environment variables
 
-Add these variables to the `football-tips` Vercel project:
+Configure these in the `football-tips` Vercel project:
 
 - `SMTP_HOST`
 - `SMTP_PORT`
@@ -22,16 +22,14 @@ Add these variables to the `football-tips` Vercel project:
 - `EMAIL_FROM_NAME`
 - `EMAIL_SEND_SECRET`
 
-Typical SMTP ports:
+Typical ports:
 
 - `587` - STARTTLS
 - `465` - TLS from connection start
 
-The application automatically uses secure mode when `SMTP_PORT=465`.
+The application uses Node.js runtime for the email route because Nodemailer requires normal Node networking.
 
 ## Send an email
-
-Request:
 
 ```http
 POST /api/send-email
@@ -39,7 +37,7 @@ Authorization: Bearer YOUR_EMAIL_SEND_SECRET
 Content-Type: application/json
 ```
 
-Body:
+Example body:
 
 ```json
 {
@@ -50,25 +48,10 @@ Body:
 }
 ```
 
-Multiple recipients are also supported:
-
-```json
-{
-  "to": [
-    { "email": "one@example.com", "name": "Subscriber One" },
-    { "email": "two@example.com", "name": "Subscriber Two" }
-  ],
-  "subject": "Today's Football Tips",
-  "html": "<h1>Today's Core Picks</h1>"
-}
-```
-
-The reusable email module also supports `cc`, `bcc`, and `replyTo`.
+The email module also supports multiple recipients, `cc`, `bcc`, and `replyTo`.
 
 ## Security
 
-Never put SMTP credentials or `EMAIL_SEND_SECRET` in frontend code.
+Do not prefix any SMTP variable with `NEXT_PUBLIC_`. Variables with that prefix are exposed to browser code.
 
-The React subscribe form must not call an SMTP server directly. Browser requests should go through controlled server-side endpoints.
-
-For newsletter delivery, subscriber addresses should normally be sent using `bcc` or processed in batches so subscribers cannot see one another's addresses.
+The public subscription form must use a separate controlled server route. It must never receive SMTP credentials or `EMAIL_SEND_SECRET`.
