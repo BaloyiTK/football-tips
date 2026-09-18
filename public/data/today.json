@@ -1,0 +1,63 @@
+{
+  "date": "18 September 2026",
+  "core": [
+    {
+      "fixture": "Bayern Munich vs Union Berlin",
+      "kickoff": "20:30 SAST",
+      "market": "Bayern Munich — Team Total Over 0.5",
+      "probability": "95%",
+      "heat": "8/8",
+      "contradictions": 0,
+      "shock": 1,
+      "reason": "Strong scoring profile against an opponent currently conceding heavily."
+    },
+    {
+      "fixture": "Qarabag FK vs Safa",
+      "kickoff": "17:45 SAST",
+      "market": "Qarabag FK or Draw — 1X",
+      "probability": "92%",
+      "heat": "8/8",
+      "contradictions": 0,
+      "shock": 1,
+      "reason": "Current form and defensive profile strongly favour Qarabag avoiding defeat."
+    },
+    {
+      "fixture": "Monza vs Sassuolo",
+      "kickoff": "20:45 SAST",
+      "market": "Over 1.5 Match Goals",
+      "probability": "89%",
+      "heat": "8/8",
+      "contradictions": 0,
+      "shock": 1,
+      "reason": "Both teams are producing open scorelines and the two-goal threshold is modest."
+    },
+    {
+      "fixture": "FK Aktobe vs Ulytau",
+      "kickoff": "17:00 SAST",
+      "market": "FK Aktobe or Draw — 1X",
+      "probability": "86%",
+      "heat": "7/8",
+      "contradictions": 0,
+      "shock": 1,
+      "reason": "Aktobe's home record is the strongest signal in this matchup."
+    },
+    {
+      "fixture": "AS Monaco vs Lens",
+      "kickoff": "20:45 SAST",
+      "market": "Over 1.5 Match Goals",
+      "probability": "85%",
+      "heat": "7/8",
+      "contradictions": 1,
+      "shock": 2,
+      "reason": "The goals market grades better than protecting either side with a result market."
+    }
+  ],
+  "secondary": [
+    {
+      "fixture": "Rapid Wien vs WSG Tirol",
+      "market": "Rapid Wien — Draw No Bet",
+      "probability": "81%"
+    }
+  ],
+  "skips": []
+}
