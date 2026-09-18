@@ -120,6 +120,17 @@ async function loadPicks(request) {
 
 async function runDailyEmail(request) {
   try {
+    let payload = {};
+    if (request.method === 'POST') {
+      try {
+        payload = await request.json();
+      } catch {
+        payload = {};
+      }
+    }
+
+    const testMode = payload?.mode === 'test';
+
     const [data, subscribers] = await Promise.all([
       loadPicks(request),
       listConfirmedSubscribers(),
@@ -128,12 +139,16 @@ async function runDailyEmail(request) {
     const dateKey = sastDateKey();
     const email = buildEmail(data);
 
+    if (testMode) {
+      email.subject = `[TEST] ${email.subject}`;
+    }
+
     let sent = 0;
     let skipped = 0;
     const failed = [];
 
     for (const subscriber of subscribers) {
-      if (subscriber.lastDailySentDate === dateKey) {
+      if (!testMode && subscriber.lastDailySentDate === dateKey) {
         skipped += 1;
         continue;
       }
@@ -146,7 +161,9 @@ async function runDailyEmail(request) {
           html: email.html,
         });
 
-        await markDailySent(subscriber.id, dateKey);
+        if (!testMode) {
+          await markDailySent(subscriber.id, dateKey);
+        }
         sent += 1;
       } catch (error) {
         failed.push({
@@ -158,6 +175,7 @@ async function runDailyEmail(request) {
 
     console.log('Daily Core Picks email run', {
       source: 'qstash',
+      mode: testMode ? 'test' : 'daily',
       dateKey,
       subscribers: subscribers.length,
       sent,
@@ -167,6 +185,7 @@ async function runDailyEmail(request) {
 
     return Response.json({
       ok: failed.length === 0,
+      mode: testMode ? 'test' : 'daily',
       dateKey,
       subscribers: subscribers.length,
       sent,
