@@ -7,6 +7,12 @@ const emptyData = { date: '', core: [], secondary: [], skips: [] };
 export default function HomePage() {
   const [data, setData] = useState(emptyData);
   const [loading, setLoading] = useState(true);
+  const [email, setEmail] = useState('');
+  const [consent, setConsent] = useState(false);
+  const [subscribeState, setSubscribeState] = useState({
+    type: 'idle',
+    message: '',
+  });
 
   useEffect(() => {
     fetch('/data/today.json', { cache: 'no-store' })
@@ -17,7 +23,71 @@ export default function HomePage() {
       .then(setData)
       .catch(() => setData(emptyData))
       .finally(() => setLoading(false));
+
+    const params = new URLSearchParams(window.location.search);
+    const subscription = params.get('subscription');
+
+    if (subscription === 'confirmed') {
+      setSubscribeState({
+        type: 'success',
+        message: 'Subscription confirmed. You are on the Daily Core Picks list.',
+      });
+    } else if (subscription === 'invalid') {
+      setSubscribeState({
+        type: 'error',
+        message: 'That confirmation link is invalid.',
+      });
+    } else if (subscription === 'error') {
+      setSubscribeState({
+        type: 'error',
+        message: 'We could not confirm the subscription. Please try again.',
+      });
+    }
   }, []);
+
+  async function handleSubscribe(event) {
+    event.preventDefault();
+    setSubscribeState({ type: 'loading', message: 'Subscribing…' });
+
+    const form = new FormData(event.currentTarget);
+    const website = String(form.get('website') || '');
+
+    try {
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          consent,
+          website,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.ok) {
+        throw new Error(result.error || 'Could not subscribe.');
+      }
+
+      setSubscribeState({
+        type: 'success',
+        message:
+          result.message ||
+          'Check your inbox and confirm your subscription.',
+      });
+
+      if (result.status !== 'already_subscribed') {
+        setEmail('');
+        setConsent(false);
+      }
+    } catch (error) {
+      setSubscribeState({
+        type: 'error',
+        message:
+          error instanceof Error ? error.message : 'Could not subscribe.',
+      });
+    }
+  }
 
   return (
     <div className="site-shell">
@@ -110,11 +180,57 @@ export default function HomePage() {
           <div>
             <span className="eyebrow">DAILY EMAIL</span>
             <h2>Get the Core picks every morning.</h2>
-            <p>Email delivery is handled securely by the Next.js server.</p>
+            <p>
+              Subscribe to receive the daily Core picks by email. We confirm the
+              address first so nobody can subscribe you without permission.
+            </p>
           </div>
-          <form onSubmit={(event) => event.preventDefault()}>
-            <input type="email" placeholder="you@example.com" aria-label="Email address" />
-            <button type="submit">Coming soon</button>
+
+          <form className="subscribe-form" onSubmit={handleSubscribe}>
+            <div className="subscribe-row">
+              <input
+                type="email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                placeholder="you@example.com"
+                aria-label="Email address"
+                required
+              />
+              <button
+                type="submit"
+                disabled={subscribeState.type === 'loading'}
+              >
+                {subscribeState.type === 'loading' ? 'Subscribing…' : 'Subscribe'}
+              </button>
+            </div>
+
+            <label className="consent">
+              <input
+                type="checkbox"
+                checked={consent}
+                onChange={(event) => setConsent(event.target.checked)}
+                required
+              />
+              <span>I agree to receive the Daily Core Picks email.</span>
+            </label>
+
+            <input
+              className="honeypot"
+              type="text"
+              name="website"
+              tabIndex="-1"
+              autoComplete="off"
+              aria-hidden="true"
+            />
+
+            {subscribeState.message ? (
+              <p
+                className={`form-status ${subscribeState.type}`}
+                role="status"
+              >
+                {subscribeState.message}
+              </p>
+            ) : null}
           </form>
         </section>
       </main>
