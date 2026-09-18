@@ -1,23 +1,33 @@
 # Email sending
 
-The project sends email through a provider-isolated serverless module.
+Football Tips uses Nodemailer with standard SMTP.
+
+This keeps the application independent from a specific email API provider. To move to another SMTP host later, change the Vercel environment variables instead of rewriting the email code.
 
 ## Files
 
-- `api/lib/email.js` - email provider adapter (currently Brevo)
+- `api/lib/email.js` - reusable Nodemailer SMTP module
 - `api/send-email.js` - protected Vercel API endpoint
 - `.env.example` - required environment variables
 
 ## Vercel environment variables
 
-Add these to the `football-tips` Vercel project:
+Add these variables to the `football-tips` Vercel project:
 
-- `BREVO_API_KEY`
+- `SMTP_HOST`
+- `SMTP_PORT`
+- `SMTP_USER`
+- `SMTP_PASS`
 - `EMAIL_FROM`
 - `EMAIL_FROM_NAME`
 - `EMAIL_SEND_SECRET`
 
-`EMAIL_FROM` must be a sender/domain verified by Brevo.
+Typical SMTP ports:
+
+- `587` - STARTTLS
+- `465` - TLS from connection start
+
+The application automatically uses secure mode when `SMTP_PORT=465`.
 
 ## Send an email
 
@@ -40,7 +50,7 @@ Body:
 }
 ```
 
-The endpoint also accepts multiple recipients:
+Multiple recipients are also supported:
 
 ```json
 {
@@ -53,8 +63,12 @@ The endpoint also accepts multiple recipients:
 }
 ```
 
+The reusable email module also supports `cc`, `bcc`, and `replyTo`.
+
 ## Security
 
-Do not expose `BREVO_API_KEY` or `EMAIL_SEND_SECRET` in frontend code. They belong only in Vercel environment variables.
+Never put SMTP credentials or `EMAIL_SEND_SECRET` in frontend code.
 
-The public subscribe form should never call Brevo directly. A separate subscription endpoint/database layer will be added for subscriber management.
+The React subscribe form must not call an SMTP server directly. Browser requests should go through controlled server-side endpoints.
+
+For newsletter delivery, subscriber addresses should normally be sent using `bcc` or processed in batches so subscribers cannot see one another's addresses.
