@@ -1,6 +1,7 @@
 import { sendEmail } from '../../../lib/email.js';
 import {
   checkSubscriberStorage,
+  confirmSubscriber,
   createPendingSubscriber,
 } from '../../../lib/subscribers.js';
 
@@ -18,7 +19,34 @@ function sameOrigin(request) {
   }
 }
 
-export async function GET() {
+export async function GET(request) {
+  const url = new URL(request.url);
+  const id = url.searchParams.get('id');
+  const token = url.searchParams.get('token');
+
+  if (id || token) {
+    try {
+      const result = await confirmSubscriber(id, token);
+      const redirectUrl = new URL('/', request.url);
+
+      redirectUrl.searchParams.set(
+        'subscription',
+        result.ok ? 'confirmed' : 'invalid'
+      );
+      redirectUrl.hash = 'subscribe';
+
+      return Response.redirect(redirectUrl, 303);
+    } catch (error) {
+      console.error('Subscription confirmation failed:', error);
+
+      const redirectUrl = new URL('/', request.url);
+      redirectUrl.searchParams.set('subscription', 'error');
+      redirectUrl.hash = 'subscribe';
+
+      return Response.redirect(redirectUrl, 303);
+    }
+  }
+
   try {
     await checkSubscriberStorage();
     return Response.json({ ok: true, storage: 'ready' });
@@ -68,7 +96,7 @@ export async function POST(request) {
       });
     }
 
-    const confirmUrl = new URL('/api/subscribe/confirm', request.url);
+    const confirmUrl = new URL('/api/subscribe', request.url);
     confirmUrl.searchParams.set('id', subscriber.id);
     confirmUrl.searchParams.set('token', subscriber.confirmationToken);
 
