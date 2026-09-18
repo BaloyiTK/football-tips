@@ -3,7 +3,7 @@ import { Client } from '@upstash/qstash';
 const SCHEDULE_ID = 'football-tips-daily-email';
 const DESTINATION =
   'https://football-tips-theta.vercel.app/api/cron/daily-email';
-const CRON = 'CRON_TZ=Africa/Johannesburg 35 18 * * *';
+const CRON = 'CRON_TZ=Africa/Johannesburg 45 18 * * *';
 
 if (process.env.VERCEL_ENV !== 'production') {
   console.log('Skipping QStash schedule configuration outside production.');
@@ -25,10 +25,15 @@ const schedule = await client.schedules.create({
   scheduleId: SCHEDULE_ID,
   cron: CRON,
   retries: 3,
+  body: JSON.stringify({ mode: 'test' }),
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
-console.log('QStash daily email schedule configured', {
+console.log('QStash test email schedule configured', {
   scheduleId: schedule.scheduleId || SCHEDULE_ID,
   cron: CRON,
   destination: DESTINATION,
+  mode: 'test',
 });
