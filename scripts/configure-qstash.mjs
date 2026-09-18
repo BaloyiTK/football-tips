@@ -3,7 +3,7 @@ import { Client } from '@upstash/qstash';
 const SCHEDULE_ID = 'football-tips-daily-email';
 const DESTINATION =
   'https://football-tips-theta.vercel.app/api/cron/daily-email';
-const CRON = 'CRON_TZ=Africa/Johannesburg 0 16 * * *';
+const CRON = 'CRON_TZ=Africa/Johannesburg 35 18 * * *';
 
 if (process.env.VERCEL_ENV !== 'production') {
   console.log('Skipping QStash schedule configuration outside production.');
