@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { formatPercent, selectCorePicks } from '../lib/value-model.js';
 
-const emptyData = { date: '', core: [], secondary: [], skips: [] };
+const emptyData = { date: '', candidates: [], core: [], secondary: [], skips: [] };
 
 export default function HomePage() {
   const [data, setData] = useState(emptyData);
@@ -13,6 +14,8 @@ export default function HomePage() {
     type: 'idle',
     message: '',
   });
+  const candidates = data.candidates ?? data.core ?? [];
+  const valueSelection = useMemo(() => selectCorePicks(candidates), [candidates]);
 
   useEffect(() => {
     fetch('/data/today.json', { cache: 'no-store' })
@@ -106,15 +109,15 @@ export default function HomePage() {
             <span className="eyebrow">FOOTBALL-FIRST ANALYSIS</span>
             <h1>Daily football picks without forcing the board.</h1>
             <p>
-              Football Tips v1.1 filters fixtures using form, goal strength, model probability,
-              Heat, Contradiction Gate and Shock Risk before a pick can become Core.
+              Football Tips v1.2 requires football strength and a positive market price.
+              A likely outcome is not Core unless it also clears our no-vig edge and EV gates.
             </p>
             <a className="cta" href="#picks">View today's Core picks</a>
           </div>
           <div className="hero-card">
             <span>Daily process</span>
             <strong>06:00 SAST</strong>
-            <p>Maximum 5 Core picks. Fewer when the board is weak.</p>
+            <p>Maximum 6 value-qualified Core picks. Fewer when the prices are weak.</p>
           </div>
         </section>
 
@@ -124,13 +127,13 @@ export default function HomePage() {
               <span className="eyebrow">TODAY</span>
               <h2>{data.date || 'Daily Picks'}</h2>
             </div>
-            <span className="pill">v1.1</span>
+            <span className="pill">v1.2 · VALUE GATE</span>
           </div>
 
           {loading ? <p className="muted">Loading picks…</p> : null}
 
           <div className="grid">
-            {data.core.map((pick, i) => (
+            {valueSelection.core.map((pick, i) => (
               <article className="pick-card core" key={`${pick.fixture}-${i}`}>
                 <div className="pick-top">
                   <span className="badge">CORE {i + 1}</span>
@@ -139,20 +142,33 @@ export default function HomePage() {
                 <h3>{pick.fixture}</h3>
                 <div className="market">{pick.market}</div>
                 <div className="metrics">
-                  <span><b>{pick.probability}</b><small>Model P</small></span>
+                  <span><b>{pick.value.odds.toFixed(2)}</b><small>Odds</small></span>
+                  <span><b>{formatPercent(pick.value.modelProbability, 0)}</b><small>Model P</small></span>
+                  <span><b>{pick.value.fairOdds.toFixed(2)}</b><small>Fair odds</small></span>
+                  <span><b>+{formatPercent(pick.value.edge)}</b><small>No-vig edge</small></span>
+                  <span><b>+{formatPercent(pick.value.expectedValue)}</b><small>EV</small></span>
                   <span><b>{pick.heat}</b><small>Heat</small></span>
-                  <span><b>{pick.contradictions}</b><small>Contradictions</small></span>
-                  <span><b>{pick.shock}</b><small>Shock</small></span>
                 </div>
                 <p>{pick.reason}</p>
               </article>
             ))}
           </div>
 
-          {data.secondary.length > 0 && (
+          {!loading && valueSelection.core.length === 0 ? (
+            <div className="no-picks">
+              <h3>No value-qualified Core picks</h3>
+              <p>
+                {valueSelection.rejected.length > 0
+                  ? `${valueSelection.rejected.length} candidate(s) were withheld because they did not have enough verified price value.`
+                  : 'The model will publish fewer picks rather than force a weak board.'}
+              </p>
+            </div>
+          ) : null}
+
+          {(data.secondary ?? []).length > 0 && (
             <div className="secondary-block">
-              <h3>Secondary</h3>
-              {data.secondary.map((pick, i) => (
+              <h3>Watchlist — not Core</h3>
+              {(data.secondary ?? []).map((pick, i) => (
                 <div className="secondary-row" key={`${pick.fixture}-${i}`}>
                   <div>
                     <strong>{pick.fixture}</strong>
@@ -167,12 +183,12 @@ export default function HomePage() {
 
         <section id="method" className="section model-section">
           <span className="eyebrow">THE MODEL</span>
-          <h2>Football Tips v1.1</h2>
+          <h2>Football Tips v1.2</h2>
           <div className="model-grid">
-            <div><strong>01</strong><h3>Football Strength</h3><p>Recent form, home/away profile, scoring, defending and squad context.</p></div>
-            <div><strong>02</strong><h3>Probability</h3><p>Goal expectations and Poisson/Dixon-Coles checks where reliable data is available.</p></div>
-            <div><strong>03</strong><h3>Contradiction Gate</h3><p>Strong-looking picks are downgraded when current football contradicts the selection.</p></div>
-            <div><strong>04</strong><h3>Market Fit</h3><p>The model chooses the best market instead of forcing match-result or double-chance picks.</p></div>
+            <div><strong>01</strong><h3>Price First</h3><p>All outcomes from one bookmaker snapshot are converted to margin-free market probabilities.</p></div>
+            <div><strong>02</strong><h3>Football Strength</h3><p>Form, home/away profile and xG/goals feed the Poisson and Dixon–Coles probability checks.</p></div>
+            <div><strong>03</strong><h3>Value Gate</h3><p>Core requires at least 65% model probability, +4pp no-vig edge and +5% EV.</p></div>
+            <div><strong>04</strong><h3>Final Rank</h3><p>Agreement, Heat, floors and contradictions are checked before the best six can be published.</p></div>
           </div>
         </section>
 

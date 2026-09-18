@@ -1,6 +1,7 @@
 {
   "date": "18 September 2026",
-  "core": [
+  "modelVersion": "1.2",
+  "candidates": [
     {
       "fixture": "Bayern Munich vs Union Berlin",
       "kickoff": "20:30 SAST",

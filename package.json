@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && node scripts/configure-qstash.mjs",
-    "start": "next start"
+    "start": "next start",
+    "test": "node --test"
   },
   "dependencies": {
     "@vercel/blob": "latest",

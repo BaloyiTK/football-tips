@@ -4,6 +4,11 @@ import {
   listConfirmedSubscribers,
   markDailySent,
 } from '../../../../lib/subscribers.js';
+import {
+  formatPercent,
+  MODEL_VERSION,
+  selectCorePicks,
+} from '../../../../lib/value-model.js';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -36,7 +41,13 @@ function escapeHtml(value) {
 }
 
 function buildEmail(data) {
-  const core = Array.isArray(data?.core) ? data.core : [];
+  const candidates = Array.isArray(data?.candidates)
+    ? data.candidates
+    : Array.isArray(data?.core)
+      ? data.core
+      : [];
+  const selection = selectCorePicks(candidates);
+  const core = selection.core;
   const date = data?.date || sastDateKey();
 
   const rows = core
@@ -54,7 +65,12 @@ function buildEmail(data) {
             ${escapeHtml(pick.market)}
           </td>
           <td style="padding:12px;border-bottom:1px solid #e5e7eb;font-weight:700">
-            ${escapeHtml(pick.probability)}
+            ${escapeHtml(pick.value.odds.toFixed(2))}<br>
+            <span style="color:#6b7280;font-weight:400">
+              Fair ${escapeHtml(pick.value.fairOdds.toFixed(2))} ·
+              Edge +${escapeHtml(formatPercent(pick.value.edge))} ·
+              EV +${escapeHtml(formatPercent(pick.value.expectedValue))}
+            </span>
           </td>
         </tr>`
     )
@@ -63,7 +79,9 @@ function buildEmail(data) {
   const textLines = core
     .map(
       (pick, index) =>
-        `${index + 1}. ${pick.fixture} — ${pick.market} — ${pick.probability} — ${pick.kickoff}`
+        `${index + 1}. ${pick.fixture} — ${pick.market} @ ${pick.value.odds.toFixed(2)} — ` +
+        `Model ${formatPercent(pick.value.modelProbability, 0)} — Fair ${pick.value.fairOdds.toFixed(2)} — ` +
+        `Edge +${formatPercent(pick.value.edge)} — EV +${formatPercent(pick.value.expectedValue)} — ${pick.kickoff}`
     )
     .join('\n');
 
@@ -77,7 +95,7 @@ function buildEmail(data) {
       <div style="font-family:Arial,sans-serif;max-width:760px;margin:0 auto;color:#111827">
         <div style="background:#08101d;color:#ffffff;padding:24px;border-radius:14px 14px 0 0">
           <div style="font-size:12px;letter-spacing:.16em;color:#79ffa8;font-weight:800">
-            FOOTBALL TIPS
+            FOOTBALL TIPS · MODEL v${MODEL_VERSION}
           </div>
           <h1 style="margin:8px 0 0;font-size:28px">Core Picks — ${escapeHtml(date)}</h1>
         </div>
@@ -90,7 +108,7 @@ function buildEmail(data) {
                       <th style="padding:12px;text-align:left">#</th>
                       <th style="padding:12px;text-align:left">Fixture</th>
                       <th style="padding:12px;text-align:left">Market</th>
-                      <th style="padding:12px;text-align:left">Model P</th>
+                      <th style="padding:12px;text-align:left">Value</th>
                     </tr>
                   </thead>
                   <tbody>${rows}</tbody>
@@ -98,11 +116,15 @@ function buildEmail(data) {
               : '<p>No Core picks were published today.</p>'
           }
           <p style="margin:18px 0 0;color:#6b7280;font-size:12px">
+            Only selections with at least 65% model probability, +4pp no-vig edge and +5% EV are published as Core.<br>
             Probabilities are estimates, not guarantees. Bet responsibly.
           </p>
         </div>
       </div>
     `,
+    corePublished: core.length,
+    candidatesChecked: candidates.length,
+    withheld: selection.rejected.length + selection.belowCut.length,
   };
 }
 
@@ -181,6 +203,9 @@ async function runDailyEmail(request) {
       sent,
       skipped,
       failed: failed.length,
+      candidatesChecked: email.candidatesChecked,
+      corePublished: email.corePublished,
+      withheld: email.withheld,
     });
 
     return Response.json({
@@ -191,6 +216,9 @@ async function runDailyEmail(request) {
       sent,
       skipped,
       failed: failed.length,
+      candidatesChecked: email.candidatesChecked,
+      corePublished: email.corePublished,
+      withheld: email.withheld,
     });
   } catch (error) {
     console.error('Daily email job failed:', error);

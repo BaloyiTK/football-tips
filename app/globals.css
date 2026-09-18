@@ -52,10 +52,13 @@ h2 { font-size: clamp(30px, 5vw, 52px); margin: 8px 0 0; }
 .kickoff { color: #7f8da3; font-size: 13px; }
 .pick-card h3 { font-size: 22px; margin: 20px 0 8px; }
 .market { font-weight: 800; color: #79ffa8; }
-.metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 22px 0; }
+.metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 22px 0; }
 .metrics span { padding: 12px; border-radius: 12px; background: #09121f; text-align: center; }
 .metrics b { display: block; font-size: 17px; }
 .metrics small { color: #718096; font-size: 10px; }
+.no-picks { margin-top: 18px; padding: 24px; border: 1px dashed rgba(121,255,168,.35); border-radius: 18px; background: rgba(121,255,168,.04); }
+.no-picks h3 { margin: 0 0 6px; }
+.no-picks p { margin: 0; }
 .secondary-block { margin-top: 26px; border: 1px solid rgba(255,255,255,.08); border-radius: 18px; overflow: hidden; }
 .secondary-block h3 { padding: 18px 20px; margin: 0; background: #0c1727; }
 .secondary-row { display: flex; justify-content: space-between; padding: 16px 20px; border-top: 1px solid rgba(255,255,255,.06); }
