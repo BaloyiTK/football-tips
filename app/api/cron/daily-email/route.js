@@ -1,3 +1,4 @@
+import { verifySignatureAppRouter } from '@upstash/qstash/nextjs';
 import { sendEmail } from '../../../../lib/email.js';
 import {
   listConfirmedSubscribers,
@@ -8,7 +9,7 @@ export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
 
-function authorised(request) {
+function manualAuthorised(request) {
   const secret = process.env.CRON_SECRET;
   return Boolean(
     secret &&
@@ -117,11 +118,7 @@ async function loadPicks(request) {
   return response.json();
 }
 
-export async function GET(request) {
-  if (!authorised(request)) {
-    return Response.json({ ok: false, error: 'Unauthorized' }, { status: 401 });
-  }
-
+async function runDailyEmail(request) {
   try {
     const [data, subscribers] = await Promise.all([
       loadPicks(request),
@@ -160,6 +157,7 @@ export async function GET(request) {
     }
 
     console.log('Daily Core Picks email run', {
+      source: 'qstash',
       dateKey,
       subscribers: subscribers.length,
       sent,
@@ -176,14 +174,24 @@ export async function GET(request) {
       failed: failed.length,
     });
   } catch (error) {
-    console.error('Daily email cron failed:', error);
+    console.error('Daily email job failed:', error);
 
     return Response.json(
       {
         ok: false,
-        error: error instanceof Error ? error.message : 'Daily email cron failed',
+        error: error instanceof Error ? error.message : 'Daily email job failed',
       },
       { status: 500 }
     );
   }
+}
+
+export const POST = verifySignatureAppRouter(runDailyEmail);
+
+export async function GET(request) {
+  if (!manualAuthorised(request)) {
+    return Response.json({ ok: false, error: 'Unauthorized' }, { status: 401 });
+  }
+
+  return runDailyEmail(request);
 }
