@@ -16,6 +16,19 @@ Version 1.2 makes value a hard publication gate. A selection is a candidate unti
 
 High probability without value is rejected. Value without adequate model confidence is also rejected.
 
+## Daily fixture scope
+
+The daily discovery stage must load every association in
+[`config/league-scope.json`](../config/league-scope.json) each day. The scope
+contains all 200 associations supplied for the project and has no famous-league
+or top-100 cutoff.
+
+For each association, the scanner should request every senior domestic league
+supported by the fixture provider. Provider gaps must be recorded as
+unavailable; they must never be filled with invented fixtures or statistics.
+Expanding discovery does not lower the publication standard: every candidate
+still has to pass the complete v1.2 value gate before it can become a Core pick.
+
 ## Candidate data
 
 ```json
