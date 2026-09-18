@@ -67,9 +67,30 @@ h2 { font-size: clamp(30px, 5vw, 52px); margin: 8px 0 0; }
 .model-grid h3 { margin-bottom: 8px; }
 
 .subscribe { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
-.subscribe form { display: flex; gap: 10px; }
-.subscribe input { flex: 1; padding: 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,.12); background: #0d1828; color: #fff; }
-.subscribe button { border: 0; border-radius: 12px; padding: 14px 18px; background: #79ffa8; color: #08101d; font-weight: 800; }
+.subscribe-form { position: relative; }
+.subscribe-row { display: flex; gap: 10px; }
+.subscribe-row input[type="email"] {
+  flex: 1; min-width: 0; padding: 14px; border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.12); background: #0d1828; color: #fff;
+}
+.subscribe-row button {
+  border: 0; border-radius: 12px; padding: 14px 18px;
+  background: #79ffa8; color: #08101d; font-weight: 800; cursor: pointer;
+}
+.subscribe-row button:disabled { opacity: .6; cursor: wait; }
+.consent {
+  display: flex; align-items: flex-start; gap: 9px;
+  margin-top: 12px; color: #aebbd0; font-size: 13px; line-height: 1.5;
+}
+.consent input { margin-top: 3px; accent-color: #79ffa8; }
+.form-status { margin: 12px 0 0 !important; font-size: 14px; }
+.form-status.success { color: #79ffa8 !important; }
+.form-status.error { color: #ff9d9d !important; }
+.form-status.loading { color: #aebbd0 !important; }
+.honeypot {
+  position: absolute !important; left: -10000px !important; top: auto !important;
+  width: 1px !important; height: 1px !important; overflow: hidden !important;
+}
 footer { padding: 28px clamp(20px, 5vw, 72px); border-top: 1px solid rgba(255,255,255,.08); color: #7f8da3; display: flex; justify-content: space-between; gap: 16px; }
 footer span { color: #fff; font-weight: 800; }
 .muted { color: #7f8da3; }
@@ -79,5 +100,6 @@ footer span { color: #fff; font-weight: 800; }
   .hero, .subscribe { grid-template-columns: 1fr; }
   .grid, .model-grid { grid-template-columns: 1fr; }
   .metrics { grid-template-columns: repeat(2, 1fr); }
+  .subscribe-row { flex-direction: column; }
   footer { flex-direction: column; }
 }
