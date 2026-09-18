@@ -55,3 +55,7 @@ The email module also supports multiple recipients, `cc`, `bcc`, and `replyTo`.
 Do not prefix any SMTP variable with `NEXT_PUBLIC_`. Variables with that prefix are exposed to browser code.
 
 The public subscription form must use a separate controlled server route. It must never receive SMTP credentials or `EMAIL_SEND_SECRET`.
+
+## Subscriber storage
+
+Subscriber records use a private Vercel Blob store connected to the production project.
