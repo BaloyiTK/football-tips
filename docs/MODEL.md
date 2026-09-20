@@ -106,11 +106,11 @@ Each field may be `support`, `neutral`, or `oppose`. Missing evidence keeps the 
 Core 1X is intended for matches where the visitor has little attacking threat.
 
 - Estimate the away team's probability of scoring at least once.
-- Core requires **away score probability <= 35%**.
+- Core requires **away score probability <= league-relative threshold**.
 - Equivalently, estimated home clean-sheet probability must be **>= 65%**.
 - Record `awayScoringThreat: "pass"` only when the quantitative scoring-risk check supports it.
 - If the away scoring probability is missing, the candidate remains Watchlist.
-- If the away scoring probability is above 35%, Core is blocked.
+- If the away scoring probability is above league-relative threshold, Core is blocked.
 - This is a filtering rule only; BTTS No is **not** an allowed betting market. The published market remains 1X only.
 
 
@@ -120,18 +120,14 @@ Core 1X is intended for matches where the visitor has little attacking threat.
 A Core candidate must explicitly pass:
 
 - **League baseline** — compare the away team's estimated scoring probability with the league's normal away scoring rate.
-- **Sample blend** — use a weighted form window rather than only the last five: approximately 45% last 5–6, 35% last 10–12, 20% longer-term/season baseline when data permits.
+- **Sample blend** — use a weighted form window rather than only the last five: approximately 45% last 5–6, league-relative threshold last 10–12, 20% longer-term/season baseline when data permits.
 - **Opposition adjustment** — discount clean sheets and scoring droughts achieved against unusually weak opposition.
 - **Goalkeeper quality** — evaluate save quality/xG prevented or the best available keeper-strength evidence.
 - **Set-piece risk** — account for away threat from corners, free kicks and penalties plus the home side's set-piece vulnerability.
 - **Market move** — compare current 1X price with opening price when a trustworthy opening line is available.
 
 ### League-normalized away scoring gate
-The away team's estimated probability of scoring must:
-1. remain **<= 35%**, and
-2. sit at least **10 percentage points below the league's normal away-score baseline**.
-
-Thus 35% is an absolute ceiling, not a universal claim that every league behaves the same way.
+The away team's estimated probability of scoring must sit at least **10 percentage points below the league's normal away-score baseline**. There is no longer a universal absolute away-score ceiling.
 
 ### Price movement
 If a trustworthy opening 1X price exists and the current price has shortened by **more than 10%**, reject Core because much of the apparent edge may already have been absorbed by the market. Missing opening-line evidence keeps the marketMove field unverified rather than inventing movement.
@@ -149,11 +145,11 @@ One opposing soft flag may be tolerated as a contradiction. More than one blocks
 ## v1.9 context-normalized 1X
 Core now requires league-baseline normalization, blended recent/medium/long samples, opposition-strength adjustment, goalkeeper quality, set-piece risk and market-move review.
 
-Away scoring must be <=35% AND at least 10 percentage points below the league away-score baseline.
+Away scoring must be <=league-relative threshold AND at least 10 percentage points below the league away-score baseline.
 
 Sample blend target when data permits:
 - 45% last 5-6
-- 35% last 10-12
+- league-relative threshold last 10-12
 - 20% season/rolling long-term baseline
 
 Opening-line rule: if a trustworthy opening 1X price exists and current 1X has shortened by more than 10%, Core is rejected.
