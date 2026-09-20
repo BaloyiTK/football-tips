@@ -125,8 +125,9 @@ export default function HomePage() {
             <span className="eyebrow">FOOTBALL-FIRST ANALYSIS</span>
             <h1>Daily football picks without forcing the board.</h1>
             <p>
-              Football Tips v1.3 requires football strength and a positive market price.
-              A likely outcome is not Core unless it also clears our no-vig edge and EV gates.
+              Football Tips v1.3 starts with football strength. Strong selections stay visible
+              on the Watchlist when price data is incomplete; only fully verified football +
+              value selections become Core.
             </p>
             <a className="cta" href="#picks">View today's Core picks</a>
           </div>
