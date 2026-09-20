@@ -39,7 +39,20 @@
       "goalkeeperQuality",
       "setPieceRisk",
       "weatherPitchRisk"
-    ]
+    ],
+    "leagueUniverse": "global-senior-men-domestic",
+    "scopeRule": "Scan every available senior men's domestic league supported by the active data sources; do not restrict discovery to a predefined Top 100.",
+    "coverageReportFields": [
+      "associationsScanned",
+      "leaguesDiscovered",
+      "leaguesScanned",
+      "fixturesDiscovered",
+      "fixturesAnalyzed",
+      "leaguesSkipped",
+      "fixturesSkipped",
+      "skipReasons"
+    ],
+    "dataAvailabilityRule": "Best effort: unavailable or incomplete provider coverage must be reported, never silently treated as complete global coverage."
   },
   "associations": [
     "England",
