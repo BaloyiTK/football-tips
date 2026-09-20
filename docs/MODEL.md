@@ -1,12 +1,18 @@
-# Football Tips model v1.4
+# Football Tips model v1.5
 
-Version 1.4 makes the football-evidence gate explicit and auditable before price/value can promote a selection to Core.
+Version 1.5 keeps the strict football-evidence gate and restricts the entire model to one market only: home team or draw (1X).
+
+## Market policy
+
+The only market the model may evaluate, rank, publish, or promote to Core is **1X — home team or draw**.
+
+X2, Match Result, Draw No Bet, Over/Under, BTTS, Asian handicaps and all other markets are rejected before probability, Heat or value evaluation.
 
 ## Daily order
 
 1. Scan every accessible senior men's domestic league and fixture in the configured global scope.
 2. Build football evidence before looking for value: recent form, home/away profile, goals or xG, Poisson/Dixon-Coles, Heat, floors, contradictions, relevant H2H and reliable team news.
-3. Cross-check the proposed market against independent models.
+3. Cross-check the proposed **1X** market against independent models.
 4. Only after the football gate is ready, validate the bookmaker price, no-vig edge and EV.
 5. Publish every qualifying Core and rate it; keep incomplete or conflicted football cases on Watchlist.
 
