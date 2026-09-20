@@ -2,14 +2,15 @@
   "date": "20 September 2026",
   "dateISO": "2026-09-20",
   "timezone": "Africa/Johannesburg",
-  "modelVersion": "1.4",
-  "publicationStatus": "published-v1.4-football-revalidation",
-  "revision": 3,
-  "replacesRecoveryPublication": true,
-  "editorialNote": "Football Tips v1.4 requires explicit structured football evidence before price/value can promote a selection to Core. Major football disagreement keeps a priced pick on Watchlist.",
+  "modelVersion": "1.9",
+  "publicationStatus": "published-v1.9-watchlist-rerun",
+  "revision": 11,
+  "runAtSAST": "11:06",
+  "runType": "manual same-day rerun of the 06:00 workflow; only matches still pre-kickoff at rerun time were eligible for publication",
+  "editorialNote": "v1.9 rerun after removing the universal 35% away-score ceiling. The board is 1X-only. No fixture cleared every Core evidence + value gate, so the strongest verified cases are published as Watchlist rather than forced into Core.",
   "scanCoverage": {
     "scopeVersion": "1.3-global-rescan",
-    "mode": "multi-source global senior-men best effort",
+    "mode": "multi-source global senior-men best effort, rerun at 11:06 SAST",
     "sourceBoards": [
       {
         "source": "FootballFixtures.org",
@@ -70,232 +71,244 @@
       "Brazil Serie A",
       "South Africa Premiership"
     ],
-    "deepEvidenceAudits": 10,
-    "coverageLimitations": "No single public source exposes one fully auditable senior-men domestic feed for every configured association. The rescan therefore used multiple broad boards and deep-audited the strongest candidates. Source-board totals overlap and must not be added together."
+    "deepEvidenceAudits": 8,
+    "coverageLimitations": "Public sources overlap and do not provide uniform goalkeeper, set-piece, opening-line, injury and league-baseline fields for every league. Missing required v1.9 evidence keeps a match on Watchlist.",
+    "rerunSources": [
+      {
+        "source": "PredictLix Double Chance",
+        "rows": 108,
+        "url": "https://predictlix.com/predictions/today/double-chance/"
+      },
+      {
+        "source": "Fballtips",
+        "rows": 112,
+        "url": "https://fballtips.com/predictions/?show=odds"
+      },
+      {
+        "source": "PredictZ",
+        "url": "https://www.predictz.com/predictions/today/all-games/"
+      },
+      {
+        "source": "Forebet",
+        "url": "https://www.forebet.com/"
+      },
+      {
+        "source": "Sportingbet / Stake / SportyTrader",
+        "meaning": "same-day price cross-checks for selected candidates"
+      }
+    ]
   },
   "candidates": [
     {
-      "fixture": "Spartak Varna vs Lokomotiv Sofia",
-      "association": "Bulgaria",
-      "league": "First League",
-      "kickoff": "14:15 SAST",
-      "market": "Spartak Varna or Draw (1X)",
-      "probability": "75.0%",
-      "odds": 1.5,
-      "bookmaker": "Bet365",
+      "fixture": "Getafe vs Málaga",
+      "association": "Spain",
+      "league": "La Liga",
+      "kickoff": "14:00 SAST",
+      "market": "Getafe or Draw (1X)",
+      "classification": "WATCHLIST",
+      "probability": "~81%",
+      "odds": 1.22,
+      "bookmaker": "Unibet snapshot",
       "marketOdds": {
-        "1": 2.7,
-        "2": 2.6,
-        "X": 3.25
+        "1": 1.98,
+        "2": 4,
+        "X": 3
       },
-      "coveredOutcomes": [
-        "1",
-        "X"
-      ],
-      "oddsCapturedAt": "20 Sep 2026 pre-match public snapshot",
+      "noVig1X": "77.0%",
+      "estimatedEV": "about -1% at 1.22 using conservative ~81% blended 1X estimate",
       "heat": "4/8",
       "contradictions": 1,
-      "modelAgreement": true,
       "floorsPassed": true,
-      "reason": "v1.4 revalidation: recent form, home/away profile, goals model, Dixon-Coles floor and three independent models all support Spartak avoiding defeat. The 1.50 price still clears the value gate.",
+      "reason": "Football case supports 1X: Málaga are winless after six league matches, multiple independent models put Getafe 1X roughly 76%-83% (with one higher outlier), H2H favors Getafe, and away xG/scoring estimates are materially below the current La Liga away-scoring baseline. Core is blocked by short-rest/team-news risk plus incomplete market-movement, goalkeeper and set-piece verification; the available 1X price also does not clearly clear +5% EV.",
       "sources": [
-        "https://footycheck.com/football/match/spartak-varna-vs-lokomotiv-sofia-2026-09-20/1551116/",
-        "https://predictvantage.com/match/23258-spartak-varna-vs-lokomotiv-sofia-2026-09-20",
-        "https://www.forebet.com/en/football/matches/spartak-varna-lokomotiv-sofia-2469295",
-        "https://footystats.org/clubs/pfc-spartak-1918-varna-3644"
+        "https://www.thestatszone.com/getafe-vs-malaga-preview-team-news-prediction-224472",
+        "https://xgboard.com/leagues/la-liga/matches/getafe-vs-malaga-2026-09-20",
+        "https://football.aleavici.com/football/2026-09-20/getafe-vs-malaga",
+        "https://predictvantage.com/match/23245-getafe-vs-malaga-2026-09-20",
+        "https://www.unibet.fr/paris-sportifs/laliga-getafe-malaga"
       ],
       "footballEvidence": {
-        "recentForm": "pass",
+        "recentForm": "neutral",
         "homeAway": "pass",
         "goalsOrXg": "pass",
         "poissonDc": "pass",
-        "poissonDcProbability": "68.3%",
+        "h2h": "pass",
+        "opponentStrength": "pass",
+        "motivation": "pass",
+        "teamNews": "neutral",
+        "scheduleFatigue": "oppose",
+        "awayScoringThreat": "pass",
+        "awayScoreProbability": "roughly 43%-59% across xG models",
+        "leagueBaseline": "pass",
+        "leagueAwayScoreBaseline": "74.5% from 55 completed La Liga matches before 20 Sep in the replay feed",
+        "sampleBlend": null,
+        "oppositionAdjusted": "pass",
+        "goalkeeperQuality": null,
+        "setPieceRisk": null,
+        "marketMove": null,
+        "gameScriptRisk": "neutral",
+        "refereeDisciplineRisk": null,
+        "weatherPitchRisk": "neutral",
+        "homeFalseFavouriteRisk": "neutral",
+        "independentModels": {
+          "checked": 5,
+          "supporting": 5,
+          "opposing": 0
+        },
+        "majorDisagreement": false
+      }
+    },
+    {
+      "fixture": "Milford FC vs Durban City",
+      "association": "South Africa",
+      "league": "Premiership",
+      "kickoff": "15:00 SAST",
+      "market": "Milford FC or Draw (1X)",
+      "classification": "WATCHLIST",
+      "probability": "~80%",
+      "odds": 1.26,
+      "bookmaker": "best public double-chance snapshot",
+      "marketOdds": {
+        "1": 2.25,
+        "2": 3.2,
+        "X": 2.8
+      },
+      "noVig1X": "~72.0%",
+      "estimatedEV": "about +1% at a conservative ~80% 1X estimate",
+      "heat": "4/8",
+      "contradictions": 1,
+      "floorsPassed": true,
+      "reason": "Multiple models support Milford 1X and the home side sit above Durban City in the current table. However the public sources do not provide enough reliable league-baseline, goalkeeper, set-piece, opening-line and team-news evidence to satisfy the full v1.9 Core gate, and the available price does not clearly reach +5% EV using a conservative blend.",
+      "sources": [
+        "https://predictlix.com/predictions/today/double-chance/",
+        "https://www.forebet.com/en/football/matches/milford-fc-durban-city-2488007",
+        "https://www.sportytrader.com/pt-br/odds/milford-fc-durban-city-fc-2024-8690469/"
+      ],
+      "footballEvidence": {
+        "recentForm": "pass",
+        "homeAway": "neutral",
+        "goalsOrXg": "neutral",
+        "poissonDc": "pass",
+        "h2h": null,
+        "opponentStrength": "pass",
+        "motivation": "neutral",
+        "teamNews": null,
+        "scheduleFatigue": "neutral",
+        "awayScoringThreat": "pass",
+        "awayScoreProbability": null,
+        "leagueBaseline": null,
+        "leagueAwayScoreBaseline": null,
+        "sampleBlend": null,
+        "oppositionAdjusted": null,
+        "goalkeeperQuality": null,
+        "setPieceRisk": null,
+        "marketMove": null,
+        "gameScriptRisk": "neutral",
+        "refereeDisciplineRisk": null,
+        "weatherPitchRisk": "neutral",
+        "homeFalseFavouriteRisk": "neutral",
         "independentModels": {
           "checked": 3,
           "supporting": 3,
           "opposing": 0
         },
-        "majorDisagreement": false,
-        "note": "Three recent draws after the Levski defeat, including Ludogorets and CSKA; home profile is stronger than Lokomotiv's away profile. FootyCheck FCxG 1.50-1.31 and an internal Dixon-Coles check give 1X about 68.3%; independent 1X models are about 74%-81.6%."
+        "majorDisagreement": false
       }
     },
     {
-      "fixture": "Parma vs Genoa",
-      "association": "Italy",
-      "league": "Serie A",
-      "kickoff": "15:00 SAST",
-      "market": "Parma or Draw (1X)",
-      "probability": "67.0%",
-      "odds": 1.49,
-      "bookmaker": "Sportingbet",
-      "marketOdds": {
-        "1": 2.95,
-        "2": 2.6,
-        "X": 3
-      },
-      "coveredOutcomes": [
-        "1",
-        "X"
-      ],
-      "oddsCapturedAt": "20 Sep 2026 pre-match public snapshot",
-      "heat": "4/8",
-      "contradictions": 1,
-      "modelAgreement": false,
-      "floorsPassed": true,
-      "reason": "v1.4 revalidation: price remains potentially attractive, but Parma's current form is poor and independent models disagree too widely. Major football disagreement blocks Core.",
-      "sources": [
-        "https://www.fotmob.com/en-GB/matches/parma-vs-genoa/3fwbbl",
-        "https://footystats.org/italy/genoa-cfc-vs-parma-calcio-1913-h2h-stats",
-        "https://football.aleavici.com/football/2026-09-20/parma-vs-genoa",
-        "https://www.statmuse.com/fc/match/9-20-2026-par-vs-gen-112121"
-      ],
-      "footballEvidence": {
-        "recentForm": "fail",
-        "homeAway": null,
-        "goalsOrXg": null,
-        "poissonDc": "pass",
-        "poissonDcProbability": "68.7%",
-        "independentModels": {
-          "checked": 5,
-          "supporting": 3,
-          "opposing": 2
-        },
-        "majorDisagreement": true,
-        "note": "Parma are L-D-L-L-L in the last five league matches and have scored two goals. Independent 1X estimates range roughly from 55% to 75%, while a Dixon-Coles check from a 1.37-1.20 xG input gives about 68.7% for 1X. The spread is too wide for Core."
-      }
-    },
-    {
-      "fixture": "Getafe vs Malaga",
-      "association": "Spain",
-      "league": "La Liga",
-      "kickoff": "14:00 SAST",
-      "market": "Getafe or Draw (1X)",
-      "probability": "78.2%",
-      "odds": 1.2,
-      "bookmaker": "Bet365",
-      "marketOdds": {
-        "1": 2.1,
-        "2": 3.7,
-        "X": 3
-      },
-      "coveredOutcomes": [
-        "1",
-        "X"
-      ],
-      "oddsCapturedAt": "20 Sep 2026 pre-match public snapshot",
-      "heat": "4/8",
-      "contradictions": 1,
-      "floorsPassed": true,
-      "reason": "Multiple models support Getafe avoiding defeat, with a conservative blended football probability around 78%. The Bet365 1X price is too short: it fails both the +4pp no-vig edge and +5% EV Core gates.",
-      "sources": [
-        "https://predictlix.com/predictions/spain/la-liga/getafe-vs-malaga/",
-        "https://www.forebet.com/en/football/matches/getafe-m%C3%A1laga-cf-2495230",
-        "https://www.wincomparator.com/predictions/getafe-malaga-8586478/",
-        "https://www.bet365.es/hub/es-es/football/football-teams/real-madrid"
-      ]
-    },
-    {
-      "fixture": "Manchester City vs Sunderland",
-      "association": "England",
-      "league": "Premier League",
-      "kickoff": "15:00 SAST",
-      "market": "Manchester City Win",
-      "probability": "73.5%",
-      "odds": null,
-      "marketOdds": null,
-      "heat": "5/8",
-      "contradictions": 1,
-      "floorsPassed": true,
-      "reason": "City's form, home strength and xG profile are clearly stronger, but the currently captured public prices are not stored as a complete named-bookmaker 1X2 snapshot for the value gate.",
-      "sources": [
-        "https://predictlix.com/predictions/england/premier-league/manchester-city-vs-sunderland/",
-        "https://www.predictz.com/predictions/"
-      ]
-    },
-    {
-      "fixture": "Juventus vs Atalanta",
-      "association": "Italy",
-      "league": "Serie A",
-      "kickoff": "18:00 SAST",
-      "market": "Juventus or Draw (1X)",
-      "probability": "83.3%",
-      "odds": null,
-      "marketOdds": null,
-      "heat": "4/8",
-      "contradictions": 1,
-      "floorsPassed": true,
-      "reason": "Independent goal models put Juventus 1X around 83%, supported by the current xG split. The available 1X price is short and a complete named-bookmaker snapshot has not been locked for Core validation.",
-      "sources": [
-        "https://predictlix.com/predictions/italy/serie-a/atalanta-vs-juventus/",
-        "https://garudalionsfc.com/predictions/serie-a/juventus-vs-atalanta-2026-09-20/"
-      ]
-    },
-    {
-      "fixture": "AC Milan vs Lecce",
-      "association": "Italy",
-      "league": "Serie A",
-      "kickoff": "20:45 SAST",
-      "market": "AC Milan or Draw (1X)",
-      "probability": "85.1%",
-      "odds": null,
-      "marketOdds": null,
-      "heat": "4/8",
-      "contradictions": 1,
-      "floorsPassed": true,
-      "reason": "Milan's stronger home projection, recent form and five straight H2H wins support 1X, but six listed Milan absences create a contradiction and the price snapshot is not complete enough for Core.",
-      "sources": [
-        "https://predictlix.com/predictions/italy/serie-a/ac-milan-vs-lecce/"
-      ]
-    },
-    {
-      "fixture": "Viking vs Lillestrom",
-      "association": "Norway",
-      "league": "Eliteserien",
-      "kickoff": "17:00 SAST",
-      "market": "Viking or Draw (1X)",
-      "probability": "85.7%",
-      "odds": null,
-      "marketOdds": null,
-      "heat": "4/8",
-      "contradictions": 0,
-      "floorsPassed": true,
-      "reason": "PredictLix and an independent xG grid both put Viking 1X around 85–86%. The football case is strong, but the available line is short and the complete same-bookmaker market snapshot is still pending.",
-      "sources": [
-        "https://predictlix.com/predictions/today/double-chance/",
-        "https://garudalionsfc.com/predictions/norway-eliteserien/viking-vs-lillestrom-2026-09-20/"
-      ]
-    },
-    {
-      "fixture": "Marumo Gallants vs Orlando Pirates",
+      "fixture": "TS Galaxy vs Chippa United",
       "association": "South Africa",
       "league": "Premiership",
-      "kickoff": "17:00 SAST",
-      "market": "Orlando Pirates or Draw (X2)",
-      "probability": "86.9%",
-      "odds": null,
-      "marketOdds": null,
+      "kickoff": "17:30 SAST",
+      "market": "TS Galaxy or Draw (1X)",
+      "classification": "WATCHLIST",
+      "probability": "~80%",
+      "odds": 1.27,
+      "bookmaker": "Stake snapshot",
+      "marketOdds": {
+        "1": 2.18,
+        "2": 3.35,
+        "X": 2.95
+      },
+      "noVig1X": "72.8%",
+      "estimatedEV": "about +2% at a conservative ~80% 1X estimate",
       "heat": "5/8",
       "contradictions": 1,
       "floorsPassed": true,
-      "reason": "Pirates are unbeaten in the league and Forebet places X2 at 92%; the cover is football-strong but the market is extremely short and no complete named-bookmaker snapshot is locked for a value claim.",
+      "reason": "The 1X football signal is broad: Chippa are winless in the first six league matches, several independent models support TS Galaxy avoiding defeat, and recent H2H is broadly supportive. Core remains blocked because league-baseline, goalkeeper, set-piece and opening-line evidence are incomplete and the conservative EV estimate is below +5%.",
       "sources": [
-        "https://www.forebet.com/en/football/matches/marumo-gallants-orlando-pirates-2487821",
-        "https://www.predictz.com/predictions/today/all-games/"
-      ]
+        "https://predictlix.com/predictions/today/double-chance/",
+        "https://www.foresportia.com/en/prediction/south-africa-premier-soccer-league/ts-galaxy-chippa-united-2026-09-20/",
+        "https://www.forebet.com/en/football/matches/ts-galaxy-fc-chippa-united-2487632",
+        "https://stake.com/fr/sports/soccer/south-africa/premier-soccer-league/46798694-ts-galaxy-fc-chippa-united-fc"
+      ],
+      "footballEvidence": {
+        "recentForm": "neutral",
+        "homeAway": "neutral",
+        "goalsOrXg": "pass",
+        "poissonDc": "pass",
+        "h2h": "pass",
+        "opponentStrength": "pass",
+        "motivation": "neutral",
+        "teamNews": null,
+        "scheduleFatigue": "neutral",
+        "awayScoringThreat": "pass",
+        "awayScoreProbability": null,
+        "leagueBaseline": null,
+        "leagueAwayScoreBaseline": null,
+        "sampleBlend": null,
+        "oppositionAdjusted": null,
+        "goalkeeperQuality": null,
+        "setPieceRisk": null,
+        "marketMove": null,
+        "gameScriptRisk": "neutral",
+        "refereeDisciplineRisk": null,
+        "weatherPitchRisk": "neutral",
+        "homeFalseFavouriteRisk": "neutral",
+        "independentModels": {
+          "checked": 5,
+          "supporting": 5,
+          "opposing": 0
+        },
+        "majorDisagreement": false
+      }
     }
   ],
   "core": [],
   "secondary": [],
   "skips": [
     {
-      "fixture": "Mjallby AIF vs GAIS",
-      "market": "Mjallby or Draw (1X)",
-      "reason": "Skipped after deep audit: Forebet/PredictLix support 1X, but independent xG models price 1X near 56% and favor GAIS. Model agreement failed."
+      "fixture": "Bayer Leverkusen vs RB Leipzig",
+      "market": "Bayer Leverkusen or Draw (1X)",
+      "reason": "Skip: 1X has support from several models, but RB Leipzig's projected scoring threat is high (roughly 1.0-1.55 xG across current models), BTTS/goal projections are elevated, and one independent model strongly favors Leipzig. Away-threat and model-agreement gates are not clean enough."
     },
     {
-      "fixture": "AD Ceuta vs Real Valladolid",
-      "market": "Valladolid or Draw (X2)",
-      "reason": "Skipped after deep audit: Forebet/PredictLix support X2 around 73–74%, but other current models lean draw/home and place X2 materially lower. Model agreement failed."
+      "fixture": "Hannover 96 vs VfL Bochum",
+      "market": "Hannover 96 or Draw (1X)",
+      "reason": "Skip: major independent-model disagreement. Current models range from Hannover-leaning to X2-leaning, with Bochum stronger on recent away form."
+    },
+    {
+      "fixture": "San Lorenzo vs Boca Juniors",
+      "market": "San Lorenzo or Draw (1X)",
+      "reason": "Skip: the attractive derived 1X price is contradicted by independent models that favor Boca or place San Lorenzo 1X materially lower; major disagreement blocks Core."
+    },
+    {
+      "fixture": "Corinthians vs Fluminense",
+      "market": "Corinthians or Draw (1X)",
+      "reason": "Skip: market and some xG models support 1X, but current form/context is conflicted, Fluminense carry the stronger recent attacking profile, and independent models disagree materially."
+    },
+    {
+      "fixture": "Manchester City vs Sunderland",
+      "market": "Manchester City or Draw (1X)",
+      "reason": "Skip for Core value: football probability is high, but 1X is too short to clear the +4pp edge/+5% EV thresholds."
     }
-  ]
+  ],
+  "modelHealth": {
+    "status": "v1.9-live-rerun",
+    "awayThreatRule": "league-relative only; universal 35% away-score ceiling removed",
+    "coreCount": 0,
+    "watchlistCount": 3,
+    "finding": "Removing the absolute 35% ceiling restored viable candidates. Today's remaining blockers are mostly price/value and incomplete context fields rather than the old away-score ceiling.",
+    "nextScheduledRun": "21 September 2026 06:00 SAST"
+  }
 }
