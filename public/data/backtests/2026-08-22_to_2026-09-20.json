@@ -1,0 +1,167 @@
+{
+  "window": {
+    "start": "2026-08-22",
+    "end": "2026-09-20",
+    "days": 30
+  },
+  "generatedAt": "2026-09-20",
+  "timezone": "Africa/Johannesburg",
+  "type": "historical-recommendation-replay",
+  "currentModelVersion": "1.3",
+  "caveat": "This is not a full v1.3 backtest. Model v1.3 went live on 20 Sep 2026 and has no settled Core selections yet. This replay settles recoverable pre-kickoff assistant/model recommendations from prior conversations during the 30-day window.",
+  "settled": 33,
+  "wins": 26,
+  "losses": [
+    {
+      "date": "2026-09-06",
+      "fixture": "Servette vs St. Gallen",
+      "market": "BTTS Yes",
+      "result": "0-2"
+    },
+    {
+      "date": "2026-09-08",
+      "fixture": "Lille vs Real Betis",
+      "market": "Under 4.5",
+      "result": "2-3"
+    },
+    {
+      "date": "2026-09-09",
+      "fixture": "Twente vs Telstar",
+      "market": "BTTS Yes",
+      "result": "1-0"
+    },
+    {
+      "date": "2026-09-09",
+      "fixture": "Rangers vs St Mirren",
+      "market": "BTTS Yes",
+      "result": "1-0"
+    },
+    {
+      "date": "2026-09-09",
+      "fixture": "Jablonec vs Banik Ostrava",
+      "market": "BTTS Yes",
+      "result": "3-0"
+    },
+    {
+      "date": "2026-09-09",
+      "fixture": "Sandvikens vs Oddevold",
+      "market": "BTTS Yes",
+      "result": "0-1"
+    },
+    {
+      "date": "2026-09-19",
+      "fixture": "Willem II vs Fortuna Sittard",
+      "market": "Over 1.5",
+      "result": "0-1"
+    }
+  ],
+  "voids": 0,
+  "hitRate": 0.7878787879,
+  "wilson95": {
+    "low": 0.6225,
+    "high": 0.8932
+  },
+  "byDate": [
+    {
+      "date": "2026-09-06",
+      "sample": "BTTS PLAY card",
+      "wins": 5,
+      "losses": 1,
+      "hitRate": 0.8333
+    },
+    {
+      "date": "2026-09-08",
+      "sample": "pre-kickoff shortlist",
+      "wins": 4,
+      "losses": 1,
+      "hitRate": 0.8
+    },
+    {
+      "date": "2026-09-09",
+      "sample": "BTTS shortlist/core",
+      "wins": 7,
+      "losses": 4,
+      "hitRate": 0.6364
+    },
+    {
+      "date": "2026-09-18",
+      "sample": "model Core",
+      "wins": 5,
+      "losses": 0,
+      "hitRate": 1
+    },
+    {
+      "date": "2026-09-19",
+      "sample": "provisional ranked O1.5 picks",
+      "wins": 5,
+      "losses": 1,
+      "hitRate": 0.8333
+    }
+  ],
+  "byMarketFamily": [
+    {
+      "family": "BTTS Yes",
+      "settled": 17,
+      "wins": 12,
+      "losses": 5,
+      "hitRate": 0.7059
+    },
+    {
+      "family": "Goal floors (O1.5 / team O0.5)",
+      "settled": 12,
+      "wins": 11,
+      "losses": 1,
+      "hitRate": 0.9167
+    },
+    {
+      "family": "Double Chance",
+      "settled": 3,
+      "wins": 3,
+      "losses": 0,
+      "hitRate": 1
+    },
+    {
+      "family": "Under 4.5",
+      "settled": 1,
+      "wins": 0,
+      "losses": 1,
+      "hitRate": 0
+    }
+  ],
+  "knownHeatSample": {
+    "settled": 11,
+    "wins": 10,
+    "losses": 1,
+    "hitRate": 0.9091,
+    "bands": [
+      {
+        "heat": "8/8",
+        "settled": 5,
+        "wins": 5,
+        "losses": 0,
+        "hitRate": 1
+      },
+      {
+        "heat": "7/8",
+        "settled": 4,
+        "wins": 4,
+        "losses": 0,
+        "hitRate": 1
+      },
+      {
+        "heat": "6/8",
+        "settled": 2,
+        "wins": 1,
+        "losses": 1,
+        "hitRate": 0.5
+      }
+    ]
+  },
+  "methodology": [
+    "Only recommendations recoverable as having been made before kickoff were included.",
+    "User-only bets without explicit assistant/model recommendation were excluded.",
+    "Duplicate alternative builders on the same fixture were not double-counted.",
+    "20 Sep selections were excluded because they were not settled at backtest time.",
+    "ROI was not calculated because complete original price snapshots were not available for every historical recommendation."
+  ]
+}
