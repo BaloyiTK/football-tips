@@ -1,6 +1,6 @@
-# Football Tips model v1.7
+# Football Tips model v1.8
 
-Version 1.7 keeps the 1X-only policy and adds mandatory motivation, team-news and schedule/fatigue checks on top of form, xG/goals, H2H, opponent strength and away-favourite protection.
+Version 1.8 keeps the 1X-only policy and adds a mandatory low-away-scoring-threat gate on top of the full football context stack.
 
 ## Market policy
 
@@ -32,6 +32,8 @@ Every Core candidate must include recent form, home/away strength, goals/xG, Poi
     "motivation": "neutral",
     "teamNews": "neutral",
     "scheduleFatigue": "neutral",
+    "awayScoringThreat": "pass",
+    "awayScoreProbability": 0.30,
     "independentModels": {
       "checked": 3,
       "supporting": 3,
@@ -79,7 +81,7 @@ EV = model probability × selection odds - 1
 `marketOdds` must contain all mutually exclusive outcomes from the same bookmaker snapshot. `coveredOutcomes` identifies the outcomes that win the selection.
 
 
-## v1.7 1X danger rules
+## v1.8 1X danger rules
 
 - H2H must be explicitly checked. "support" or "neutral" may pass; "oppose" blocks Core.
 - Opponent strength must explicitly pass. A materially stronger away side blocks Core.
@@ -88,7 +90,7 @@ EV = model probability × selection odds - 1
 - Missing H2H or opponent-strength evidence keeps a candidate on Watchlist rather than silently assuming support.
 
 
-## v1.7 context gates
+## v1.8 context gates
 
 Every serious 1X candidate must explicitly record:
 
@@ -97,3 +99,16 @@ Every serious 1X candidate must explicitly record:
 - **Schedule/Fatigue** — rest days, European/cup congestion, travel burden and short turnaround.
 
 Each field may be `support`, `neutral`, or `oppose`. Missing evidence keeps the pick on Watchlist. `oppose` blocks Core.
+
+
+## v1.8 low away-scoring-threat gate
+
+Core 1X is intended for matches where the visitor has little attacking threat.
+
+- Estimate the away team's probability of scoring at least once.
+- Core requires **away score probability <= 35%**.
+- Equivalently, estimated home clean-sheet probability must be **>= 65%**.
+- Record `awayScoringThreat: "pass"` only when the quantitative scoring-risk check supports it.
+- If the away scoring probability is missing, the candidate remains Watchlist.
+- If the away scoring probability is above 35%, Core is blocked.
+- This is a filtering rule only; BTTS No is **not** an allowed betting market. The published market remains 1X only.
