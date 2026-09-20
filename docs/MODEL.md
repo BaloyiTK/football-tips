@@ -120,3 +120,20 @@ The Match Team Form pillar now also records these last-five supporting metrics, 
 All numeric five-match metrics use the same 30% / 25% / 20% / 15% / 10% recency weights.
 
 These six fields are currently **supporting diagnostics**. They do not yet change the 40% overall + 60% venue Match Team Form score. We will test them before assigning final weights.
+
+
+## Pillar 2 — Head-to-Head (H2H)
+
+H2H measures how the selected team performed in the five most recent direct meetings with the opponent.
+
+It uses the same result values and recency weights as Match Team Form:
+- Win = 100%
+- Draw = 33.3%
+- Loss = 0%
+- most recent to oldest = 30% / 25% / 20% / 15% / 10%
+
+H2H Strength = sum of each H2H result value multiplied by its recency weight.
+
+The five results are recorded from the perspective of the team being evaluated. The pillar also reports raw wins, draws and losses.
+
+H2H remains a separate supporting pillar for now. It does not yet change Match Team Form or automatically determine the final pick. We will test it before assigning a final model weight.
