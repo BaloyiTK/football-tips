@@ -1,6 +1,6 @@
-# Football Tips model v1.8
+# Football Tips model v1.9
 
-Version 1.8 keeps the 1X-only policy and adds a mandatory low-away-scoring-threat gate on top of the full football context stack.
+Version 1.9 keeps the 1X-only policy and normalizes the low-away-scoring case for league style, sample size, opposition quality, goalkeeper/set-piece risk and market movement.
 
 ## Market policy
 
@@ -81,7 +81,7 @@ EV = model probability × selection odds - 1
 `marketOdds` must contain all mutually exclusive outcomes from the same bookmaker snapshot. `coveredOutcomes` identifies the outcomes that win the selection.
 
 
-## v1.8 1X danger rules
+## v1.9 1X danger rules
 
 - H2H must be explicitly checked. "support" or "neutral" may pass; "oppose" blocks Core.
 - Opponent strength must explicitly pass. A materially stronger away side blocks Core.
@@ -90,7 +90,7 @@ EV = model probability × selection odds - 1
 - Missing H2H or opponent-strength evidence keeps a candidate on Watchlist rather than silently assuming support.
 
 
-## v1.8 context gates
+## v1.9 context gates
 
 Every serious 1X candidate must explicitly record:
 
@@ -101,7 +101,7 @@ Every serious 1X candidate must explicitly record:
 Each field may be `support`, `neutral`, or `oppose`. Missing evidence keeps the pick on Watchlist. `oppose` blocks Core.
 
 
-## v1.8 low away-scoring-threat gate
+## v1.9 low away-scoring-threat gate
 
 Core 1X is intended for matches where the visitor has little attacking threat.
 
@@ -112,3 +112,35 @@ Core 1X is intended for matches where the visitor has little attacking threat.
 - If the away scoring probability is missing, the candidate remains Watchlist.
 - If the away scoring probability is above 35%, Core is blocked.
 - This is a filtering rule only; BTTS No is **not** an allowed betting market. The published market remains 1X only.
+
+
+## v1.9 context-normalized 1X rules
+
+### Hard structural inputs
+A Core candidate must explicitly pass:
+
+- **League baseline** — compare the away team's estimated scoring probability with the league's normal away scoring rate.
+- **Sample blend** — use a weighted form window rather than only the last five: approximately 45% last 5–6, 35% last 10–12, 20% longer-term/season baseline when data permits.
+- **Opposition adjustment** — discount clean sheets and scoring droughts achieved against unusually weak opposition.
+- **Goalkeeper quality** — evaluate save quality/xG prevented or the best available keeper-strength evidence.
+- **Set-piece risk** — account for away threat from corners, free kicks and penalties plus the home side's set-piece vulnerability.
+- **Market move** — compare current 1X price with opening price when a trustworthy opening line is available.
+
+### League-normalized away scoring gate
+The away team's estimated probability of scoring must:
+1. remain **<= 35%**, and
+2. sit at least **10 percentage points below the league's normal away-score baseline**.
+
+Thus 35% is an absolute ceiling, not a universal claim that every league behaves the same way.
+
+### Price movement
+If a trustworthy opening 1X price exists and the current price has shortened by **more than 10%**, reject Core because much of the apparent edge may already have been absorbed by the market. Missing opening-line evidence keeps the marketMove field unverified rather than inventing movement.
+
+### Soft contextual risks
+Record these separately:
+- gameScriptRisk
+- refereeDisciplineRisk
+- weatherPitchRisk
+- homeFalseFavouriteRisk
+
+One opposing soft flag may be tolerated as a contradiction. More than one blocks the pick before value scoring.
