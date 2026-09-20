@@ -23,12 +23,14 @@ const validPick = {
     motivation: 'neutral',
     teamNews: 'neutral',
     scheduleFatigue: 'neutral',
+    awayScoringThreat: 'pass',
+    awayScoreProbability: 0.30,
     independentModels: { checked: 3, supporting: 3, opposing: 0 },
     majorDisagreement: false,
   },
 };
 
-test('uses model v1.7', () => assert.equal(MODEL_VERSION, '1.7'));
+test('uses model v1.8', () => assert.equal(MODEL_VERSION, '1.8'));
 
 test('qualifies a fully verified value pick as Core', () => {
   const result = evaluatePick(validPick);
@@ -183,6 +185,32 @@ test('blocks Core when team news materially opposes the 1X case', () => {
   const result = evaluatePick({
     ...validPick,
     footballEvidence: { ...validPick.footballEvidence, teamNews: 'oppose' },
+  });
+  assert.equal(result.grade, 'watchlist');
+});
+
+
+test('blocks Core when away scoring probability is above 35%', () => {
+  const result = evaluatePick({
+    ...validPick,
+    footballEvidence: {
+      ...validPick.footballEvidence,
+      awayScoringThreat: 'fail',
+      awayScoreProbability: 0.42,
+    },
+  });
+  assert.notEqual(result.grade, 'core');
+  assert.match(result.reasons.join(' '), /Away scoring probability is too high|awayScoringThreat/i);
+});
+
+test('requires away scoring threat evidence for Core', () => {
+  const result = evaluatePick({
+    ...validPick,
+    footballEvidence: {
+      ...validPick.footballEvidence,
+      awayScoringThreat: undefined,
+      awayScoreProbability: undefined,
+    },
   });
   assert.equal(result.grade, 'watchlist');
 });
