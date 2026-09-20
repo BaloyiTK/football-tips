@@ -120,3 +120,15 @@ footer span { color: #fff; font-weight: 800; }
   .watchlist-meta { text-align: left; min-width: 0; }
   footer { flex-direction: column; }
 }
+
+.scan-audit { margin: 0 0 24px; padding: 20px; border: 1px solid rgba(121,255,168,.18); border-radius: 18px; background: rgba(121,255,168,.035); }
+.scan-audit-head { display:flex; justify-content:space-between; align-items:center; gap:16px; }
+.scan-audit-head h3 { margin:6px 0 0; }
+.scan-metrics { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin:18px 0 10px; }
+.scan-metrics span { padding:12px; border-radius:12px; background:#09121f; text-align:center; }
+.scan-metrics b { display:block; font-size:18px; }
+.scan-metrics small { display:block; color:#718096; font-size:10px; margin-top:3px; }
+.scan-audit details { margin-top:12px; color:#aebbd0; }
+.scan-audit summary { cursor:pointer; color:#79ffa8; font-weight:700; }
+.competition-list { padding-top:12px; line-height:1.7; font-size:13px; color:#8fa0b8; }
+@media (max-width:800px) { .scan-audit-head { align-items:flex-start; flex-direction:column; } .scan-metrics { grid-template-columns:repeat(2,1fr); } }
