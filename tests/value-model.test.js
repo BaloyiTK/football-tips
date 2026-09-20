@@ -1,13 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { evaluatePick, selectCorePicks, MODEL_VERSION, ratingBand, validateFootballEvidence } from '../lib/value-model.js';
+import { evaluatePick, selectCorePicks, MODEL_VERSION, ratingBand, validateFootballEvidence, isOneXPick } from '../lib/value-model.js';
 
 const validPick = {
   fixture: 'Home vs Away',
   probability: '72%',
   odds: 1.55,
-  marketOdds: { selection: 1.55, opposite: 2.5 },
-  selectionOutcome: 'selection',
+  market: 'Home or Draw (1X)',
+  marketOdds: { '1': 2.2, 'X': 3.3, '2': 3.4 },
+  coveredOutcomes: ['1', 'X'],
   heat: '5/8',
   contradictions: 0,
   modelAgreement: true,
@@ -22,7 +23,7 @@ const validPick = {
   },
 };
 
-test('uses model v1.4', () => assert.equal(MODEL_VERSION, '1.4'));
+test('uses model v1.5', () => assert.equal(MODEL_VERSION, '1.5'));
 
 test('qualifies a fully verified value pick as Core', () => {
   const result = evaluatePick(validPick);
@@ -110,4 +111,12 @@ test('maps numeric ratings into descriptive Core bands', () => {
   assert.equal(ratingBand(80), 'STRONG');
   assert.equal(ratingBand(70), 'SOLID');
   assert.equal(ratingBand(60), 'QUALIFIED');
+});
+
+
+test('accepts only home-or-draw 1X selections', () => {
+  assert.equal(isOneXPick(validPick), true);
+  assert.equal(evaluatePick({ ...validPick, market: 'Away or Draw (X2)', coveredOutcomes: ['X','2'] }).grade, 'skip');
+  assert.equal(evaluatePick({ ...validPick, market: 'Over 1.5', coveredOutcomes: undefined }).grade, 'skip');
+  assert.equal(evaluatePick({ ...validPick, market: 'Home Win', coveredOutcomes: ['1'] }).grade, 'skip');
 });
