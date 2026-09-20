@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { evaluatePick, selectCorePicks, MODEL_VERSION } from './value-model.js';
+import { evaluatePick, selectCorePicks, MODEL_VERSION, ratingBand } from '../lib/value-model.js';
 
 const validPick = {
   fixture: 'Home vs Away',
