@@ -1,5 +1,5 @@
 {
-  "version": "1.2",
+  "version": "1.3",
   "effectiveDate": "2026-09-20",
   "timezone": "Africa/Johannesburg",
   "associationCount": 200,
@@ -11,7 +11,7 @@
     ],
     "topAssociationLimit": null,
     "providerCoverage": "best-effort",
-    "selectionGate": "value-model-v1.3",
+    "selectionGate": "value-model-v1.4",
     "fixtureSourceStrategy": "multi-source-global-exhaustive",
     "minimumDistinctLeagues": null,
     "weekendTargetDistinctLeagues": null,
