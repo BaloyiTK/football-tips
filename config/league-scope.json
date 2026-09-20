@@ -11,7 +11,7 @@
     ],
     "topAssociationLimit": null,
     "providerCoverage": "best-effort",
-    "selectionGate": "value-model-v1.6-1x-strength-gate",
+    "selectionGate": "value-model-v1.7-full-context",
     "fixtureSourceStrategy": "multi-source-global-exhaustive",
     "minimumDistinctLeagues": null,
     "weekendTargetDistinctLeagues": null,
@@ -26,7 +26,10 @@
     ],
     "requireH2H": true,
     "requireOpponentStrength": true,
-    "maxAwayNoVigWinProbability": 0.6
+    "maxAwayNoVigWinProbability": 0.6,
+    "requireMotivation": true,
+    "requireTeamNews": true,
+    "requireScheduleFatigue": true
   },
   "associations": [
     "England",
