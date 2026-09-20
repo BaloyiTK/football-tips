@@ -1,15 +1,24 @@
 {
-  "version": "1.0",
-  "effectiveDate": "2026-09-18",
+  "version": "1.1",
+  "effectiveDate": "2026-09-20",
   "timezone": "Africa/Johannesburg",
   "associationCount": 200,
   "scanPolicy": {
     "associationMode": "all-listed",
     "competitionMode": "all-provider-supported",
-    "competitionTypes": ["domestic-league"],
+    "competitionTypes": [
+      "domestic-league"
+    ],
     "topAssociationLimit": null,
     "providerCoverage": "best-effort",
-    "selectionGate": "value-model-v1.2"
+    "selectionGate": "value-model-v1.3",
+    "fixtureSourceStrategy": "multi-source-global-board",
+    "minimumDistinctLeagues": 30,
+    "weekendTargetDistinctLeagues": 50,
+    "minimumFixturesBeforeRanking": 200,
+    "weekendTargetFixtures": 500,
+    "doNotStopAfterFirstCandidates": true,
+    "requireCoverageReport": true
   },
   "associations": [
     "England",
