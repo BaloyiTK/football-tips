@@ -282,7 +282,7 @@ export default function HomePage() {
           <div className="model-grid">
             <div><strong>01</strong><h3>No Hard Market Rule</h3><p>Any football market may be considered when the data supports it.</p></div>
             <div><strong>02</strong><h3>No Automatic Reject Gates</h3><p>No fixed probability, EV, heat, contradiction, away-threat or model-agreement threshold automatically removes a match.</p></div>
-            <div><strong>03</strong><h3>Analyze The Evidence</h3><p>Form, home/away performance, goals/xG, team news, H2H, prices and match context are inputs for ranking rather than mandatory gates.</p></div>
+            <div><strong>03</strong><h3>Match Team Form</h3><p>Pillar 1 combines weighted last-5 overall form with venue form: 40% overall + 60% home form for the host, or away form for the visitor. Recent matches carry 30/25/20/15/10% weights.</p></div>
             <div><strong>04</strong><h3>Rank, Don't Force</h3><p>The strongest opportunities are ranked from best to weakest, with uncertainty and missing evidence shown openly.</p></div>
           </div>
         </section>
