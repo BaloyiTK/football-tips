@@ -18,12 +18,14 @@ const validPick = {
     homeAway: 'pass',
     goalsOrXg: 'pass',
     poissonDc: 'pass',
+    h2h: 'neutral',
+    opponentStrength: 'pass',
     independentModels: { checked: 3, supporting: 3, opposing: 0 },
     majorDisagreement: false,
   },
 };
 
-test('uses model v1.5', () => assert.equal(MODEL_VERSION, '1.5'));
+test('uses model v1.6', () => assert.equal(MODEL_VERSION, '1.6'));
 
 test('qualifies a fully verified value pick as Core', () => {
   const result = evaluatePick(validPick);
@@ -119,4 +121,37 @@ test('accepts only home-or-draw 1X selections', () => {
   assert.equal(evaluatePick({ ...validPick, market: 'Away or Draw (X2)', coveredOutcomes: ['X','2'] }).grade, 'skip');
   assert.equal(evaluatePick({ ...validPick, market: 'Over 1.5', coveredOutcomes: undefined }).grade, 'skip');
   assert.equal(evaluatePick({ ...validPick, market: 'Home Win', coveredOutcomes: ['1'] }).grade, 'skip');
+});
+
+
+test('requires H2H and opponent-strength evidence for Core', () => {
+  const result = evaluatePick({
+    ...validPick,
+    footballEvidence: {
+      ...validPick.footballEvidence,
+      h2h: undefined,
+      opponentStrength: undefined,
+    },
+  });
+  assert.equal(result.grade, 'watchlist');
+  assert.match(result.reasons.join(' '), /h2h|opponentStrength/i);
+});
+
+test('blocks 1X when H2H directly opposes the home side', () => {
+  const result = evaluatePick({
+    ...validPick,
+    footballEvidence: { ...validPick.footballEvidence, h2h: 'oppose' },
+  });
+  assert.equal(result.grade, 'watchlist');
+});
+
+test('blocks 1X when the away side is an overwhelming no-vig market favourite', () => {
+  const result = evaluatePick({
+    ...validPick,
+    odds: 2.1,
+    marketOdds: { '1': 8.0, 'X': 5.0, '2': 1.25 },
+    coveredOutcomes: ['1', 'X'],
+  });
+  assert.equal(result.grade, 'skip');
+  assert.match(result.reasons.join(' '), /overwhelming market favourite/i);
 });
