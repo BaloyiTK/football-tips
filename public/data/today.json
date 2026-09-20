@@ -70,7 +70,7 @@
       "Brazil Serie A",
       "South Africa Premiership"
     ],
-    "deepEvidenceAudits": 9,
+    "deepEvidenceAudits": 10,
     "coverageLimitations": "No single public source exposes one fully auditable senior-men domestic feed for every configured association. The rescan therefore used multiple broad boards and deep-audited the strongest candidates. Source-board totals overlap and must not be added together."
   },
   "candidates": [
