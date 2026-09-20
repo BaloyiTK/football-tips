@@ -125,7 +125,7 @@ export default function HomePage() {
             <span className="eyebrow">FOOTBALL-FIRST ANALYSIS</span>
             <h1>Daily football picks without forcing the board.</h1>
             <p>
-              Football Tips v1.8 starts with football strength. Strong selections stay visible
+              Football Tips v1.9 starts with football strength. Strong selections stay visible
               on the Watchlist when price data is incomplete; only fully verified football +
               value selections become Core.
             </p>
@@ -144,7 +144,7 @@ export default function HomePage() {
               <span className="eyebrow">TODAY</span>
               <h2>{data.date || 'Daily Picks'}</h2>
             </div>
-            <span className="pill">v1.8 · 1X + LOW AWAY THREAT</span>
+            <span className="pill">v1.9 · CONTEXT-NORMALIZED 1X</span>
           </div>
 
           {loading ? <p className="muted">Loading picks…</p> : null}
@@ -264,11 +264,11 @@ export default function HomePage() {
 
         <section id="method" className="section model-section">
           <span className="eyebrow">THE MODEL</span>
-          <h2>Football Tips v1.8</h2>
+          <h2>Football Tips v1.9</h2>
           <div className="model-grid">
             <div><strong>01</strong><h3>1X Only</h3><p>The model evaluates only home team or draw (1X). X2, totals, BTTS, DNB and Match Result are excluded before scoring.</p></div>
-            <div><strong>02</strong><h3>Full Football Context</h3><p>Form, home/away profile, xG/goals, H2H, opponent strength, motivation, team news, schedule/fatigue and Poisson/Dixon-Coles must all be explicitly checked.</p></div>
-            <div><strong>03</strong><h3>Low Away Scoring Threat</h3><p>Core requires the away side's estimated chance of scoring to be 35% or lower — at least a 65% home clean-sheet probability. The 60% away-favourite danger rule still applies.</p></div>
+            <div><strong>02</strong><h3>Full Football Context</h3><p>Form is blended across short, medium and long windows, normalized for league style and opposition quality, then checked with xG/goals, H2H, goalkeeper, set-piece, team-news, schedule and Poisson/Dixon-Coles.</p></div>
+            <div><strong>03</strong><h3>Low Away Scoring Threat</h3><p>Core requires away scoring probability <=35% and at least 10 percentage points below the league away-score baseline. Goalkeeper and set-piece risk must also be checked.</p></div>
             <div><strong>04</strong><h3>Separate The Scores</h3><p>Every Core shows Football Strength, Value Strength and an Overall rating. Price cannot compensate for a failed football gate.</p></div>
           </div>
         </section>
