@@ -268,7 +268,7 @@ export default function HomePage() {
           <div className="model-grid">
             <div><strong>01</strong><h3>1X Only</h3><p>The model evaluates only home team or draw (1X). X2, totals, BTTS, DNB and Match Result are excluded before scoring.</p></div>
             <div><strong>02</strong><h3>Full Football Context</h3><p>Form is blended across short, medium and long windows, normalized for league style and opposition quality, then checked with xG/goals, H2H, goalkeeper, set-piece, team-news, schedule and Poisson/Dixon-Coles.</p></div>
-            <div><strong>03</strong><h3>Low Away Scoring Threat</h3><p>Core requires away scoring probability <=35% and at least 10 percentage points below the league away-score baseline. Goalkeeper and set-piece risk must also be checked.</p></div>
+            <div><strong>03</strong><h3>Low Away Scoring Threat</h3><p>Core requires away scoring probability ≤35% and at least 10 percentage points below the league away-score baseline. Goalkeeper and set-piece risk must also be checked.</p></div>
             <div><strong>04</strong><h3>Separate The Scores</h3><p>Every Core shows Football Strength, Value Strength and an Overall rating. Price cannot compensate for a failed football gate.</p></div>
           </div>
         </section>
