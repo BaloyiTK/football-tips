@@ -2,11 +2,11 @@
   "date": "20 September 2026",
   "dateISO": "2026-09-20",
   "timezone": "Africa/Johannesburg",
-  "modelVersion": "1.4",
-  "publicationStatus": "published-v1.4-football-revalidation",
-  "revision": 3,
+  "modelVersion": "1.5",
+  "publicationStatus": "published-v1.5-1x-only",
+  "revision": 4,
   "replacesRecoveryPublication": true,
-  "editorialNote": "Football Tips v1.4 requires explicit structured football evidence before price/value can promote a selection to Core. Major football disagreement keeps a priced pick on Watchlist.",
+  "editorialNote": "Football Tips v1.5 is 1X-only. The model evaluates home-team-or-draw selections only; all X2, totals, BTTS, DNB and Match Result markets are excluded before the football/value gates.",
   "scanCoverage": {
     "scopeVersion": "1.3-global-rescan",
     "mode": "multi-source global senior-men best effort",
@@ -195,24 +195,6 @@
       ]
     },
     {
-      "fixture": "Manchester City vs Sunderland",
-      "association": "England",
-      "league": "Premier League",
-      "kickoff": "15:00 SAST",
-      "market": "Manchester City Win",
-      "probability": "73.5%",
-      "odds": null,
-      "marketOdds": null,
-      "heat": "5/8",
-      "contradictions": 1,
-      "floorsPassed": true,
-      "reason": "City's form, home strength and xG profile are clearly stronger, but the currently captured public prices are not stored as a complete named-bookmaker 1X2 snapshot for the value gate.",
-      "sources": [
-        "https://predictlix.com/predictions/england/premier-league/manchester-city-vs-sunderland/",
-        "https://www.predictz.com/predictions/"
-      ]
-    },
-    {
       "fixture": "Juventus vs Atalanta",
       "association": "Italy",
       "league": "Serie A",
@@ -264,24 +246,6 @@
         "https://predictlix.com/predictions/today/double-chance/",
         "https://garudalionsfc.com/predictions/norway-eliteserien/viking-vs-lillestrom-2026-09-20/"
       ]
-    },
-    {
-      "fixture": "Marumo Gallants vs Orlando Pirates",
-      "association": "South Africa",
-      "league": "Premiership",
-      "kickoff": "17:00 SAST",
-      "market": "Orlando Pirates or Draw (X2)",
-      "probability": "86.9%",
-      "odds": null,
-      "marketOdds": null,
-      "heat": "5/8",
-      "contradictions": 1,
-      "floorsPassed": true,
-      "reason": "Pirates are unbeaten in the league and Forebet places X2 at 92%; the cover is football-strong but the market is extremely short and no complete named-bookmaker snapshot is locked for a value claim.",
-      "sources": [
-        "https://www.forebet.com/en/football/matches/marumo-gallants-orlando-pirates-2487821",
-        "https://www.predictz.com/predictions/today/all-games/"
-      ]
     }
   ],
   "core": [],
@@ -291,11 +255,6 @@
       "fixture": "Mjallby AIF vs GAIS",
       "market": "Mjallby or Draw (1X)",
       "reason": "Skipped after deep audit: Forebet/PredictLix support 1X, but independent xG models price 1X near 56% and favor GAIS. Model agreement failed."
-    },
-    {
-      "fixture": "AD Ceuta vs Real Valladolid",
-      "market": "Valladolid or Draw (X2)",
-      "reason": "Skipped after deep audit: Forebet/PredictLix support X2 around 73–74%, but other current models lean draw/home and place X2 materially lower. Model agreement failed."
     }
   ]
 }
