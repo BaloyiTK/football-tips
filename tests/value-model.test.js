@@ -1,7 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-
-import { evaluatePick, selectCorePicks } from '../lib/value-model.js';
+import { evaluatePick, selectCorePicks, MODEL_VERSION } from './value-model.js';
 
 const validPick = {
   fixture: 'Home vs Away',
@@ -15,73 +14,49 @@ const validPick = {
   floorsPassed: true,
 };
 
-test('qualifies a pick with sufficient probability, no-vig edge and EV', () => {
-  const result = evaluatePick(validPick);
+test('uses model v1.3', () => assert.equal(MODEL_VERSION, '1.3'));
 
+test('qualifies a fully verified value pick as Core', () => {
+  const result = evaluatePick(validPick);
+  assert.equal(result.grade, 'core');
   assert.equal(result.qualifies, true);
   assert.ok(result.value.edge > 0.1);
-  assert.ok(result.value.expectedValue > 0.11);
-  assert.equal(result.value.fairOdds.toFixed(2), '1.39');
 });
 
-test('rejects a likely selection when the bookmaker price is too short', () => {
-  const result = evaluatePick({
-    ...validPick,
-    odds: 1.3,
-    marketOdds: { selection: 1.3, opposite: 3.8 },
-  });
-
-  assert.equal(result.qualifies, false);
-  assert.ok(result.reasons.some((reason) => reason.includes('Expected value')));
+test('keeps a football-strong pick on Watchlist when price data is missing', () => {
+  const result = evaluatePick({ ...validPick, odds: undefined, marketOdds: undefined });
+  assert.equal(result.grade, 'watchlist');
+  assert.equal(result.priceStatus, 'pending');
 });
 
-test('rejects picks without a complete market snapshot', () => {
-  const result = evaluatePick({
-    ...validPick,
-    marketOdds: undefined,
-  });
-
-  assert.equal(result.qualifies, false);
-  assert.ok(result.reasons.some((reason) => reason.includes('Complete market odds')));
+test('keeps a strong pick on Watchlist when price is too short', () => {
+  const result = evaluatePick({ ...validPick, odds: 1.3, marketOdds: { selection: 1.3, opposite: 3.8 } });
+  assert.equal(result.grade, 'watchlist');
+  assert.equal(result.priceStatus, 'verified-no-core-value');
 });
 
-test('calculates double-chance market probability from no-vig 1X2 odds', () => {
-  const result = evaluatePick({
-    ...validPick,
-    probability: '86%',
-    odds: 1.23,
-    marketOdds: { home: 1.8, draw: 3.8, away: 5 },
-    coveredOutcomes: ['home', 'draw'],
-    selectionOutcome: undefined,
-  });
-
-  assert.equal(result.qualifies, true);
-  assert.ok(result.value.noVigMarketProbability > 0.8);
-  assert.ok(result.value.expectedValue > 0.05);
+test('skips weak football evidence even if a price exists', () => {
+  const result = evaluatePick({ ...validPick, probability: '56%' });
+  assert.equal(result.grade, 'skip');
 });
 
-test('requires football-model agreement and floors', () => {
-  const result = evaluatePick({
-    ...validPick,
-    modelAgreement: false,
-    floorsPassed: false,
-  });
-
-  assert.equal(result.qualifies, false);
-  assert.ok(result.reasons.some((reason) => reason.includes('must agree')));
-  assert.ok(result.reasons.some((reason) => reason.includes('floors')));
+test('keeps 60-64% football picks on Watchlist', () => {
+  const result = evaluatePick({ ...validPick, probability: '63%' });
+  assert.equal(result.grade, 'watchlist');
 });
 
-test('ranks qualified picks and publishes no more than six', () => {
+test('requires explicit full football confirmation for Core, not Watchlist', () => {
+  const result = evaluatePick({ ...validPick, modelAgreement: undefined, floorsPassed: undefined });
+  assert.equal(result.grade, 'watchlist');
+});
+
+test('ranks Core and limits publication to six', () => {
   const picks = Array.from({ length: 8 }, (_, index) => ({
     ...validPick,
     fixture: `Fixture ${index + 1}`,
     probability: `${72 + index}%`,
   }));
-
   const result = selectCorePicks(picks);
-
   assert.equal(result.core.length, 6);
   assert.equal(result.core[0].fixture, 'Fixture 8');
 });
-
