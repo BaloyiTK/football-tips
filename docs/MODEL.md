@@ -1,6 +1,6 @@
-# Football Tips model v1.6
+# Football Tips model v1.7
 
-Version 1.6 keeps the 1X-only policy and adds explicit H2H, opponent-strength and away-favourite danger gates so short-term form cannot overpower a clearly hostile matchup.
+Version 1.7 keeps the 1X-only policy and adds mandatory motivation, team-news and schedule/fatigue checks on top of form, xG/goals, H2H, opponent strength and away-favourite protection.
 
 ## Market policy
 
@@ -29,6 +29,9 @@ Every Core candidate must include recent form, home/away strength, goals/xG, Poi
     "poissonDc": "pass",
     "h2h": "neutral",
     "opponentStrength": "pass",
+    "motivation": "neutral",
+    "teamNews": "neutral",
+    "scheduleFatigue": "neutral",
     "independentModels": {
       "checked": 3,
       "supporting": 3,
@@ -76,10 +79,21 @@ EV = model probability × selection odds - 1
 `marketOdds` must contain all mutually exclusive outcomes from the same bookmaker snapshot. `coveredOutcomes` identifies the outcomes that win the selection.
 
 
-## v1.6 1X danger rules
+## v1.7 1X danger rules
 
 - H2H must be explicitly checked. "support" or "neutral" may pass; "oppose" blocks Core.
 - Opponent strength must explicitly pass. A materially stronger away side blocks Core.
 - When a complete 1X2 market exists, the model calculates the away team's no-vig win probability.
 - If the away team's no-vig win probability is **60% or higher**, 1X is rejected before value scoring. Price cannot rescue it.
 - Missing H2H or opponent-strength evidence keeps a candidate on Watchlist rather than silently assuming support.
+
+
+## v1.7 context gates
+
+Every serious 1X candidate must explicitly record:
+
+- **Motivation** — title race, relegation battle, rotation priorities, cup focus, or dead-rubber context.
+- **Team news** — key injuries, suspensions, goalkeeper/centre-back/striker absences, and expected rotation.
+- **Schedule/Fatigue** — rest days, European/cup congestion, travel burden and short turnaround.
+
+Each field may be `support`, `neutral`, or `oppose`. Missing evidence keeps the pick on Watchlist. `oppose` blocks Core.
