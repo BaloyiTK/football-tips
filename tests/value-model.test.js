@@ -13,6 +13,8 @@ import {
   calculatePoisson,
   calculateMarketValue,
   calculateH2HWithAge,
+  calculateAttackDefence,
+  calculateThreePillarPrediction,
 } from '../lib/value-model.js';
 
 test('uses reset model v1.0', () => {
@@ -147,4 +149,17 @@ test('old H2H meetings decay by age', () => {
   const recent=calculateH2HWithAge(['W','W','L','L','L'],[30,60,90,120,150]);
   const oldWins=calculateH2HWithAge(['L','L','W','W','W'],[30,60,3000,3200,3400]);
   assert.ok(recent.score > oldWins.score);
+});
+
+
+test('three-pillar prediction uses P3 xG then P1 and P2 adjustments', () => {
+  const attackDefence={homeBase:1.46,awayBase:2.07};
+  const result=calculateThreePillarPrediction({
+    homeForm:68.3,awayForm:37.0,homeH2H:77.9,awayH2H:16.5,attackDefence
+  });
+  assert.equal(result.baseXG.home,1.46);
+  assert.equal(result.baseXG.away,2.07);
+  assert.equal(result.finalXG.home,1.6);
+  assert.equal(result.finalXG.away,1.88);
+  assert.equal(result.predictedOutcome,'away');
 });
