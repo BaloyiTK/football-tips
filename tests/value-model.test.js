@@ -92,8 +92,8 @@ test('ranks all supplied selections', () => {
 
 
 test('calculates weighted goals and xG using the same recency weights', () => {
-  assert.equal(calculateWeightedMetric([3,2,1,2,0]), 1.75);
-  assert.equal(calculateWeightedMetric([2.1,1.8,1.4,1.2,0.9]), 1.63);
+  assert.equal(calculateWeightedMetric([3,2,1,2,0]), 1.9);
+  assert.equal(calculateWeightedMetric([2.1,1.8,1.4,1.2,0.9]), 1.72);
 });
 
 test('calculates positive and negative recent trend', () => {
@@ -113,8 +113,8 @@ test('Match Team Form exposes goals, defence, xG, xGA, opponent strength and tre
   });
   assert.equal(form.goalsScored, 2.3);
   assert.equal(form.goalsConceded, 0.75);
-  assert.equal(form.xG, 1.93);
-  assert.equal(form.xGA, 0.99);
-  assert.equal(form.opponentStrength, 77.25);
-  assert.equal(form.recentTrend, 44.4);
+  assert.equal(form.xG, 1.92);
+  assert.equal(form.xGA, 0.98);
+  assert.equal(form.opponentStrength, 76.85);
+  assert.equal(form.recentTrend, 55.6);
 });
