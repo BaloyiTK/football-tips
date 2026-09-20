@@ -2,12 +2,12 @@
   "date": "20 September 2026",
   "dateISO": "2026-09-20",
   "timezone": "Africa/Johannesburg",
-  "modelVersion": "1.9",
-  "publicationStatus": "published-v1.9-watchlist-rerun-verified",
-  "revision": 12,
+  "modelVersion": "1.0",
+  "publicationStatus": "reset-v1.0-open-ranking",
+  "revision": 13,
   "runAtSAST": "11:16",
   "runType": "second manual same-day rerun of the 06:00 workflow; only matches still pre-kickoff at rerun time were eligible",
-  "editorialNote": "Second independent same-day rerun after removing the universal 35% away-score ceiling. The same three 1X Watchlist fixtures reproduced; no fixture cleared every Core football/context/value gate.",
+  "editorialNote": "Model reset to v1.0 Open Ranking. All previous hard rejection rules have been removed. Existing analyzed selections are retained as ranked observations until the next full v1.0 scan.",
   "scanCoverage": {
     "scopeVersion": "1.3-global-rescan",
     "mode": "multi-source global senior-men best effort, rerun at 11:06 SAST",
@@ -105,7 +105,7 @@
       "league": "La Liga",
       "kickoff": "14:00 SAST",
       "market": "Getafe or Draw (1X)",
-      "classification": "WATCHLIST",
+      "classification": "RANKED",
       "probability": "81.7%",
       "odds": 1.26,
       "bookmaker": "PredictLix snapshot",
@@ -156,7 +156,8 @@
           "opposing": 0
         },
         "majorDisagreement": false
-      }
+      },
+      "rank": 1
     },
     {
       "fixture": "Milford FC vs Durban City",
@@ -164,7 +165,7 @@
       "league": "Premiership",
       "kickoff": "15:00 SAST",
       "market": "Milford FC or Draw (1X)",
-      "classification": "WATCHLIST",
+      "classification": "RANKED",
       "probability": "76.9%",
       "odds": 1.35,
       "bookmaker": "PredictLix snapshot",
@@ -213,7 +214,8 @@
           "opposing": 0
         },
         "majorDisagreement": false
-      }
+      },
+      "rank": 2
     },
     {
       "fixture": "TS Galaxy vs Chippa United",
@@ -221,7 +223,7 @@
       "league": "Premiership",
       "kickoff": "17:30 SAST",
       "market": "TS Galaxy or Draw (1X)",
-      "classification": "WATCHLIST",
+      "classification": "RANKED",
       "probability": "~78%",
       "odds": 1.25,
       "bookmaker": "PredictLix snapshot",
@@ -271,45 +273,196 @@
           "opposing": 0
         },
         "majorDisagreement": false
-      }
+      },
+      "rank": 3
     }
   ],
-  "core": [],
+  "core": [
+    {
+      "fixture": "Getafe vs Málaga",
+      "association": "Spain",
+      "league": "La Liga",
+      "kickoff": "14:00 SAST",
+      "market": "Getafe or Draw (1X)",
+      "classification": "RANKED",
+      "probability": "81.7%",
+      "odds": 1.26,
+      "bookmaker": "PredictLix snapshot",
+      "marketOdds": {
+        "1": 1.98,
+        "2": 4,
+        "X": 3
+      },
+      "noVig1X": "77.0%",
+      "estimatedEV": "about +3% at 81.7% and 1.26; below the +5% Core EV floor",
+      "heat": "4/8",
+      "contradictions": 1,
+      "floorsPassed": true,
+      "reason": "Second rerun reproduced Getafe 1X. PredictLix has 1X at 81.7% @1.26; xGboard has 83%, Foresportia 77%, and other current models still support Getafe avoiding defeat. Málaga's projected attack remains materially suppressed. Core remains blocked because EV is still below +5% and required market-movement/goalkeeper/set-piece evidence is incomplete.",
+      "sources": [
+        "https://www.thestatszone.com/getafe-vs-malaga-preview-team-news-prediction-224472",
+        "https://xgboard.com/leagues/la-liga/matches/getafe-vs-malaga-2026-09-20",
+        "https://football.aleavici.com/football/2026-09-20/getafe-vs-malaga",
+        "https://predictvantage.com/match/23245-getafe-vs-malaga-2026-09-20",
+        "https://www.unibet.fr/paris-sportifs/laliga-getafe-malaga"
+      ],
+      "footballEvidence": {
+        "recentForm": "neutral",
+        "homeAway": "pass",
+        "goalsOrXg": "pass",
+        "poissonDc": "pass",
+        "h2h": "pass",
+        "opponentStrength": "pass",
+        "motivation": "pass",
+        "teamNews": "neutral",
+        "scheduleFatigue": "oppose",
+        "awayScoringThreat": "pass",
+        "awayScoreProbability": "roughly 43%-59% across xG models",
+        "leagueBaseline": "pass",
+        "leagueAwayScoreBaseline": "74.5% from 55 completed La Liga matches before 20 Sep in the replay feed",
+        "sampleBlend": null,
+        "oppositionAdjusted": "pass",
+        "goalkeeperQuality": null,
+        "setPieceRisk": null,
+        "marketMove": null,
+        "gameScriptRisk": "neutral",
+        "refereeDisciplineRisk": null,
+        "weatherPitchRisk": "neutral",
+        "homeFalseFavouriteRisk": "neutral",
+        "independentModels": {
+          "checked": 5,
+          "supporting": 5,
+          "opposing": 0
+        },
+        "majorDisagreement": false
+      },
+      "rank": 1
+    },
+    {
+      "fixture": "Milford FC vs Durban City",
+      "association": "South Africa",
+      "league": "Premiership",
+      "kickoff": "15:00 SAST",
+      "market": "Milford FC or Draw (1X)",
+      "classification": "RANKED",
+      "probability": "76.9%",
+      "odds": 1.35,
+      "bookmaker": "PredictLix snapshot",
+      "marketOdds": {
+        "1": 2.25,
+        "2": 3.2,
+        "X": 2.8
+      },
+      "noVig1X": "~72.0%",
+      "estimatedEV": "about +4% at 76.9% and 1.35; below the +5% Core EV floor",
+      "heat": "4/8",
+      "contradictions": 1,
+      "floorsPassed": true,
+      "reason": "Second rerun reproduced Milford 1X. PredictLix gives 76.9% @1.35 and Forebet 75%; Milford are also on three consecutive home league wins. Core remains blocked by the +5% EV floor and incomplete league-baseline, goalkeeper, set-piece, opening-line and team-news evidence.",
+      "sources": [
+        "https://predictlix.com/predictions/today/double-chance/",
+        "https://www.forebet.com/en/football/matches/milford-fc-durban-city-2488007",
+        "https://www.sportytrader.com/pt-br/odds/milford-fc-durban-city-fc-2024-8690469/"
+      ],
+      "footballEvidence": {
+        "recentForm": "pass",
+        "homeAway": "neutral",
+        "goalsOrXg": "neutral",
+        "poissonDc": "pass",
+        "h2h": null,
+        "opponentStrength": "pass",
+        "motivation": "neutral",
+        "teamNews": null,
+        "scheduleFatigue": "neutral",
+        "awayScoringThreat": "pass",
+        "awayScoreProbability": null,
+        "leagueBaseline": null,
+        "leagueAwayScoreBaseline": null,
+        "sampleBlend": null,
+        "oppositionAdjusted": null,
+        "goalkeeperQuality": null,
+        "setPieceRisk": null,
+        "marketMove": null,
+        "gameScriptRisk": "neutral",
+        "refereeDisciplineRisk": null,
+        "weatherPitchRisk": "neutral",
+        "homeFalseFavouriteRisk": "neutral",
+        "independentModels": {
+          "checked": 3,
+          "supporting": 3,
+          "opposing": 0
+        },
+        "majorDisagreement": false
+      },
+      "rank": 2
+    },
+    {
+      "fixture": "TS Galaxy vs Chippa United",
+      "association": "South Africa",
+      "league": "Premiership",
+      "kickoff": "17:30 SAST",
+      "market": "TS Galaxy or Draw (1X)",
+      "classification": "RANKED",
+      "probability": "~78%",
+      "odds": 1.25,
+      "bookmaker": "PredictLix snapshot",
+      "marketOdds": {
+        "1": 2.18,
+        "2": 3.35,
+        "X": 2.95
+      },
+      "noVig1X": "72.8%",
+      "estimatedEV": "negative to roughly break-even at a conservative 77-79% range and 1.25",
+      "heat": "5/8",
+      "contradictions": 1,
+      "floorsPassed": true,
+      "reason": "Second rerun reproduced TS Galaxy 1X. PredictLix gives 76.7% @1.25 while Forebet's 1X probability is 79%; Chippa remain winless through six league matches. Core remains blocked by value and incomplete league-baseline, goalkeeper, set-piece and opening-line evidence.",
+      "sources": [
+        "https://predictlix.com/predictions/today/double-chance/",
+        "https://www.foresportia.com/en/prediction/south-africa-premier-soccer-league/ts-galaxy-chippa-united-2026-09-20/",
+        "https://www.forebet.com/en/football/matches/ts-galaxy-fc-chippa-united-2487632",
+        "https://stake.com/fr/sports/soccer/south-africa/premier-soccer-league/46798694-ts-galaxy-fc-chippa-united-fc"
+      ],
+      "footballEvidence": {
+        "recentForm": "neutral",
+        "homeAway": "neutral",
+        "goalsOrXg": "pass",
+        "poissonDc": "pass",
+        "h2h": "pass",
+        "opponentStrength": "pass",
+        "motivation": "neutral",
+        "teamNews": null,
+        "scheduleFatigue": "neutral",
+        "awayScoringThreat": "pass",
+        "awayScoreProbability": null,
+        "leagueBaseline": null,
+        "leagueAwayScoreBaseline": null,
+        "sampleBlend": null,
+        "oppositionAdjusted": null,
+        "goalkeeperQuality": null,
+        "setPieceRisk": null,
+        "marketMove": null,
+        "gameScriptRisk": "neutral",
+        "refereeDisciplineRisk": null,
+        "weatherPitchRisk": "neutral",
+        "homeFalseFavouriteRisk": "neutral",
+        "independentModels": {
+          "checked": 5,
+          "supporting": 5,
+          "opposing": 0
+        },
+        "majorDisagreement": false
+      },
+      "rank": 3
+    }
+  ],
   "secondary": [],
-  "skips": [
-    {
-      "fixture": "Bayer Leverkusen vs RB Leipzig",
-      "market": "Bayer Leverkusen or Draw (1X)",
-      "reason": "Skip: 1X has support from several models, but RB Leipzig's projected scoring threat is high (roughly 1.0-1.55 xG across current models), BTTS/goal projections are elevated, and one independent model strongly favors Leipzig. Away-threat and model-agreement gates are not clean enough."
-    },
-    {
-      "fixture": "Hannover 96 vs VfL Bochum",
-      "market": "Hannover 96 or Draw (1X)",
-      "reason": "Skip: major independent-model disagreement. Current models range from Hannover-leaning to X2-leaning, with Bochum stronger on recent away form."
-    },
-    {
-      "fixture": "San Lorenzo vs Boca Juniors",
-      "market": "San Lorenzo or Draw (1X)",
-      "reason": "Skip: the attractive derived 1X price is contradicted by independent models that favor Boca or place San Lorenzo 1X materially lower; major disagreement blocks Core."
-    },
-    {
-      "fixture": "Corinthians vs Fluminense",
-      "market": "Corinthians or Draw (1X)",
-      "reason": "Skip: market and some xG models support 1X, but current form/context is conflicted, Fluminense carry the stronger recent attacking profile, and independent models disagree materially."
-    },
-    {
-      "fixture": "Manchester City vs Sunderland",
-      "market": "Manchester City or Draw (1X)",
-      "reason": "Skip for Core value: football probability is high, but 1X is too short to clear the +4pp edge/+5% EV thresholds."
-    }
-  ],
+  "skips": [],
   "modelHealth": {
-    "status": "v1.9-second-rerun-verified",
-    "awayThreatRule": "league-relative only; universal 35% away-score ceiling removed",
-    "coreCount": 0,
-    "watchlistCount": 3,
-    "finding": "The shortlist is stable across the two reruns. The old 35% ceiling is no longer the blocker; current blockers are mostly value and missing high-detail context evidence.",
-    "nextScheduledRun": "21 September 2026 06:00 SAST",
-    "reproducibility": "Same three Watchlist fixtures reproduced on a second fresh rerun at 11:16 SAST."
+    "status": "v1.0-reset-live",
+    "hardRules": 0,
+    "marketRestriction": "none",
+    "rankingMode": "open",
+    "note": "No fixed market, probability, EV, heat, contradiction, away-threat, model-agreement, or mandatory-evidence gate remains."
   }
 }
