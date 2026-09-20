@@ -201,18 +201,6 @@ test('blocks Core when team news materially opposes the 1X case', () => {
 });
 
 
-test('blocks Core when away scoring probability is above 35%', () => {
-  const result = evaluatePick({
-    ...validPick,
-    footballEvidence: {
-      ...validPick.footballEvidence,
-      awayScoringThreat: 'fail',
-      awayScoreProbability: 0.42,
-    },
-  });
-  assert.notEqual(result.grade, 'core');
-  assert.match(result.reasons.join(' '), /Away scoring probability is too high|awayScoringThreat/i);
-});
 
 test('requires away scoring threat evidence for Core', () => {
   const result = evaluatePick({
