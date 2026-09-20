@@ -125,7 +125,7 @@ export default function HomePage() {
             <span className="eyebrow">FOOTBALL-FIRST ANALYSIS</span>
             <h1>Daily football picks without forcing the board.</h1>
             <p>
-              Football Tips v1.4 starts with football strength. Strong selections stay visible
+              Football Tips v1.5 starts with football strength. Strong selections stay visible
               on the Watchlist when price data is incomplete; only fully verified football +
               value selections become Core.
             </p>
@@ -144,7 +144,7 @@ export default function HomePage() {
               <span className="eyebrow">TODAY</span>
               <h2>{data.date || 'Daily Picks'}</h2>
             </div>
-            <span className="pill">v1.4 · FOOTBALL + VALUE GATE</span>
+            <span className="pill">v1.5 · 1X ONLY</span>
           </div>
 
           {loading ? <p className="muted">Loading picks…</p> : null}
@@ -264,9 +264,9 @@ export default function HomePage() {
 
         <section id="method" className="section model-section">
           <span className="eyebrow">THE MODEL</span>
-          <h2>Football Tips v1.4</h2>
+          <h2>Football Tips v1.5</h2>
           <div className="model-grid">
-            <div><strong>01</strong><h3>Football First</h3><p>Form, home/away strength and xG/goals create the initial probability before price can remove a football-strong candidate.</p></div>
+            <div><strong>01</strong><h3>1X Only</h3><p>The model evaluates only home team or draw (1X). X2, totals, BTTS, DNB and Match Result are excluded before scoring.</p></div>
             <div><strong>02</strong><h3>Football Evidence Gate</h3><p>Recent form, home/away profile, goals/xG, Poisson/Dixon-Coles and at least two independent models must be explicitly recorded. Major disagreement blocks Core.</p></div>
             <div><strong>03</strong><h3>Price Validation</h3><p>When a complete market snapshot exists, no-vig edge and EV decide whether a Core-ready football pick has enough price value.</p></div>
             <div><strong>04</strong><h3>Separate The Scores</h3><p>Every Core shows Football Strength, Value Strength and an Overall rating. Price cannot compensate for a failed football gate.</p></div>
