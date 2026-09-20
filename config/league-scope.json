@@ -31,8 +31,6 @@
     "requireTeamNews": true,
     "requireScheduleFatigue": true,
     "requireAwayScoringThreat": true,
-    "maxAwayScoreProbability": 0.35,
-    "minHomeCleanSheetProbability": 0.65,
     "requireLeagueBaseline": true,
     "minAwayScoreAdvantageVsLeague": 0.1,
     "sampleBlendWeights": {
@@ -51,7 +49,8 @@
       "weatherPitchRisk",
       "homeFalseFavouriteRisk"
     ],
-    "maxSoftRiskFlags": 1
+    "maxSoftRiskFlags": 1,
+    "requireAwayScoreBelowLeagueBaselineBy": 0.1
   },
   "associations": [
     "England",
