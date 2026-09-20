@@ -50,13 +50,23 @@ test('requires explicit full football confirmation for Core, not Watchlist', () 
   assert.equal(result.grade, 'watchlist');
 });
 
-test('ranks Core and limits publication to six', () => {
+test('ranks every qualifying Core without truncating the board', () => {
   const picks = Array.from({ length: 8 }, (_, index) => ({
     ...validPick,
     fixture: `Fixture ${index + 1}`,
     probability: `${72 + index}%`,
   }));
   const result = selectCorePicks(picks);
-  assert.equal(result.core.length, 6);
+  assert.equal(result.core.length, 8);
   assert.equal(result.core[0].fixture, 'Fixture 8');
+  assert.ok(Number.isFinite(result.core[0].value.rating));
+  assert.ok(['A+', 'A', 'B+', 'B', 'C'].includes(result.core[0].value.ratingBand));
+});
+
+test('maps numeric ratings into bands', () => {
+  assert.equal(ratingBand(90), 'A+');
+  assert.equal(ratingBand(80), 'A');
+  assert.equal(ratingBand(70), 'B+');
+  assert.equal(ratingBand(60), 'B');
+  assert.equal(ratingBand(40), 'C');
 });
