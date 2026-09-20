@@ -104,3 +104,19 @@ Using the test sample:
 - Form Gap = +44 percentage points to Manchester City
 
 Match Team Form is a strength pillar, not by itself a final match prediction.
+
+
+### Supporting Match Team Form metrics
+
+The Match Team Form pillar now also records these last-five supporting metrics, most-recent first:
+
+- **Goals Scored** — weighted average goals scored.
+- **Goals Conceded** — weighted average goals allowed.
+- **xG** — weighted average expected goals created.
+- **xGA** — weighted average expected goals allowed.
+- **Opponent Strength** — weighted average strength of the five opponents on a 0–100 scale when available.
+- **Recent Trend** — momentum in results. It is calculated as the average result strength of the two most recent matches minus the average result strength of the older three matches.
+
+All numeric five-match metrics use the same 30% / 25% / 20% / 15% / 10% recency weights.
+
+These six fields are currently **supporting diagnostics**. They do not yet change the 40% overall + 60% venue Match Team Form score. We will test them before assigning final weights.
