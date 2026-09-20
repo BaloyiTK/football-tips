@@ -156,6 +156,26 @@ export default function HomePage() {
             </div>
           ) : null}
 
+          {data.scanCoverage ? (
+            <div className="scan-audit">
+              <div className="scan-audit-head">
+                <div><span className="eyebrow">SCAN AUDIT</span><h3>What today's rescan covered</h3></div>
+                <span className="pill">{data.scanCoverage.competitionsObserved?.length ?? 0} competitions observed</span>
+              </div>
+              <div className="scan-metrics">
+                {(data.scanCoverage.sourceBoards ?? []).map((source) => (
+                  <span key={source.source}><b>{source.rows}</b><small>{source.source}</small></span>
+                ))}
+                <span><b>{data.scanCoverage.deepEvidenceAudits ?? 0}</b><small>Deep evidence audits</small></span>
+              </div>
+              <p>{data.scanCoverage.coverageLimitations}</p>
+              <details>
+                <summary>Show competitions observed</summary>
+                <div className="competition-list">{(data.scanCoverage.competitionsObserved ?? []).join(' · ')}</div>
+              </details>
+            </div>
+          ) : null}
+
           <div className="grid">
             {valueSelection.core.map((pick, i) => (
               <article className="pick-card core" key={`${pick.fixture}-${i}`}>
