@@ -3,10 +3,10 @@
   "dateISO": "2026-09-20",
   "timezone": "Africa/Johannesburg",
   "modelVersion": "1.9",
-  "publicationStatus": "published-v1.9-context-normalized",
-  "revision": 9,
+  "publicationStatus": "v1.9-revalidation-required",
+  "revision": 10,
   "replacesRecoveryPublication": true,
-  "editorialNote": "v1.9 adds league baselines, 45/35/20 sample blending, opposition-strength adjustment, goalkeeper/set-piece checks, opening-line movement and soft game-script/referee/weather/false-favourite flags. Existing candidates require fresh v1.9 evidence before Core.",
+  "editorialNote": "Production is on Football Tips v1.9. Previous candidate rows were created under older evidence gates and have been removed from the live board. No fixture is published as v1.9 Core until it is freshly revalidated against the full v1.9 evidence stack.",
   "scanCoverage": {
     "scopeVersion": "1.3-global-rescan",
     "mode": "multi-source global senior-men best effort",
@@ -73,188 +73,14 @@
     "deepEvidenceAudits": 10,
     "coverageLimitations": "No single public source exposes one fully auditable senior-men domestic feed for every configured association. The rescan therefore used multiple broad boards and deep-audited the strongest candidates. Source-board totals overlap and must not be added together."
   },
-  "candidates": [
-    {
-      "fixture": "Spartak Varna vs Lokomotiv Sofia",
-      "association": "Bulgaria",
-      "league": "First League",
-      "kickoff": "14:15 SAST",
-      "market": "Spartak Varna or Draw (1X)",
-      "probability": "75.0%",
-      "odds": 1.5,
-      "bookmaker": "Bet365",
-      "marketOdds": {
-        "1": 2.7,
-        "2": 2.6,
-        "X": 3.25
-      },
-      "coveredOutcomes": [
-        "1",
-        "X"
-      ],
-      "oddsCapturedAt": "20 Sep 2026 pre-match public snapshot",
-      "heat": "4/8",
-      "contradictions": 1,
-      "modelAgreement": true,
-      "floorsPassed": true,
-      "reason": "v1.4 revalidation: recent form, home/away profile, goals model, Dixon-Coles floor and three independent models all support Spartak avoiding defeat. The 1.50 price still clears the value gate.",
-      "sources": [
-        "https://footycheck.com/football/match/spartak-varna-vs-lokomotiv-sofia-2026-09-20/1551116/",
-        "https://predictvantage.com/match/23258-spartak-varna-vs-lokomotiv-sofia-2026-09-20",
-        "https://www.forebet.com/en/football/matches/spartak-varna-lokomotiv-sofia-2469295",
-        "https://footystats.org/clubs/pfc-spartak-1918-varna-3644"
-      ],
-      "footballEvidence": {
-        "recentForm": "pass",
-        "homeAway": "pass",
-        "goalsOrXg": "pass",
-        "poissonDc": "pass",
-        "poissonDcProbability": "68.3%",
-        "independentModels": {
-          "checked": 3,
-          "supporting": 3,
-          "opposing": 0
-        },
-        "majorDisagreement": false,
-        "note": "Three recent draws after the Levski defeat, including Ludogorets and CSKA; home profile is stronger than Lokomotiv's away profile. FootyCheck FCxG 1.50-1.31 and an internal Dixon-Coles check give 1X about 68.3%; independent 1X models are about 74%-81.6%."
-      }
-    },
-    {
-      "fixture": "Parma vs Genoa",
-      "association": "Italy",
-      "league": "Serie A",
-      "kickoff": "15:00 SAST",
-      "market": "Parma or Draw (1X)",
-      "probability": "67.0%",
-      "odds": 1.49,
-      "bookmaker": "Sportingbet",
-      "marketOdds": {
-        "1": 2.95,
-        "2": 2.6,
-        "X": 3
-      },
-      "coveredOutcomes": [
-        "1",
-        "X"
-      ],
-      "oddsCapturedAt": "20 Sep 2026 pre-match public snapshot",
-      "heat": "4/8",
-      "contradictions": 1,
-      "modelAgreement": false,
-      "floorsPassed": true,
-      "reason": "v1.4 revalidation: price remains potentially attractive, but Parma's current form is poor and independent models disagree too widely. Major football disagreement blocks Core.",
-      "sources": [
-        "https://www.fotmob.com/en-GB/matches/parma-vs-genoa/3fwbbl",
-        "https://footystats.org/italy/genoa-cfc-vs-parma-calcio-1913-h2h-stats",
-        "https://football.aleavici.com/football/2026-09-20/parma-vs-genoa",
-        "https://www.statmuse.com/fc/match/9-20-2026-par-vs-gen-112121"
-      ],
-      "footballEvidence": {
-        "recentForm": "fail",
-        "homeAway": null,
-        "goalsOrXg": null,
-        "poissonDc": "pass",
-        "poissonDcProbability": "68.7%",
-        "independentModels": {
-          "checked": 5,
-          "supporting": 3,
-          "opposing": 2
-        },
-        "majorDisagreement": true,
-        "note": "Parma are L-D-L-L-L in the last five league matches and have scored two goals. Independent 1X estimates range roughly from 55% to 75%, while a Dixon-Coles check from a 1.37-1.20 xG input gives about 68.7% for 1X. The spread is too wide for Core."
-      }
-    },
-    {
-      "fixture": "Getafe vs Malaga",
-      "association": "Spain",
-      "league": "La Liga",
-      "kickoff": "14:00 SAST",
-      "market": "Getafe or Draw (1X)",
-      "probability": "78.2%",
-      "odds": 1.2,
-      "bookmaker": "Bet365",
-      "marketOdds": {
-        "1": 2.1,
-        "2": 3.7,
-        "X": 3
-      },
-      "coveredOutcomes": [
-        "1",
-        "X"
-      ],
-      "oddsCapturedAt": "20 Sep 2026 pre-match public snapshot",
-      "heat": "4/8",
-      "contradictions": 1,
-      "floorsPassed": true,
-      "reason": "Multiple models support Getafe avoiding defeat, with a conservative blended football probability around 78%. The Bet365 1X price is too short: it fails both the +4pp no-vig edge and +5% EV Core gates.",
-      "sources": [
-        "https://predictlix.com/predictions/spain/la-liga/getafe-vs-malaga/",
-        "https://www.forebet.com/en/football/matches/getafe-m%C3%A1laga-cf-2495230",
-        "https://www.wincomparator.com/predictions/getafe-malaga-8586478/",
-        "https://www.bet365.es/hub/es-es/football/football-teams/real-madrid"
-      ]
-    },
-    {
-      "fixture": "Juventus vs Atalanta",
-      "association": "Italy",
-      "league": "Serie A",
-      "kickoff": "18:00 SAST",
-      "market": "Juventus or Draw (1X)",
-      "probability": "83.3%",
-      "odds": null,
-      "marketOdds": null,
-      "heat": "4/8",
-      "contradictions": 1,
-      "floorsPassed": true,
-      "reason": "Independent goal models put Juventus 1X around 83%, supported by the current xG split. The available 1X price is short and a complete named-bookmaker snapshot has not been locked for Core validation.",
-      "sources": [
-        "https://predictlix.com/predictions/italy/serie-a/atalanta-vs-juventus/",
-        "https://garudalionsfc.com/predictions/serie-a/juventus-vs-atalanta-2026-09-20/"
-      ]
-    },
-    {
-      "fixture": "AC Milan vs Lecce",
-      "association": "Italy",
-      "league": "Serie A",
-      "kickoff": "20:45 SAST",
-      "market": "AC Milan or Draw (1X)",
-      "probability": "85.1%",
-      "odds": null,
-      "marketOdds": null,
-      "heat": "4/8",
-      "contradictions": 1,
-      "floorsPassed": true,
-      "reason": "Milan's stronger home projection, recent form and five straight H2H wins support 1X, but six listed Milan absences create a contradiction and the price snapshot is not complete enough for Core.",
-      "sources": [
-        "https://predictlix.com/predictions/italy/serie-a/ac-milan-vs-lecce/"
-      ]
-    },
-    {
-      "fixture": "Viking vs Lillestrom",
-      "association": "Norway",
-      "league": "Eliteserien",
-      "kickoff": "17:00 SAST",
-      "market": "Viking or Draw (1X)",
-      "probability": "85.7%",
-      "odds": null,
-      "marketOdds": null,
-      "heat": "4/8",
-      "contradictions": 0,
-      "floorsPassed": true,
-      "reason": "PredictLix and an independent xG grid both put Viking 1X around 85–86%. The football case is strong, but the available line is short and the complete same-bookmaker market snapshot is still pending.",
-      "sources": [
-        "https://predictlix.com/predictions/today/double-chance/",
-        "https://garudalionsfc.com/predictions/norway-eliteserien/viking-vs-lillestrom-2026-09-20/"
-      ]
-    }
-  ],
+  "candidates": [],
   "core": [],
   "secondary": [],
-  "skips": [
-    {
-      "fixture": "Mjallby AIF vs GAIS",
-      "market": "Mjallby or Draw (1X)",
-      "reason": "Skipped after deep audit: Forebet/PredictLix support 1X, but independent xG models price 1X near 56% and favor GAIS. Model agreement failed."
-    }
-  ]
+  "skips": [],
+  "modelHealth": {
+    "status": "experimental-revalidation",
+    "latestBacktest": "2026-08-22 to 2026-09-19 quantitative replay",
+    "finding": "The current 35% away-score ceiling produced zero qualifiers in the reconstructable 30-day sample, so no historical hit-rate claim is published for v1.9.",
+    "action": "Fresh v1.9 candidates require complete current evidence; threshold tuning must be validated on a larger out-of-sample dataset before changing the model."
+  }
 }
