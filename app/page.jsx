@@ -283,7 +283,9 @@ export default function HomePage() {
             <div><strong>01</strong><h3>No Hard Market Rule</h3><p>Any football market may be considered when the data supports it.</p></div>
             <div><strong>02</strong><h3>No Automatic Reject Gates</h3><p>No fixed probability, EV, heat, contradiction, away-threat or model-agreement threshold automatically removes a match.</p></div>
             <div><strong>03</strong><h3>Match Team Form</h3><p>Pillar 1 combines weighted last-5 overall form with venue form: 40% overall + 60% home form for the host, or away form for the visitor. Recent matches carry 30/25/20/15/10% weights. The pillar also tracks weighted Goals Scored, Goals Conceded, xG, xGA, Opponent Strength and Recent Trend.</p></div>
-            <div><strong>04</strong><h3>Rank, Don't Force</h3><p>The strongest opportunities are ranked from best to weakest, with uncertainty and missing evidence shown openly.</p></div>
+            <div><strong>04</strong><h3>Full Match Model</h3><p>H2H, Attack vs Defence, expected goals, Poisson, squad context, scoring and defensive reliability, set pieces, motivation and rotation are combined as a football-analysis pipeline while avoiding double-counting.</p></div>
+            <div><strong>05</strong><h3>Market Confirmation</h3><p>Prices are checked only after the football prediction: opening/current odds, implied and no-vig probability, fair odds, edge and EV. Odds confirm value; they do not create the prediction.</p></div>
+            <div><strong>06</strong><h3>Rank, Don't Force</h3><p>Missing evidence lowers confidence rather than automatically rejecting a match. Final component weights remain open until tested and backtested.</p></div>
           </div>
         </section>
 
