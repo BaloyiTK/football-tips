@@ -144,3 +144,18 @@ Record these separately:
 - homeFalseFavouriteRisk
 
 One opposing soft flag may be tolerated as a contradiction. More than one blocks the pick before value scoring.
+
+
+## v1.9 context-normalized 1X
+Core now requires league-baseline normalization, blended recent/medium/long samples, opposition-strength adjustment, goalkeeper quality, set-piece risk and market-move review.
+
+Away scoring must be <=35% AND at least 10 percentage points below the league away-score baseline.
+
+Sample blend target when data permits:
+- 45% last 5-6
+- 35% last 10-12
+- 20% season/rolling long-term baseline
+
+Opening-line rule: if a trustworthy opening 1X price exists and current 1X has shortened by more than 10%, Core is rejected.
+
+Soft contextual flags: game script, referee/discipline, weather/pitch and home false-favourite risk. One opposing soft flag may be tolerated; more than one blocks Core.
