@@ -249,4 +249,6 @@ Team Form & Performance -> H2H/contextual matchup evidence -> Attack vs Defence 
 - Do not invent unavailable evidence.
 - Avoid double-counting derived information: xG can feed lambda, and lambda feeds Poisson, so those outputs are not treated as three independent votes.
 - Keep football probability separate from bookmaker price/value.
-- Final component weights remain uncommitted until tested/backtested.
+- Calculation engine is frozen before backtesting: goals/xG blend = 40%/60%; contextual lambda adjustments are capped at ±15%; reliability ±8%, set pieces ±5%, squad ±10%, motivation/rotation ±7% before the combined cap.
+- H2H age relevance uses exponential decay with a 3-year time constant and is normalized over available meetings.
+- Market fair odds = 1/model probability; EV = model probability × decimal odds − 1. Market value remains downstream of the football prediction.
