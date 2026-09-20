@@ -1,0 +1,119 @@
+{
+  "date": "20 September 2026",
+  "dateISO": "2026-09-20",
+  "timezone": "Africa/Johannesburg",
+  "modelVersion": "1.3",
+  "publicationStatus": "published-watchlist",
+  "editorialNote": "Football Tips v1.3 keeps football-qualified selections visible when complete bookmaker price validation is unavailable. These selections are Watchlist, not Core, until the price/value gate is verified.",
+  "scanCoverage": {
+    "scopeVersion": "1.3-recovery",
+    "mode": "football-first recovery scan",
+    "competitionsChecked": ["England Premier League", "Italy Serie A", "Greece Super League"],
+    "note": "This recovery publication corrects the stale 19 September board. It is not represented as a complete top-100-league scan."
+  },
+  "candidates": [
+    {
+      "fixture": "AC Milan vs Lecce",
+      "association": "Italy",
+      "league": "Serie A",
+      "kickoff": "20:45 SAST",
+      "market": "AC Milan or Draw (1X)",
+      "probability": "85%",
+      "odds": null,
+      "marketOdds": null,
+      "heat": "4/8",
+      "contradictions": 1,
+      "modelAgreement": true,
+      "floorsPassed": true,
+      "reason": "Multiple current models put Milan clearly ahead and the 1X cover materially raises the football probability. Milan's recent home form is the main contradiction, so price confirmation is still required before Core.",
+      "sources": [
+        "https://www.probascore.com/match/serie-a/milan-vs-lecce-63-60/",
+        "https://slipsiq.com/preview/serie-a/ac-milan-vs-lecce-1550127",
+        "https://www.sportytrader.com/en/betting-tips/ac-milan-lecce-374166/"
+      ]
+    },
+    {
+      "fixture": "Fiorentina vs Napoli",
+      "association": "Italy",
+      "league": "Serie A",
+      "kickoff": "12:30 SAST",
+      "market": "Napoli or Draw (X2)",
+      "probability": "67%",
+      "odds": null,
+      "marketOdds": null,
+      "heat": "4/8",
+      "contradictions": 1,
+      "modelAgreement": true,
+      "floorsPassed": true,
+      "reason": "Napoli have the stronger broad form/H2H case, but external models disagree on the outright winner. X2 keeps the football edge while protecting the draw; price validation remains pending.",
+      "sources": [
+        "https://predictvantage.com/match/23182-fiorentina-vs-napoli-2026-09-20",
+        "https://footinsights.com/predictions/fiorentina-vs-napoli-2026-09-20/",
+        "https://footballwhispers.com/blog/fiorentina-vs-napoli-prediction-20-09-2026/"
+      ]
+    },
+    {
+      "fixture": "Olympiacos vs Levadiakos",
+      "association": "Greece",
+      "league": "Super League",
+      "kickoff": "KO pending verification",
+      "market": "Olympiacos or Draw (X2)",
+      "probability": "65%",
+      "odds": null,
+      "marketOdds": null,
+      "heat": "3/8",
+      "contradictions": 1,
+      "modelAgreement": true,
+      "floorsPassed": true,
+      "reason": "Olympiacos show the stronger season attack/defence profile and are heavily favoured by the market, but independent models conflict on the outright result. X2 stays on Watchlist until price and kickoff are fully verified.",
+      "sources": [
+        "https://predictvantage.com/match/23391-levadiakos-vs-olympiakos-piraeus-2026-09-20",
+        "https://www.sportytrader.com/en/odds/levadiakos-fc-olympiacos-8657681/",
+        "https://www.sportsgambler.com/betting-tips/football/levadiakos-vs-olympiacos-prediction-lineups-odds-2026-09-20/"
+      ]
+    },
+    {
+      "fixture": "Bournemouth vs Liverpool",
+      "association": "England",
+      "league": "Premier League",
+      "kickoff": "15:00 SAST",
+      "market": "Liverpool or Draw (X2)",
+      "probability": "62%",
+      "odds": null,
+      "marketOdds": null,
+      "heat": "3/8",
+      "contradictions": 1,
+      "modelAgreement": true,
+      "floorsPassed": true,
+      "reason": "Liverpool are unbeaten and have a strong H2H record, but Bournemouth's home profile creates a real contradiction. X2 is retained as a football-qualified Watchlist selection rather than forcing the away win.",
+      "sources": [
+        "https://slipsiq.com/preview/premier-league/bournemouth-vs-liverpool-1557407",
+        "https://talksport.com/betting/4588799/bournemouth-vs-liverpool-odds-tips-2026/",
+        "https://www.thesun.co.uk/sport/40395888/bournemouth-vs-liverpool-preview-betting-tips-predictions/"
+      ]
+    },
+    {
+      "fixture": "Manchester City vs Sunderland",
+      "association": "England",
+      "league": "Premier League",
+      "kickoff": "15:00 SAST",
+      "market": "Manchester City Win",
+      "probability": "61%",
+      "odds": null,
+      "marketOdds": null,
+      "heat": "4/8",
+      "contradictions": 1,
+      "modelAgreement": true,
+      "floorsPassed": true,
+      "reason": "City are 4-for-4 in the league with a strong goal differential, while Sunderland have four points from four. Model estimates vary, so the straight win remains Watchlist until price validation clears the value gate.",
+      "sources": [
+        "https://www.sportytrader.com/en/betting-tips/manchester-city-sunderland-373980/",
+        "https://slipsiq.com/preview/premier-league/manchester-city-vs-sunderland-1557413",
+        "https://www.tntsports.co.uk/betting/tips/man-city-vs-sunderland-prediction-tips-and-odds-premier-league-20-09-26/"
+      ]
+    }
+  ],
+  "core": [],
+  "secondary": [],
+  "skips": []
+}
