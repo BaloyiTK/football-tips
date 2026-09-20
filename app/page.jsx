@@ -3,7 +3,22 @@
 import { useEffect, useMemo, useState } from 'react';
 import { formatPercent, selectCorePicks } from '../lib/value-model.js';
 
-const emptyData = { date: '', candidates: [], core: [], secondary: [], skips: [] };
+const emptyData = { date: '', dateISO: '', candidates: [], core: [], secondary: [], skips: [] };
+
+function sastTodayKey() {
+  return new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Africa/Johannesburg',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).format(new Date());
+}
+
+function displayProbability(value) {
+  if (typeof value === 'string') return value;
+  if (Number.isFinite(value)) return value <= 1 ? `${Math.round(value * 100)}%` : `${Math.round(value)}%`;
+  return '—';
+}
 
 export default function HomePage() {
   const [data, setData] = useState(emptyData);
@@ -16,6 +31,7 @@ export default function HomePage() {
   });
   const candidates = data.candidates ?? data.core ?? [];
   const valueSelection = useMemo(() => selectCorePicks(candidates), [candidates]);
+  const isStale = Boolean(data.dateISO && data.dateISO !== sastTodayKey());
 
   useEffect(() => {
     fetch('/data/today.json', { cache: 'no-store' })
@@ -109,7 +125,7 @@ export default function HomePage() {
             <span className="eyebrow">FOOTBALL-FIRST ANALYSIS</span>
             <h1>Daily football picks without forcing the board.</h1>
             <p>
-              Football Tips v1.2 requires football strength and a positive market price.
+              Football Tips v1.3 requires football strength and a positive market price.
               A likely outcome is not Core unless it also clears our no-vig edge and EV gates.
             </p>
             <a className="cta" href="#picks">View today's Core picks</a>
@@ -117,7 +133,7 @@ export default function HomePage() {
           <div className="hero-card">
             <span>Daily process</span>
             <strong>06:00 SAST</strong>
-            <p>Maximum 6 value-qualified Core picks. Fewer when the prices are weak.</p>
+            <p>Maximum 6 Core picks, plus a football-qualified Watchlist when price confirmation is pending.</p>
           </div>
         </section>
 
@@ -127,10 +143,17 @@ export default function HomePage() {
               <span className="eyebrow">TODAY</span>
               <h2>{data.date || 'Daily Picks'}</h2>
             </div>
-            <span className="pill">v1.2 · VALUE GATE</span>
+            <span className="pill">v1.3 · VALUE GATE</span>
           </div>
 
           {loading ? <p className="muted">Loading picks…</p> : null}
+
+          {!loading && isStale ? (
+            <div className="status-banner warning">
+              <strong>Today's scan has not been published yet.</strong>
+              <span>Showing the last published board: {data.date || data.dateISO}.</span>
+            </div>
+          ) : null}
 
           <div className="grid">
             {valueSelection.core.map((pick, i) => (
@@ -156,18 +179,45 @@ export default function HomePage() {
 
           {!loading && valueSelection.core.length === 0 ? (
             <div className="no-picks">
-              <h3>No value-qualified Core picks</h3>
+              <h3>No Core picks currently verified</h3>
               <p>
-                {valueSelection.rejected.length > 0
-                  ? `${valueSelection.rejected.length} candidate(s) were withheld because they did not have enough verified price value.`
-                  : 'The model will publish fewer picks rather than force a weak board.'}
+                {candidates.length === 0
+                  ? 'No candidate analysis has been published for this board yet.'
+                  : valueSelection.watchlist.length > 0
+                    ? `${valueSelection.watchlist.length} football-qualified candidate(s) remain on the Watchlist while price/value or final football checks are pending.`
+                    : 'The football evidence did not produce a Core selection.'}
               </p>
+            </div>
+          ) : null}
+
+          {valueSelection.watchlist.length > 0 ? (
+            <div className="watchlist-block">
+              <div className="watchlist-heading">
+                <div>
+                  <span className="eyebrow">FOOTBALL-QUALIFIED</span>
+                  <h3>Watchlist — price/value pending</h3>
+                </div>
+                <span className="pill">{valueSelection.watchlist.length} candidates</span>
+              </div>
+              {valueSelection.watchlist.map((pick, i) => (
+                <div className="watchlist-row" key={`${pick.fixture}-watch-${i}`}>
+                  <div>
+                    <strong>{pick.fixture}</strong>
+                    <span>{pick.market || 'Best market pending'} · {pick.kickoff || 'KO pending'}</span>
+                    <small>{pick.assessment?.reasons?.[0] || 'Football profile passed; Core confirmation is pending.'}</small>
+                  </div>
+                  <div className="watchlist-meta">
+                    <b>{displayProbability(pick.probability)}</b>
+                    <span>{pick.assessment?.priceStatus === 'pending' ? 'PRICE PENDING' : 'NOT CORE VALUE'}</span>
+                  </div>
+                </div>
+              ))}
             </div>
           ) : null}
 
           {(data.secondary ?? []).length > 0 && (
             <div className="secondary-block">
-              <h3>Watchlist — not Core</h3>
+              <h3>Additional watchlist — not Core</h3>
               {(data.secondary ?? []).map((pick, i) => (
                 <div className="secondary-row" key={`${pick.fixture}-${i}`}>
                   <div>
@@ -183,12 +233,12 @@ export default function HomePage() {
 
         <section id="method" className="section model-section">
           <span className="eyebrow">THE MODEL</span>
-          <h2>Football Tips v1.2</h2>
+          <h2>Football Tips v1.3</h2>
           <div className="model-grid">
-            <div><strong>01</strong><h3>Price First</h3><p>All outcomes from one bookmaker snapshot are converted to margin-free market probabilities.</p></div>
-            <div><strong>02</strong><h3>Football Strength</h3><p>Form, home/away profile and xG/goals feed the Poisson and Dixon–Coles probability checks.</p></div>
-            <div><strong>03</strong><h3>Value Gate</h3><p>Core requires at least 65% model probability, +4pp no-vig edge and +5% EV.</p></div>
-            <div><strong>04</strong><h3>Final Rank</h3><p>Agreement, Heat, floors and contradictions are checked before the best six can be published.</p></div>
+            <div><strong>01</strong><h3>Football First</h3><p>Form, home/away strength and xG/goals create the initial probability before price can remove a football-strong candidate.</p></div>
+            <div><strong>02</strong><h3>Agreement & Floors</h3><p>Heat, model agreement, contradictions and selection floors decide whether a pick is Core-ready or stays on Watchlist.</p></div>
+            <div><strong>03</strong><h3>Price Validation</h3><p>When a complete market snapshot exists, no-vig edge and EV decide whether a Core-ready football pick has enough price value.</p></div>
+            <div><strong>04</strong><h3>Three Grades</h3><p>CORE = football + value verified. WATCHLIST = football strong but confirmation pending. SKIP = football evidence itself is weak.</p></div>
           </div>
         </section>
 
