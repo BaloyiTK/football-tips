@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { evaluatePick, selectCorePicks, MODEL_VERSION, ratingBand } from '../lib/value-model.js';
+import { evaluatePick, selectCorePicks, MODEL_VERSION, ratingBand, validateFootballEvidence } from '../lib/value-model.js';
 
 const validPick = {
   fixture: 'Home vs Away',
@@ -12,9 +12,17 @@ const validPick = {
   contradictions: 0,
   modelAgreement: true,
   floorsPassed: true,
+  footballEvidence: {
+    recentForm: 'pass',
+    homeAway: 'pass',
+    goalsOrXg: 'pass',
+    poissonDc: 'pass',
+    independentModels: { checked: 3, supporting: 3, opposing: 0 },
+    majorDisagreement: false,
+  },
 };
 
-test('uses model v1.3', () => assert.equal(MODEL_VERSION, '1.3'));
+test('uses model v1.4', () => assert.equal(MODEL_VERSION, '1.4'));
 
 test('qualifies a fully verified value pick as Core', () => {
   const result = evaluatePick(validPick);
@@ -45,9 +53,41 @@ test('keeps 60-64% football picks on Watchlist', () => {
   assert.equal(result.grade, 'watchlist');
 });
 
-test('requires explicit full football confirmation for Core, not Watchlist', () => {
-  const result = evaluatePick({ ...validPick, modelAgreement: undefined, floorsPassed: undefined });
+test('requires explicit structured football confirmation for Core', () => {
+  const result = evaluatePick({ ...validPick, footballEvidence: undefined });
   assert.equal(result.grade, 'watchlist');
+  assert.match(result.reasons.join(' '), /Structured football evidence/);
+});
+
+test('keeps a priced pick on Watchlist when a major football signal disagrees', () => {
+  const result = evaluatePick({
+    ...validPick,
+    footballEvidence: {
+      ...validPick.footballEvidence,
+      recentForm: 'fail',
+      independentModels: { checked: 5, supporting: 3, opposing: 2 },
+      majorDisagreement: true,
+    },
+  });
+  assert.equal(result.grade, 'watchlist');
+  assert.equal(result.qualifies, false);
+});
+
+test('requires at least two independent models and 67% support for Core', () => {
+  const result = evaluatePick({
+    ...validPick,
+    footballEvidence: {
+      ...validPick.footballEvidence,
+      independentModels: { checked: 2, supporting: 1, opposing: 1 },
+    },
+  });
+  assert.equal(result.grade, 'watchlist');
+});
+
+test('validates complete supporting football evidence', () => {
+  const validation = validateFootballEvidence(validPick);
+  assert.equal(validation.readyForCore, true);
+  assert.equal(validation.supportRate, 1);
 });
 
 test('ranks every qualifying Core without truncating the board', () => {
@@ -60,13 +100,14 @@ test('ranks every qualifying Core without truncating the board', () => {
   assert.equal(result.core.length, 8);
   assert.equal(result.core[0].fixture, 'Fixture 8');
   assert.ok(Number.isFinite(result.core[0].value.rating));
-  assert.ok(['A+', 'A', 'B+', 'B', 'C'].includes(result.core[0].value.ratingBand));
+  assert.ok(['ELITE', 'STRONG', 'SOLID', 'QUALIFIED'].includes(result.core[0].value.ratingBand));
+  assert.ok(Number.isFinite(result.core[0].value.footballStrength));
+  assert.ok(Number.isFinite(result.core[0].value.valueStrength));
 });
 
-test('maps numeric ratings into bands', () => {
-  assert.equal(ratingBand(90), 'A+');
-  assert.equal(ratingBand(80), 'A');
-  assert.equal(ratingBand(70), 'B+');
-  assert.equal(ratingBand(60), 'B');
-  assert.equal(ratingBand(40), 'C');
+test('maps numeric ratings into descriptive Core bands', () => {
+  assert.equal(ratingBand(90), 'ELITE');
+  assert.equal(ratingBand(80), 'STRONG');
+  assert.equal(ratingBand(70), 'SOLID');
+  assert.equal(ratingBand(60), 'QUALIFIED');
 });
