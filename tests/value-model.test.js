@@ -25,12 +25,23 @@ const validPick = {
     scheduleFatigue: 'neutral',
     awayScoringThreat: 'pass',
     awayScoreProbability: 0.30,
+    leagueBaseline: 'pass',
+    leagueAwayScoreBaseline: 0.50,
+    sampleBlend: 'pass',
+    oppositionAdjusted: 'pass',
+    goalkeeperQuality: 'neutral',
+    setPieceRisk: 'neutral',
+    marketMove: 'neutral',
+    gameScriptRisk: 'neutral',
+    refereeDisciplineRisk: 'neutral',
+    weatherPitchRisk: 'neutral',
+    homeFalseFavouriteRisk: 'neutral',
     independentModels: { checked: 3, supporting: 3, opposing: 0 },
     majorDisagreement: false,
   },
 };
 
-test('uses model v1.8', () => assert.equal(MODEL_VERSION, '1.8'));
+test('uses model v1.9', () => assert.equal(MODEL_VERSION, '1.9'));
 
 test('qualifies a fully verified value pick as Core', () => {
   const result = evaluatePick(validPick);
@@ -213,4 +224,60 @@ test('requires away scoring threat evidence for Core', () => {
     },
   });
   assert.equal(result.grade, 'watchlist');
+});
+
+
+test('requires league normalization, sample blending and opposition adjustment for Core', () => {
+  const result = evaluatePick({
+    ...validPick,
+    footballEvidence: {
+      ...validPick.footballEvidence,
+      leagueBaseline: undefined,
+      sampleBlend: undefined,
+      oppositionAdjusted: undefined,
+    },
+  });
+  assert.equal(result.grade, 'watchlist');
+  assert.match(result.reasons.join(' '), /leagueBaseline|sampleBlend|oppositionAdjusted/i);
+});
+
+test('blocks Core when away scoring threat is not 10pp below league baseline', () => {
+  const result = evaluatePick({
+    ...validPick,
+    footballEvidence: {
+      ...validPick.footballEvidence,
+      awayScoreProbability: 0.34,
+      leagueAwayScoreBaseline: 0.40,
+    },
+  });
+  assert.equal(result.grade, 'skip');
+  assert.match(result.reasons.join(' '), /league baseline/i);
+});
+
+test('blocks Core when 1X price has shortened more than 10% from open', () => {
+  const result = evaluatePick({
+    ...validPick,
+    openingOdds: 1.80,
+    odds: 1.55,
+  });
+  assert.equal(result.grade, 'skip');
+  assert.match(result.reasons.join(' '), /shortened too far/i);
+});
+
+test('allows one soft contextual risk but blocks two', () => {
+  const one = evaluatePick({
+    ...validPick,
+    footballEvidence: { ...validPick.footballEvidence, weatherPitchRisk: 'oppose' },
+  });
+  assert.notEqual(one.grade, 'skip');
+
+  const two = evaluatePick({
+    ...validPick,
+    footballEvidence: {
+      ...validPick.footballEvidence,
+      weatherPitchRisk: 'oppose',
+      refereeDisciplineRisk: 'oppose',
+    },
+  });
+  assert.equal(two.grade, 'skip');
 });
