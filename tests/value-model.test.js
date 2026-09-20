@@ -281,3 +281,46 @@ test('allows one soft contextual risk but blocks two', () => {
   });
   assert.equal(two.grade, 'skip');
 });
+
+
+test('requires normalization inputs for Core', () => {
+  const result = evaluatePick({
+    ...validPick,
+    footballEvidence: {
+      ...validPick.footballEvidence,
+      leagueBaseline: undefined,
+      sampleBlend: undefined,
+      oppositionAdjusted: undefined,
+    },
+  });
+  assert.equal(result.grade, 'watchlist');
+});
+
+test('blocks Core when away threat is not 10pp below league baseline', () => {
+  const result = evaluatePick({
+    ...validPick,
+    footballEvidence: {
+      ...validPick.footballEvidence,
+      awayScoreProbability: 0.34,
+      leagueAwayScoreBaseline: 0.40,
+    },
+  });
+  assert.equal(result.grade, 'skip');
+});
+
+test('blocks Core after more than 10% 1X shortening', () => {
+  const result = evaluatePick({ ...validPick, openingOdds: 1.80, odds: 1.55 });
+  assert.equal(result.grade, 'skip');
+});
+
+test('blocks Core when more than one soft context risk opposes', () => {
+  const result = evaluatePick({
+    ...validPick,
+    footballEvidence: {
+      ...validPick.footballEvidence,
+      weatherPitchRisk: 'oppose',
+      refereeDisciplineRisk: 'oppose',
+    },
+  });
+  assert.equal(result.grade, 'skip');
+});
