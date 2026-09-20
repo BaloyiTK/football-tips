@@ -49,3 +49,58 @@ The daily workflow should:
 4. publish the ranked list,
 5. update the website,
 6. verify Vercel production is READY.
+
+
+## Pillar 1 — Match Team Form
+
+Match Team Form measures current result strength while giving more importance to the venue of the upcoming match.
+
+### Result values
+- Win = 100%
+- Draw = 33.3%
+- Loss = 0%
+
+### Recency weights
+The five matches must be supplied most-recent first:
+
+1. most recent = 30%
+2. second = 25%
+3. third = 20%
+4. fourth = 15%
+5. fifth = 10%
+
+Weighted five-match form:
+
+`Weighted Form = Σ(Result Value × Recency Weight)`
+
+### Home team
+Use:
+- last 5 overall
+- last 5 home
+
+`Home Match Team Form = 40% × Weighted Last-5 Overall + 60% × Weighted Last-5 Home`
+
+### Away team
+Use:
+- last 5 overall
+- last 5 away
+
+`Away Match Team Form = 40% × Weighted Last-5 Overall + 60% × Weighted Last-5 Away`
+
+### Match form gap
+
+`Form Gap = Home Match Team Form - Away Match Team Form`
+
+Positive values favor the home side's current/venue form; negative values favor the away side.
+
+### Example: Manchester City vs Sunderland
+Using the test sample:
+- Manchester City overall: WWWWW = 100%
+- Manchester City home: WWWLW = 85%
+- Manchester City Match Team Form = 91%
+- Sunderland overall: WLWDW = 65%
+- Sunderland away: DLWDL = 35%
+- Sunderland Match Team Form = 47%
+- Form Gap = +44 percentage points to Manchester City
+
+Match Team Form is a strength pillar, not by itself a final match prediction.
