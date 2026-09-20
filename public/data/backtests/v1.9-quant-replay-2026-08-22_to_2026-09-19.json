@@ -1,0 +1,89 @@
+{
+  "window": {
+    "start": "2026-08-22",
+    "end": "2026-09-19"
+  },
+  "modelVersion": "1.9",
+  "type": "fresh-v1.9-quantitative-morning-style-replay",
+  "leagues": [
+    "Premier League",
+    "Championship",
+    "Bundesliga",
+    "La Liga",
+    "Ligue 1",
+    "Serie A",
+    "Eredivisie",
+    "Liga Portugal"
+  ],
+  "result": {
+    "fixturesScanned": 311,
+    "sufficientQuantitativeEvidence": 216,
+    "insufficientEvidence": 95,
+    "qualifiedAtCurrent35PctAwayScoreCeiling": 0,
+    "wins": 0,
+    "losses": 0,
+    "hitRate": null
+  },
+  "diagnostic": {
+    "awayScoreProbabilityDistribution": {
+      "min": 0.4977524985,
+      "p10": 0.6563139929,
+      "p25": 0.7095648068,
+      "median": 0.7464594779,
+      "p75": 0.8025981269,
+      "max": 0.891675661
+    },
+    "thresholdSensitivity": [
+      {
+        "awayScoreCeiling": 0.35,
+        "picks": 0,
+        "wins": 0,
+        "losses": 0
+      },
+      {
+        "awayScoreCeiling": 0.4,
+        "picks": 0,
+        "wins": 0,
+        "losses": 0
+      },
+      {
+        "awayScoreCeiling": 0.45,
+        "picks": 0,
+        "wins": 0,
+        "losses": 0
+      },
+      {
+        "awayScoreCeiling": 0.5,
+        "picks": 1,
+        "wins": 1,
+        "losses": 0
+      },
+      {
+        "awayScoreCeiling": 0.55,
+        "picks": 3,
+        "wins": 3,
+        "losses": 0
+      },
+      {
+        "awayScoreCeiling": 0.6,
+        "picks": 7,
+        "wins": 7,
+        "losses": 0
+      }
+    ]
+  },
+  "methodology": {
+    "chronology": "Only matches completed before the fixture date were used.",
+    "history": "Previous-season plus current-season pre-match results were used so early-season fixtures had short/medium/long samples.",
+    "sampleBlend": "45% last 6, 35% last 12, 20% last 20.",
+    "oppositionAdjustment": "Recent GF/GA inputs were adjusted by the average strength of recent opponents.",
+    "leagueNormalization": "Away scoring probability was compared with the pre-match league away-team scoring baseline.",
+    "probability": "70% Poisson 1X + 15% recent empirical 1X + 15% venue empirical 1X."
+  },
+  "limitations": [
+    "This is the reconstructable quantitative portion of v1.9, not a fully audited v1.9 Core backtest.",
+    "Historical 06:00 bookmaker prices, opening-line movement, goalkeeper event metrics, set-piece event metrics, team news, motivation, referee and weather/pitch context were not available in the machine-readable source and were not invented.",
+    "The current 35% away-score rule produced zero selections before those unavailable contextual/value gates could matter.",
+    "Threshold sensitivity is diagnostic only and is not evidence that a looser threshold should be adopted without a larger out-of-sample test."
+  ]
+}
