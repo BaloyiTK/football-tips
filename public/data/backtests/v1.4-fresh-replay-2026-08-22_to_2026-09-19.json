@@ -1,0 +1,185 @@
+{
+  "window": {
+    "start": "2026-08-22",
+    "end": "2026-09-19"
+  },
+  "generatedAt": "2026-09-20",
+  "timezone": "Africa/Johannesburg",
+  "modelVersion": "1.4",
+  "type": "fresh-deterministic-replay",
+  "oldPredictionsUsed": false,
+  "coverage": {
+    "fixturesScanned": 506,
+    "leagues": {
+      "E0": 39,
+      "E1": 69,
+      "E2": 58,
+      "E3": 60,
+      "D1": 27,
+      "D2": 27,
+      "I1": 40,
+      "I2": 39,
+      "SP1": 43,
+      "SP2": 43,
+      "T1": 35,
+      "F1": 26
+    },
+    "leagueCount": 12,
+    "note": "Coverage is limited to leagues for which reproducible 2026/27 match, xG/goals and bookmaker data could be obtained. This is not an all-world replay."
+  },
+  "methodology": {
+    "chronology": "Each fixture was processed in chronological order. Only matches completed before that fixture were available to the model.",
+    "history": "Rolling last-five team form plus venue form; previous-season matches were used to seed early-season samples.",
+    "primaryFootballGate": [
+      "recent form supports selected market",
+      "home/away profile supports selected market",
+      "goals/xG profile supports selected market",
+      "Poisson/Dixon-Coles probability supports selected market"
+    ],
+    "independentChecks": "Three deterministic historical checks: goal-based Poisson, xG-based Poisson when available (otherwise empirical form), and empirical recent/venue rate. At least 2 of 3 had to support.",
+    "probabilityFloor": 0.65,
+    "edgeFloor": 0.04,
+    "evFloor": 0.05,
+    "markets": [
+      "1X",
+      "X2",
+      "Home win",
+      "Over 2.5",
+      "Under 2.5"
+    ],
+    "prices": "Opening Bet365 1X2 and O/U 2.5 fields where available. Double-chance prices were derived from the same 1X2 book for replay purposes.",
+    "noFutureLeakage": true
+  },
+  "result": {
+    "coreSelections": 124,
+    "wins": 71,
+    "losses": 53,
+    "hitRate": 0.5725806452,
+    "wilson95": {
+      "low": 0.4846,
+      "high": 0.6562
+    },
+    "flatStake": 100,
+    "totalStake": 12400,
+    "approximateProfit": -540.1,
+    "approximateROI": -0.0436,
+    "roiCaveat": "ROI is approximate because double-chance prices are synthetic from the same 1X2 book rather than archived quoted DC prices."
+  },
+  "byMarket": {
+    "1X": {
+      "selections": 31,
+      "wins": 15,
+      "losses": 16,
+      "hitRate": 0.4839,
+      "approximateProfit": -732.1
+    },
+    "X2": {
+      "selections": 40,
+      "wins": 23,
+      "losses": 17,
+      "hitRate": 0.575,
+      "approximateProfit": 138
+    },
+    "Over 2.5": {
+      "selections": 35,
+      "wins": 20,
+      "losses": 15,
+      "hitRate": 0.5714,
+      "approximateProfit": -325
+    },
+    "Under 2.5": {
+      "selections": 17,
+      "wins": 12,
+      "losses": 5,
+      "hitRate": 0.7059,
+      "approximateProfit": 322
+    },
+    "Home win": {
+      "selections": 1,
+      "wins": 1,
+      "losses": 0,
+      "hitRate": 1,
+      "approximateProfit": 57
+    }
+  },
+  "byLeague": {
+    "E0": {
+      "selections": 13,
+      "wins": 8,
+      "losses": 5,
+      "hitRate": 0.615
+    },
+    "E1": {
+      "selections": 11,
+      "wins": 3,
+      "losses": 8,
+      "hitRate": 0.273
+    },
+    "E2": {
+      "selections": 12,
+      "wins": 5,
+      "losses": 7,
+      "hitRate": 0.417
+    },
+    "E3": {
+      "selections": 12,
+      "wins": 9,
+      "losses": 3,
+      "hitRate": 0.75
+    },
+    "D1": {
+      "selections": 14,
+      "wins": 10,
+      "losses": 4,
+      "hitRate": 0.714
+    },
+    "D2": {
+      "selections": 8,
+      "wins": 6,
+      "losses": 2,
+      "hitRate": 0.75
+    },
+    "I1": {
+      "selections": 16,
+      "wins": 8,
+      "losses": 8,
+      "hitRate": 0.5
+    },
+    "I2": {
+      "selections": 9,
+      "wins": 4,
+      "losses": 5,
+      "hitRate": 0.444
+    },
+    "SP1": {
+      "selections": 7,
+      "wins": 3,
+      "losses": 4,
+      "hitRate": 0.429
+    },
+    "SP2": {
+      "selections": 9,
+      "wins": 6,
+      "losses": 3,
+      "hitRate": 0.667
+    },
+    "T1": {
+      "selections": 8,
+      "wins": 4,
+      "losses": 4,
+      "hitRate": 0.5
+    },
+    "F1": {
+      "selections": 5,
+      "wins": 5,
+      "losses": 0,
+      "hitRate": 1
+    }
+  },
+  "interpretation": [
+    "The fresh replay does not support a high-confidence claim for v1.4 as currently reconstructed.",
+    "The model is materially overconfident on 1X and several Over 2.5 selections.",
+    "Under 2.5 was the strongest repeated market in this sample.",
+    "External historical prediction snapshots were not available systematically; independent-model checks were reconstructed deterministically from past-only statistical models."
+  ]
+}
