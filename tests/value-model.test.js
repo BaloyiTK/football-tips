@@ -20,12 +20,15 @@ const validPick = {
     poissonDc: 'pass',
     h2h: 'neutral',
     opponentStrength: 'pass',
+    motivation: 'neutral',
+    teamNews: 'neutral',
+    scheduleFatigue: 'neutral',
     independentModels: { checked: 3, supporting: 3, opposing: 0 },
     majorDisagreement: false,
   },
 };
 
-test('uses model v1.6', () => assert.equal(MODEL_VERSION, '1.6'));
+test('uses model v1.7', () => assert.equal(MODEL_VERSION, '1.7'));
 
 test('qualifies a fully verified value pick as Core', () => {
   const result = evaluatePick(validPick);
@@ -159,4 +162,27 @@ test('blocks 1X when the away side is an overwhelming no-vig market favourite', 
   });
   assert.equal(result.grade, 'skip');
   assert.match(result.reasons.join(' '), /overwhelming market favourite/i);
+});
+
+
+test('requires motivation, team news and schedule evidence for Core', () => {
+  const result = evaluatePick({
+    ...validPick,
+    footballEvidence: {
+      ...validPick.footballEvidence,
+      motivation: undefined,
+      teamNews: undefined,
+      scheduleFatigue: undefined,
+    },
+  });
+  assert.equal(result.grade, 'watchlist');
+  assert.match(result.reasons.join(' '), /motivation|teamNews|scheduleFatigue/i);
+});
+
+test('blocks Core when team news materially opposes the 1X case', () => {
+  const result = evaluatePick({
+    ...validPick,
+    footballEvidence: { ...validPick.footballEvidence, teamNews: 'oppose' },
+  });
+  assert.equal(result.grade, 'watchlist');
 });
