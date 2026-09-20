@@ -7,6 +7,8 @@ import {
   calculateWeightedFive,
   calculateMatchTeamForm,
   calculateMatchTeamFormGap,
+  calculateWeightedMetric,
+  calculateRecentTrend,
 } from '../lib/value-model.js';
 
 test('uses reset model v1.0', () => {
@@ -86,4 +88,33 @@ test('ranks all supplied selections', () => {
   assert.equal(result.core[0].fixture, 'A vs B');
   assert.equal(result.watchlist.length, 0);
   assert.equal(result.skip.length, 0);
+});
+
+
+test('calculates weighted goals and xG using the same recency weights', () => {
+  assert.equal(calculateWeightedMetric([3,2,1,2,0]), 1.75);
+  assert.equal(calculateWeightedMetric([2.1,1.8,1.4,1.2,0.9]), 1.63);
+});
+
+test('calculates positive and negative recent trend', () => {
+  assert.equal(calculateRecentTrend(['W','W','D','L','L']), 88.9);
+  assert.equal(calculateRecentTrend(['L','L','D','W','W']), -88.9);
+});
+
+test('Match Team Form exposes goals, defence, xG, xGA, opponent strength and trend', () => {
+  const form = calculateMatchTeamForm({
+    overallResults:['W','W','D','L','W'],
+    venueResults:['W','W','W','D','W'],
+    goalsScored:[3,2,2,1,4],
+    goalsConceded:[0,1,1,2,0],
+    xG:[2.4,1.9,1.8,1.2,2.1],
+    xGA:[0.7,0.9,1.1,1.6,0.8],
+    opponentStrength:[82,75,68,90,64],
+  });
+  assert.equal(form.goalsScored, 2.3);
+  assert.equal(form.goalsConceded, 0.75);
+  assert.equal(form.xG, 1.93);
+  assert.equal(form.xGA, 0.99);
+  assert.equal(form.opponentStrength, 77.25);
+  assert.equal(form.recentTrend, 44.4);
 });
