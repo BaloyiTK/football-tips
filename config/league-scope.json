@@ -1,5 +1,5 @@
 {
-  "version": "1.9",
+  "version": "1.0",
   "effectiveDate": "2026-09-20",
   "timezone": "Africa/Johannesburg",
   "associationCount": 200,
@@ -11,7 +11,7 @@
     ],
     "topAssociationLimit": null,
     "providerCoverage": "best-effort",
-    "selectionGate": "value-model-v1.9-context-normalized-1x",
+    "selectionGate": "open-ranking-v1.0",
     "fixtureSourceStrategy": "multi-source-global-exhaustive",
     "minimumDistinctLeagues": null,
     "weekendTargetDistinctLeagues": null,
@@ -21,36 +21,25 @@
     "requireCoverageReport": true,
     "scanAllAvailableLeagues": true,
     "scanAllAvailableFixtures": true,
-    "allowedMarkets": [
-      "1X"
-    ],
-    "requireH2H": true,
-    "requireOpponentStrength": true,
-    "maxAwayNoVigWinProbability": 0.6,
-    "requireMotivation": true,
-    "requireTeamNews": true,
-    "requireScheduleFatigue": true,
-    "requireAwayScoringThreat": true,
-    "requireLeagueBaseline": true,
-    "minAwayScoreAdvantageVsLeague": 0.1,
-    "sampleBlendWeights": {
-      "recent5to6": 0.45,
-      "recent10to12": 0.35,
-      "longTerm": 0.2
-    },
-    "requireOppositionAdjustment": true,
-    "requireGoalkeeperQuality": true,
-    "requireSetPieceRisk": true,
-    "requireMarketMoveCheck": true,
-    "maxPriceShorteningFromOpen": 0.1,
-    "softRiskFields": [
-      "gameScriptRisk",
-      "refereeDisciplineRisk",
-      "weatherPitchRisk",
-      "homeFalseFavouriteRisk"
-    ],
-    "maxSoftRiskFlags": 1,
-    "requireAwayScoreBelowLeagueBaselineBy": 0.1
+    "allowedMarkets": "all",
+    "hardRejectRules": [],
+    "rankingInputs": [
+      "recentForm",
+      "homeAway",
+      "goalsOrXg",
+      "poissonOrModelProbability",
+      "h2h",
+      "opponentStrength",
+      "teamNews",
+      "motivation",
+      "scheduleFatigue",
+      "odds",
+      "expectedValue",
+      "marketMove",
+      "goalkeeperQuality",
+      "setPieceRisk",
+      "weatherPitchRisk"
+    ]
   },
   "associations": [
     "England",
