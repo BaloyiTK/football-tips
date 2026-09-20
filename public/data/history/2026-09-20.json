@@ -2,11 +2,11 @@
   "date": "20 September 2026",
   "dateISO": "2026-09-20",
   "timezone": "Africa/Johannesburg",
-  "modelVersion": "1.3",
-  "publicationStatus": "published-global-rescan",
-  "revision": 2,
+  "modelVersion": "1.4",
+  "publicationStatus": "published-v1.4-football-revalidation",
+  "revision": 3,
   "replacesRecoveryPublication": true,
-  "editorialNote": "Broad multi-source global rescan. Every qualifying Core is retained and rated. Strong football selections remain Watchlist when the price/value gate is incomplete or too short.",
+  "editorialNote": "Football Tips v1.4 requires explicit structured football evidence before price/value can promote a selection to Core. Major football disagreement keeps a priced pick on Watchlist.",
   "scanCoverage": {
     "scopeVersion": "1.3-global-rescan",
     "mode": "multi-source global senior-men best effort",
@@ -80,7 +80,7 @@
       "league": "First League",
       "kickoff": "14:15 SAST",
       "market": "Spartak Varna or Draw (1X)",
-      "probability": "74.0%",
+      "probability": "75.0%",
       "odds": 1.5,
       "bookmaker": "Bet365",
       "marketOdds": {
@@ -97,12 +97,27 @@
       "contradictions": 1,
       "modelAgreement": true,
       "floorsPassed": true,
-      "reason": "PredictLix rates 1X at 79.4%, Forebet at 74%, and another form model at 69%; the draw-heavy profile and Lokomotiv's poor run support the cover. Bet365's complete 1X2/DC snapshot leaves enough no-vig edge and EV for Core.",
+      "reason": "v1.4 revalidation: recent form, home/away profile, goals model, Dixon-Coles floor and three independent models all support Spartak avoiding defeat. The 1.50 price still clears the value gate.",
       "sources": [
-        "https://predictlix.com/predictions/weekend/double-chance/",
+        "https://footycheck.com/football/match/spartak-varna-vs-lokomotiv-sofia-2026-09-20/1551116/",
+        "https://predictvantage.com/match/23258-spartak-varna-vs-lokomotiv-sofia-2026-09-20",
         "https://www.forebet.com/en/football/matches/spartak-varna-lokomotiv-sofia-2469295",
-        "https://footycheck.com/football/match/spartak-varna-vs-lokomotiv-sofia-2026-09-20/1551116/"
-      ]
+        "https://footystats.org/clubs/pfc-spartak-1918-varna-3644"
+      ],
+      "footballEvidence": {
+        "recentForm": "pass",
+        "homeAway": "pass",
+        "goalsOrXg": "pass",
+        "poissonDc": "pass",
+        "poissonDcProbability": "68.3%",
+        "independentModels": {
+          "checked": 3,
+          "supporting": 3,
+          "opposing": 0
+        },
+        "majorDisagreement": false,
+        "note": "Three recent draws after the Levski defeat, including Ludogorets and CSKA; home profile is stronger than Lokomotiv's away profile. FootyCheck FCxG 1.50-1.31 and an internal Dixon-Coles check give 1X about 68.3%; independent 1X models are about 74%-81.6%."
+      }
     },
     {
       "fixture": "Parma vs Genoa",
@@ -110,7 +125,7 @@
       "league": "Serie A",
       "kickoff": "15:00 SAST",
       "market": "Parma or Draw (1X)",
-      "probability": "74.9%",
+      "probability": "67.0%",
       "odds": 1.49,
       "bookmaker": "Sportingbet",
       "marketOdds": {
@@ -125,14 +140,29 @@
       "oddsCapturedAt": "20 Sep 2026 pre-match public snapshot",
       "heat": "4/8",
       "contradictions": 1,
-      "modelAgreement": true,
+      "modelAgreement": false,
       "floorsPassed": true,
-      "reason": "PredictLix places 1X at 74.8% and Forebet at 75%. The last two league meetings were 0-0 and half of the last six meetings were draws. Sportingbet's complete market snapshot gives the 1X line sufficient no-vig edge and EV.",
+      "reason": "v1.4 revalidation: price remains potentially attractive, but Parma's current form is poor and independent models disagree too widely. Major football disagreement blocks Core.",
       "sources": [
-        "https://predictlix.com/predictions/italy/serie-a/genoa-vs-parma/",
-        "https://www.forebet.com/en/football/matches/parma-genoa-2496534",
-        "https://www.sportingbet.com/en/sports/events/parma-calcio-genoa-cfc-2%3A7862402"
-      ]
+        "https://www.fotmob.com/en-GB/matches/parma-vs-genoa/3fwbbl",
+        "https://footystats.org/italy/genoa-cfc-vs-parma-calcio-1913-h2h-stats",
+        "https://football.aleavici.com/football/2026-09-20/parma-vs-genoa",
+        "https://www.statmuse.com/fc/match/9-20-2026-par-vs-gen-112121"
+      ],
+      "footballEvidence": {
+        "recentForm": "fail",
+        "homeAway": null,
+        "goalsOrXg": null,
+        "poissonDc": "pass",
+        "poissonDcProbability": "68.7%",
+        "independentModels": {
+          "checked": 5,
+          "supporting": 3,
+          "opposing": 2
+        },
+        "majorDisagreement": true,
+        "note": "Parma are L-D-L-L-L in the last five league matches and have scored two goals. Independent 1X estimates range roughly from 55% to 75%, while a Dixon-Coles check from a 1.37-1.20 xG input gives about 68.7% for 1X. The spread is too wide for Core."
+      }
     },
     {
       "fixture": "Getafe vs Malaga",
@@ -155,7 +185,6 @@
       "oddsCapturedAt": "20 Sep 2026 pre-match public snapshot",
       "heat": "4/8",
       "contradictions": 1,
-      "modelAgreement": true,
       "floorsPassed": true,
       "reason": "Multiple models support Getafe avoiding defeat, with a conservative blended football probability around 78%. The Bet365 1X price is too short: it fails both the +4pp no-vig edge and +5% EV Core gates.",
       "sources": [
@@ -176,7 +205,6 @@
       "marketOdds": null,
       "heat": "5/8",
       "contradictions": 1,
-      "modelAgreement": true,
       "floorsPassed": true,
       "reason": "City's form, home strength and xG profile are clearly stronger, but the currently captured public prices are not stored as a complete named-bookmaker 1X2 snapshot for the value gate.",
       "sources": [
@@ -195,7 +223,6 @@
       "marketOdds": null,
       "heat": "4/8",
       "contradictions": 1,
-      "modelAgreement": true,
       "floorsPassed": true,
       "reason": "Independent goal models put Juventus 1X around 83%, supported by the current xG split. The available 1X price is short and a complete named-bookmaker snapshot has not been locked for Core validation.",
       "sources": [
@@ -214,7 +241,6 @@
       "marketOdds": null,
       "heat": "4/8",
       "contradictions": 1,
-      "modelAgreement": true,
       "floorsPassed": true,
       "reason": "Milan's stronger home projection, recent form and five straight H2H wins support 1X, but six listed Milan absences create a contradiction and the price snapshot is not complete enough for Core.",
       "sources": [
@@ -232,7 +258,6 @@
       "marketOdds": null,
       "heat": "4/8",
       "contradictions": 0,
-      "modelAgreement": true,
       "floorsPassed": true,
       "reason": "PredictLix and an independent xG grid both put Viking 1X around 85–86%. The football case is strong, but the available line is short and the complete same-bookmaker market snapshot is still pending.",
       "sources": [
@@ -251,7 +276,6 @@
       "marketOdds": null,
       "heat": "5/8",
       "contradictions": 1,
-      "modelAgreement": true,
       "floorsPassed": true,
       "reason": "Pirates are unbeaten in the league and Forebet places X2 at 92%; the cover is football-strong but the market is extremely short and no complete named-bookmaker snapshot is locked for a value claim.",
       "sources": [
