@@ -29,8 +29,15 @@ export default function HomePage() {
     type: 'idle',
     message: '',
   });
-  const candidates = data.candidates ?? data.core ?? [];
-  const valueSelection = useMemo(() => selectCorePicks(candidates), [candidates]);
+  const candidates = data.candidates ?? [];
+  const computedSelection = useMemo(() => selectCorePicks(candidates), [candidates]);
+  const publishedCore = Array.isArray(data.core) ? data.core : [];
+  const publishedWatchlist = candidates.filter((pick) => String(pick.classification || '').toUpperCase() === 'WATCHLIST');
+  const valueSelection = {
+    core: publishedCore.length > 0 ? publishedCore : computedSelection.core,
+    watchlist: publishedWatchlist.length > 0 ? publishedWatchlist : computedSelection.watchlist,
+    skip: computedSelection.skip,
+  };
   const isStale = Boolean(data.dateISO && data.dateISO !== sastTodayKey());
 
   useEffect(() => {
@@ -149,6 +156,13 @@ export default function HomePage() {
 
           {loading ? <p className="muted">Loading picks…</p> : null}
 
+          {!loading && data.runAtSAST ? (
+            <div className="status-banner">
+              <strong>Last workflow run: {data.runAtSAST} SAST</strong>
+              <span>{data.publicationStatus || 'published'}</span>
+            </div>
+          ) : null}
+
           {!loading && isStale ? (
             <div className="status-banner warning">
               <strong>Today's scan has not been published yet.</strong>
@@ -229,16 +243,18 @@ export default function HomePage() {
                   <div>
                     <strong>{pick.fixture}</strong>
                     <span>{pick.market || 'Best market pending'} · {pick.kickoff || 'KO pending'}</span>
-                    <small>{pick.assessment?.reasons?.[0] || 'Football profile passed; Core confirmation is pending.'}</small>
+                    <small>{pick.reason || pick.assessment?.reasons?.[0] || 'Football profile passed; Core confirmation is pending.'}</small>
                   </div>
                   <div className="watchlist-meta">
                     <b>{displayProbability(pick.probability)}</b>
                     <span>{
-                      pick.assessment?.priceStatus === 'pending'
-                        ? 'PRICE PENDING'
-                        : pick.assessment?.priceStatus === 'verified-football-pending'
-                          ? 'FOOTBALL CHECK'
-                          : 'NOT CORE VALUE'
+                      pick.classification === 'WATCHLIST'
+                        ? 'WATCHLIST'
+                        : pick.assessment?.priceStatus === 'pending'
+                          ? 'PRICE PENDING'
+                          : pick.assessment?.priceStatus === 'verified-football-pending'
+                            ? 'FOOTBALL CHECK'
+                            : 'NOT CORE VALUE'
                     }</span>
                   </div>
                 </div>
