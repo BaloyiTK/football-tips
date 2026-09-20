@@ -1,9 +1,62 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { evaluatePick, selectCorePicks, MODEL_VERSION } from '../lib/value-model.js';
+import {
+  evaluatePick,
+  selectCorePicks,
+  MODEL_VERSION,
+  calculateWeightedFive,
+  calculateMatchTeamForm,
+  calculateMatchTeamFormGap,
+} from '../lib/value-model.js';
 
 test('uses reset model v1.0', () => {
   assert.equal(MODEL_VERSION, '1.0');
+});
+
+test('WWWWW scores 100 percent', () => {
+  assert.equal(calculateWeightedFive(['W','W','W','W','W']), 100);
+});
+
+test('recency weighting distinguishes identical WDL counts', () => {
+  assert.equal(calculateWeightedFive(['W','W','D','L','L']), 61.7);
+  assert.equal(calculateWeightedFive(['L','L','D','W','W']), 31.7);
+});
+
+test('calculates Manchester City test Match Team Form at 91 percent', () => {
+  const form = calculateMatchTeamForm({
+    overallResults: ['W','W','W','W','W'],
+    venueResults: ['W','W','W','L','W'],
+  });
+  assert.equal(form.overall, 100);
+  assert.equal(form.venue, 85);
+  assert.equal(form.score, 91);
+});
+
+test('calculates Sunderland test Match Team Form at 47 percent', () => {
+  const form = calculateMatchTeamForm({
+    overallResults: ['W','L','W','D','W'],
+    venueResults: ['D','L','W','D','L'],
+  });
+  assert.equal(form.overall, 65);
+  assert.equal(form.venue, 35);
+  assert.equal(form.score, 47);
+});
+
+test('calculates Manchester City form gap over Sunderland at 44 points', () => {
+  const home = calculateMatchTeamForm({
+    overallResults: ['W','W','W','W','W'],
+    venueResults: ['W','W','W','L','W'],
+  });
+  const away = calculateMatchTeamForm({
+    overallResults: ['W','L','W','D','W'],
+    venueResults: ['D','L','W','D','L'],
+  });
+  assert.equal(calculateMatchTeamFormGap(home, away), 44);
+});
+
+test('requires exactly five valid results for the pillar', () => {
+  assert.equal(calculateWeightedFive(['W','W','W']), null);
+  assert.equal(calculateWeightedFive(['W','W','W','W','X']), null);
 });
 
 test('does not reject non-1X markets', () => {
@@ -12,18 +65,25 @@ test('does not reject non-1X markets', () => {
   assert.equal(result.qualifies, true);
 });
 
-test('does not reject low probability automatically', () => {
-  const result = evaluatePick({ fixture:'A vs B', market:'Home Win', probability:'48%', odds:2.30 });
-  assert.equal(result.grade, 'ranked');
-  assert.equal(result.qualifies, true);
+test('uses Match Team Form as current ranking score when supplied', () => {
+  const result = evaluatePick({
+    fixture:'A vs B',
+    matchTeamForm:{
+      overallResults:['W','W','W','W','W'],
+      venueResults:['W','W','W','L','W'],
+    },
+  });
+  assert.equal(result.score, 91);
+  assert.equal(result.matchTeamForm.score, 91);
 });
 
 test('ranks all supplied selections', () => {
   const result = selectCorePicks([
-    { fixture:'A vs B', probability:'70%', odds:1.60 },
-    { fixture:'C vs D', probability:'55%', odds:2.00 }
+    { fixture:'A vs B', matchTeamForm:{overallResults:['W','W','W','W','W'],venueResults:['W','W','W','L','W']} },
+    { fixture:'C vs D', matchTeamForm:{overallResults:['W','D','L','W','D'],venueResults:['D','L','W','D','L']} }
   ]);
   assert.equal(result.core.length, 2);
+  assert.equal(result.core[0].fixture, 'A vs B');
   assert.equal(result.watchlist.length, 0);
   assert.equal(result.skip.length, 0);
 });
