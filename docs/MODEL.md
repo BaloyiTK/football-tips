@@ -1,61 +1,62 @@
-# Football Tips model v1.2
+# Football Tips model v1.4
 
-Version 1.2 makes value a hard publication gate. A selection is a candidate until the shared value model promotes it to Core. The website and scheduled email use the same gate.
+Version 1.4 makes the football-evidence gate explicit and auditable before price/value can promote a selection to Core.
+
+## Daily order
+
+1. Scan every accessible senior men's domestic league and fixture in the configured global scope.
+2. Build football evidence before looking for value: recent form, home/away profile, goals or xG, Poisson/Dixon-Coles, Heat, floors, contradictions, relevant H2H and reliable team news.
+3. Cross-check the proposed market against independent models.
+4. Only after the football gate is ready, validate the bookmaker price, no-vig edge and EV.
+5. Publish every qualifying Core and rate it; keep incomplete or conflicted football cases on Watchlist.
+
+## Structured football gate
+
+Every Core candidate must include:
+
+```json
+{
+  "footballEvidence": {
+    "recentForm": "pass",
+    "homeAway": "pass",
+    "goalsOrXg": "pass",
+    "poissonDc": "pass",
+    "independentModels": {
+      "checked": 3,
+      "supporting": 3,
+      "opposing": 0
+    },
+    "majorDisagreement": false
+  }
+}
+```
+
+Core requires all four primary football signals to support the selection, at least 2 independent model checks, at least 67% independent-model support, and no major disagreement. Missing or conflicting evidence keeps a selection on Watchlist; price never overrides a failed football gate.
+
+H2H is supporting evidence, not a standalone Core requirement.
 
 ## Core requirements
 
 - Model probability: at least 65%
-- No-vig edge: at least 4 percentage points
-- Expected value: at least 5%
 - Heat: at least 2
 - Contradictions: no more than 1
-- Form/xG and the goal model agree
 - All selection floors pass
-- Complete decimal market odds are present
-- Maximum 6 Core picks, ranked by probability, edge, EV and Heat
+- Structured football evidence gate passes
+- Complete same-bookmaker mutually exclusive market odds are present
+- No-vig edge: at least 4 percentage points
+- Expected value: at least 5%
+- No maximum number of Core picks; every qualifier is retained and ranked
 
-High probability without value is rejected. Value without adequate model confidence is also rejected.
+## Scores shown on the site
 
-## Daily fixture scope
+- Football Strength /100: 70% model probability, 10% Heat, 15% independent-model agreement, 5% evidence completeness, minus contradiction penalties.
+- Value Strength /100: 60% edge score and 40% expected-value score.
+- Overall /100: 70% Football Strength and 30% Value Strength.
+- Rating labels: ELITE (85+), STRONG (75+), SOLID (68+), QUALIFIED (<68, but still must pass all Core gates).
 
-The daily discovery stage must load every association in
-[`config/league-scope.json`](../config/league-scope.json) each day. The scope
-contains all 200 associations supplied for the project and has no famous-league
-or top-100 cutoff.
+The Overall rating ranks already-qualified Core picks. It is not a substitute for the Core gates.
 
-For each association, the scanner should request every senior domestic league
-supported by the fixture provider. Provider gaps must be recorded as
-unavailable; they must never be filled with invented fixtures or statistics.
-Expanding discovery does not lower the publication standard: every candidate
-still has to pass the complete v1.2 value gate before it can become a Core pick.
-
-## Candidate data
-
-```json
-{
-  "fixture": "Home vs Away",
-  "market": "Home or Draw — 1X",
-  "probability": "72%",
-  "odds": 1.55,
-  "marketOdds": {
-    "home": 2.1,
-    "draw": 3.4,
-    "away": 3.8
-  },
-  "coveredOutcomes": ["home", "draw"],
-  "oddsCapturedAt": "2026-09-18T06:00:00+02:00",
-  "heat": "5/8",
-  "contradictions": 0,
-  "modelAgreement": true,
-  "floorsPassed": true
-}
-```
-
-`marketOdds` must contain every mutually exclusive outcome from the same bookmaker snapshot. The model removes the overround by normalising the implied probabilities. `coveredOutcomes` identifies the outcomes that win the selection. This supports ordinary two-way/three-way markets and double chance derived from 1X2 prices.
-
-Push markets such as Draw No Bet should remain Secondary until win, push and loss probabilities are modelled explicitly.
-
-## Calculations
+## Price calculations
 
 ```text
 fair odds = 1 / model probability
@@ -63,3 +64,5 @@ no-vig market probability = covered normalised implied probabilities
 edge = model probability - no-vig market probability
 EV = model probability × selection odds - 1
 ```
+
+`marketOdds` must contain all mutually exclusive outcomes from the same bookmaker snapshot. `coveredOutcomes` identifies the outcomes that win the selection.
