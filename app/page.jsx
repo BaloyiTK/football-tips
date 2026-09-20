@@ -125,7 +125,7 @@ export default function HomePage() {
             <span className="eyebrow">FOOTBALL-FIRST ANALYSIS</span>
             <h1>Daily football picks without forcing the board.</h1>
             <p>
-              Football Tips v1.3 starts with football strength. Strong selections stay visible
+              Football Tips v1.4 starts with football strength. Strong selections stay visible
               on the Watchlist when price data is incomplete; only fully verified football +
               value selections become Core.
             </p>
@@ -144,7 +144,7 @@ export default function HomePage() {
               <span className="eyebrow">TODAY</span>
               <h2>{data.date || 'Daily Picks'}</h2>
             </div>
-            <span className="pill">v1.3 · VALUE GATE</span>
+            <span className="pill">v1.4 · FOOTBALL + VALUE GATE</span>
           </div>
 
           {loading ? <p className="muted">Loading picks…</p> : null}
@@ -192,8 +192,10 @@ export default function HomePage() {
                   <span><b>+{formatPercent(pick.value.edge)}</b><small>No-vig edge</small></span>
                   <span><b>+{formatPercent(pick.value.expectedValue)}</b><small>EV</small></span>
                   <span><b>{pick.heat}</b><small>Heat</small></span>
-                  <span><b>{pick.value.rating.toFixed(1)}</b><small>Rating /100</small></span>
-                  <span><b>{pick.value.ratingBand}</b><small>Grade</small></span>
+                  <span><b>{pick.value.footballStrength.toFixed(1)}</b><small>Football /100</small></span>
+                  <span><b>{pick.value.valueStrength.toFixed(1)}</b><small>Value /100</small></span>
+                  <span><b>{pick.value.rating.toFixed(1)}</b><small>Overall /100</small></span>
+                  <span><b>{pick.value.ratingBand}</b><small>Core rating</small></span>
                 </div>
                 <p>{pick.reason}</p>
               </article>
@@ -218,7 +220,7 @@ export default function HomePage() {
               <div className="watchlist-heading">
                 <div>
                   <span className="eyebrow">FOOTBALL-QUALIFIED</span>
-                  <h3>Watchlist — price/value pending</h3>
+                  <h3>Watchlist — verification pending</h3>
                 </div>
                 <span className="pill">{valueSelection.watchlist.length} candidates</span>
               </div>
@@ -231,7 +233,13 @@ export default function HomePage() {
                   </div>
                   <div className="watchlist-meta">
                     <b>{displayProbability(pick.probability)}</b>
-                    <span>{pick.assessment?.priceStatus === 'pending' ? 'PRICE PENDING' : 'NOT CORE VALUE'}</span>
+                    <span>{
+                      pick.assessment?.priceStatus === 'pending'
+                        ? 'PRICE PENDING'
+                        : pick.assessment?.priceStatus === 'verified-football-pending'
+                          ? 'FOOTBALL CHECK'
+                          : 'NOT CORE VALUE'
+                    }</span>
                   </div>
                 </div>
               ))}
@@ -256,12 +264,12 @@ export default function HomePage() {
 
         <section id="method" className="section model-section">
           <span className="eyebrow">THE MODEL</span>
-          <h2>Football Tips v1.3</h2>
+          <h2>Football Tips v1.4</h2>
           <div className="model-grid">
             <div><strong>01</strong><h3>Football First</h3><p>Form, home/away strength and xG/goals create the initial probability before price can remove a football-strong candidate.</p></div>
-            <div><strong>02</strong><h3>Agreement & Floors</h3><p>Heat, model agreement, contradictions and selection floors decide whether a pick is Core-ready or stays on Watchlist.</p></div>
+            <div><strong>02</strong><h3>Football Evidence Gate</h3><p>Recent form, home/away profile, goals/xG, Poisson/Dixon-Coles and at least two independent models must be explicitly recorded. Major disagreement blocks Core.</p></div>
             <div><strong>03</strong><h3>Price Validation</h3><p>When a complete market snapshot exists, no-vig edge and EV decide whether a Core-ready football pick has enough price value.</p></div>
-            <div><strong>04</strong><h3>Rate Every Core</h3><p>Every qualifying Core stays on the board and receives a 0–100 rating plus A+/A/B+/B/C band. WATCHLIST = football strong but confirmation pending. SKIP = football evidence itself is weak.</p></div>
+            <div><strong>04</strong><h3>Separate The Scores</h3><p>Every Core shows Football Strength, Value Strength and an Overall rating. Price cannot compensate for a failed football gate.</p></div>
           </div>
         </section>
 
