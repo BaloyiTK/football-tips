@@ -1,0 +1,78 @@
+{
+  "window": {
+    "start": "2026-08-22",
+    "end": "2026-09-20",
+    "days": 30
+  },
+  "generatedAt": "2026-09-20",
+  "timezone": "Africa/Johannesburg",
+  "modelVersion": "1.4",
+  "type": "v1.4-retro-audit",
+  "conclusion": {
+    "full30DayV14HitRateEstablished": false,
+    "reason": "v1.4 was introduced on 20 Sep 2026. Earlier days did not archive the structured footballEvidence fields required by v1.4, and the repository does not yet deterministically regenerate model probability from stored pre-match form/xG/Poisson inputs.",
+    "legacyBaseline": {
+      "settled": 33,
+      "wins": 26,
+      "losses": 7,
+      "hitRate": 0.7878787879
+    },
+    "v14CompatibleFullyMetadataRichDay": {
+      "date": "2026-09-18",
+      "settled": 5,
+      "wins": 5,
+      "losses": 0,
+      "observedHitRate": 1,
+      "note": "Useful compatibility check only; five selections are far too few to estimate the true v1.4 hit rate."
+    }
+  },
+  "v14CompatibleSelections": [
+    {
+      "fixture": "Bayern Munich vs Union Berlin",
+      "market": "Bayern team over 0.5 goals",
+      "result": "7-0",
+      "outcome": "win"
+    },
+    {
+      "fixture": "Qarabag vs Safa",
+      "market": "Qarabag or Draw (1X)",
+      "result": "1-0",
+      "outcome": "win"
+    },
+    {
+      "fixture": "Monza vs Sassuolo",
+      "market": "Over 1.5 goals",
+      "result": "2-1",
+      "outcome": "win"
+    },
+    {
+      "fixture": "Aktobe vs Ulytau",
+      "market": "Aktobe or Draw (1X)",
+      "result": "2-2",
+      "outcome": "win"
+    },
+    {
+      "fixture": "Monaco vs Lens",
+      "market": "Over 1.5 goals",
+      "result": "2-1",
+      "outcome": "win"
+    }
+  ],
+  "retrospectiveFilterExamples": {
+    "likelyFilteredLosses": [
+      "Servette vs St. Gallen — BTTS Yes: independent/form evidence was not sufficiently aligned.",
+      "Rangers vs St Mirren — BTTS Yes: independent support was weak/conflicted.",
+      "Jablonec vs Banik Ostrava — BTTS Yes: independent models conflicted."
+    ],
+    "lossThatWouldNotNecessarilyBeFiltered": [
+      "Twente vs Telstar — BTTS Yes: several independent pre-match models supported BTTS Yes, but the match still finished 1-0."
+    ]
+  },
+  "limitations": [
+    "Do not report 5/5 as the true v1.4 hit rate.",
+    "The 33-pick legacy baseline mixes earlier model processes and is not a v1.4 test.",
+    "Historical picks lacking pre-kickoff structured football evidence are excluded from strict v1.4 certification.",
+    "Exact ROI cannot be computed without complete historical price snapshots.",
+    "Future v1.4 boards must archive raw football inputs, structured footballEvidence, exact probability derivation, bookmaker snapshot, and result."
+  ]
+}
