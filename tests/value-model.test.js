@@ -9,6 +9,10 @@ import {
   calculateMatchTeamFormGap,
   calculateWeightedMetric,
   calculateRecentTrend,
+  calculateExpectedGoals,
+  calculatePoisson,
+  calculateMarketValue,
+  calculateH2HWithAge,
 } from '../lib/value-model.js';
 
 test('uses reset model v1.0', () => {
@@ -117,4 +121,30 @@ test('Match Team Form exposes goals, defence, xG, xGA, opponent strength and tre
   assert.equal(form.xGA, 0.98);
   assert.equal(form.opponentStrength, 76.85);
   assert.equal(form.recentTrend, 55.6);
+});
+
+
+test('contextual expected-goals adjustment is capped at 15 percent', () => {
+  const x=calculateExpectedGoals({homeGF:2,homeXG:2,homeGA:1,homeXGA:1,awayGF:1,awayXG:1,awayGA:2,awayXGA:2,homeSquadAdjustment:.2,homeMotivationAdjustment:.2});
+  assert.equal(x.homeAdjustment,.15);
+});
+
+test('Poisson probabilities are coherent', () => {
+  const p=calculatePoisson(2.1,.9);
+  assert.ok(p.home > p.draw);
+  assert.ok(p.home > p.away);
+  assert.ok(p.over15 > p.over25);
+  assert.ok(p.home1 > p.home2 && p.home2 > p.home3);
+});
+
+test('market layer computes fair odds and EV separately', () => {
+  const v=calculateMarketValue({probability:.6,odds:2});
+  assert.equal(Math.round(v.fairOdds*100)/100,1.67);
+  assert.equal(Math.round(v.expectedValue*100),20);
+});
+
+test('old H2H meetings decay by age', () => {
+  const recent=calculateH2HWithAge(['W','W','L','L','L'],[30,60,90,120,150]);
+  const oldWins=calculateH2HWithAge(['L','L','W','W','W'],[30,60,3000,3200,3400]);
+  assert.ok(recent.score > oldWins.score);
 });
