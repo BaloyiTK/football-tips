@@ -4,9 +4,9 @@
   "timezone": "Africa/Johannesburg",
   "modelVersion": "1.9",
   "publicationStatus": "published-v1.9-context-normalized",
-  "revision": 8,
+  "revision": 9,
   "replacesRecoveryPublication": true,
-  "editorialNote": "Football Tips v1.9 remains 1X-only and adds league-normalized away-scoring thresholds, blended sample windows, opposition-quality adjustment, goalkeeper/set-piece checks, opening-line movement and soft game-script/referee/weather/false-favourite risk flags.",
+  "editorialNote": "v1.9 adds league baselines, 45/35/20 sample blending, opposition-strength adjustment, goalkeeper/set-piece checks, opening-line movement and soft game-script/referee/weather/false-favourite flags. Existing candidates require fresh v1.9 evidence before Core.",
   "scanCoverage": {
     "scopeVersion": "1.3-global-rescan",
     "mode": "multi-source global senior-men best effort",
