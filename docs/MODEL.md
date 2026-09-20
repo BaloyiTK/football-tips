@@ -1,6 +1,6 @@
-# Football Tips model v1.5
+# Football Tips model v1.6
 
-Version 1.5 keeps the strict football-evidence gate and restricts the entire model to one market only: home team or draw (1X).
+Version 1.6 keeps the 1X-only policy and adds explicit H2H, opponent-strength and away-favourite danger gates so short-term form cannot overpower a clearly hostile matchup.
 
 ## Market policy
 
@@ -18,7 +18,7 @@ X2, Match Result, Draw No Bet, Over/Under, BTTS, Asian handicaps and all other m
 
 ## Structured football gate
 
-Every Core candidate must include:
+Every Core candidate must include recent form, home/away strength, goals/xG, Poisson/Dixon-Coles, H2H, opponent strength and independent-model evidence:
 
 ```json
 {
@@ -27,6 +27,8 @@ Every Core candidate must include:
     "homeAway": "pass",
     "goalsOrXg": "pass",
     "poissonDc": "pass",
+    "h2h": "neutral",
+    "opponentStrength": "pass",
     "independentModels": {
       "checked": 3,
       "supporting": 3,
@@ -72,3 +74,12 @@ EV = model probability × selection odds - 1
 ```
 
 `marketOdds` must contain all mutually exclusive outcomes from the same bookmaker snapshot. `coveredOutcomes` identifies the outcomes that win the selection.
+
+
+## v1.6 1X danger rules
+
+- H2H must be explicitly checked. "support" or "neutral" may pass; "oppose" blocks Core.
+- Opponent strength must explicitly pass. A materially stronger away side blocks Core.
+- When a complete 1X2 market exists, the model calculates the away team's no-vig win probability.
+- If the away team's no-vig win probability is **60% or higher**, 1X is rejected before value scoring. Price cannot rescue it.
+- Missing H2H or opponent-strength evidence keeps a candidate on Watchlist rather than silently assuming support.
