@@ -7,7 +7,7 @@ const validPick = {
   probability: '72%',
   odds: 1.55,
   market: 'Home or Draw (1X)',
-  marketOdds: { '1': 2.2, 'X': 3.3, '2': 3.4 },
+  marketOdds: { '1': 3.0, 'X': 3.6, '2': 2.1 },
   coveredOutcomes: ['1', 'X'],
   heat: '5/8',
   contradictions: 0,
@@ -41,7 +41,12 @@ test('keeps a football-strong pick on Watchlist when price data is missing', () 
 });
 
 test('keeps a strong pick on Watchlist when price is too short', () => {
-  const result = evaluatePick({ ...validPick, odds: 1.3, marketOdds: { selection: 1.3, opposite: 3.8 } });
+  const result = evaluatePick({
+    ...validPick,
+    odds: 1.3,
+    marketOdds: { '1': 1.75, 'X': 3.8, '2': 5.0 },
+    coveredOutcomes: ['1', 'X'],
+  });
   assert.equal(result.grade, 'watchlist');
   assert.equal(result.priceStatus, 'verified-no-core-value');
 });
