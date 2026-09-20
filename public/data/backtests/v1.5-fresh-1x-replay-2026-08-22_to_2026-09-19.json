@@ -1,0 +1,182 @@
+{
+  "window": {
+    "start": "2026-08-22",
+    "end": "2026-09-19",
+    "days": 29,
+    "label": "fresh v1.5 1X-only replay over completed matches in the requested 30-day lookback window"
+  },
+  "modelVersion": "1.5",
+  "type": "fresh-deterministic-1x-only-replay",
+  "marketPolicy": "1X only",
+  "dataSource": {
+    "name": "OpenFootball football.json",
+    "repository": "openfootball/football.json",
+    "season": "2026-27",
+    "leagues": [
+      "Premier League",
+      "Championship",
+      "Bundesliga",
+      "La Liga",
+      "Ligue 1",
+      "Serie A",
+      "Eredivisie",
+      "Liga Portugal"
+    ],
+    "files": [
+      "2026-27/en.1.json",
+      "2026-27/en.2.json",
+      "2026-27/de.1.json",
+      "2026-27/es.1.json",
+      "2026-27/fr.1.json",
+      "2026-27/it.1.json",
+      "2026-27/nl.1.json",
+      "2026-27/pt.1.json"
+    ]
+  },
+  "result": {
+    "fixturesScanned": 311,
+    "insufficientPreMatchEvidence": 189,
+    "rejectedBy1XFootballGate": 87,
+    "qualified1XPicks": 35,
+    "wins": 28,
+    "losses": 7,
+    "hitRate": 0.8,
+    "meanModelProbability": 0.8016824561,
+    "wilson95": {
+      "low": 0.6411,
+      "high": 0.8996
+    }
+  },
+  "byLeague": {
+    "Premier League": {
+      "picks": 0,
+      "wins": 0,
+      "hitRate": null
+    },
+    "Championship": {
+      "picks": 11,
+      "wins": 8,
+      "hitRate": 0.7273
+    },
+    "Bundesliga": {
+      "picks": 0,
+      "wins": 0,
+      "hitRate": null
+    },
+    "La Liga": {
+      "picks": 7,
+      "wins": 6,
+      "hitRate": 0.8571
+    },
+    "Ligue 1": {
+      "picks": 2,
+      "wins": 1,
+      "hitRate": 0.5
+    },
+    "Serie A": {
+      "picks": 1,
+      "wins": 1,
+      "hitRate": 1
+    },
+    "Eredivisie": {
+      "picks": 8,
+      "wins": 7,
+      "hitRate": 0.875
+    },
+    "Liga Portugal": {
+      "picks": 6,
+      "wins": 5,
+      "hitRate": 0.8333
+    }
+  },
+  "byHeat": {
+    "6/8": {
+      "picks": 1,
+      "wins": 1,
+      "hitRate": 1
+    },
+    "7/8": {
+      "picks": 9,
+      "wins": 6,
+      "hitRate": 0.6667
+    },
+    "8/8": {
+      "picks": 25,
+      "wins": 21,
+      "hitRate": 0.84
+    }
+  },
+  "losses": [
+    {
+      "date": "2026-09-02",
+      "league": "Championship",
+      "fixture": "Millwall vs Wrexham",
+      "result": "0-3",
+      "probability": 0.8126,
+      "heat": "8/8"
+    },
+    {
+      "date": "2026-09-05",
+      "league": "Championship",
+      "fixture": "QPR vs Middlesbrough",
+      "result": "0-1",
+      "probability": 0.7721,
+      "heat": "7/8"
+    },
+    {
+      "date": "2026-09-12",
+      "league": "Championship",
+      "fixture": "Watford vs Stoke",
+      "result": "1-2",
+      "probability": 0.7119,
+      "heat": "8/8"
+    },
+    {
+      "date": "2026-09-15",
+      "league": "La Liga",
+      "fixture": "Alaves vs Valencia",
+      "result": "0-1",
+      "probability": 0.9315,
+      "heat": "8/8"
+    },
+    {
+      "date": "2026-09-13",
+      "league": "Ligue 1",
+      "fixture": "Brest vs PSG",
+      "result": "0-1",
+      "probability": 0.7567,
+      "heat": "7/8"
+    },
+    {
+      "date": "2026-09-13",
+      "league": "Eredivisie",
+      "fixture": "Excelsior vs Utrecht",
+      "result": "1-2",
+      "probability": 0.809,
+      "heat": "8/8"
+    },
+    {
+      "date": "2026-09-12",
+      "league": "Liga Portugal",
+      "fixture": "Nacional vs Alverca",
+      "result": "1-3",
+      "probability": 0.7374,
+      "heat": "7/8"
+    }
+  ],
+  "replayRules": {
+    "chronology": "Each fixture used only earlier completed matches from the same season/league.",
+    "minimumHistory": "At least 3 earlier matches per team, at least 1 earlier home match for the home team, and at least 1 earlier away match for the away team.",
+    "lambda": "35% home team's recent GF + 35% away team's recent GA + 15% home venue GF + 15% away venue GA for lambda_H; mirrored calculation for lambda_A, clamped 0.20–3.50.",
+    "probability": "70% Poisson 1X probability + 15% recent empirical 1X support + 15% venue empirical 1X support.",
+    "footballGate": "1X probability >=65%; recent-form support >=60%; home/away support >=60%; goals profile lambda_H >= 0.9*lambda_A; Poisson 1X >=65%; both empirical support checks positive; Heat >=2.",
+    "settlement": "1X wins when home team wins or draws."
+  },
+  "limitations": [
+    "This is a fresh v1.5 1X-only replay and does not use older-version predictions.",
+    "Historical same-bookmaker price snapshots were not available in this dataset, so the +4pp no-vig edge and +5% EV gates were not applied.",
+    "Therefore 80.0% is the football-gate hit rate, not yet the fully price-verified Core hit rate.",
+    "Only the eight leagues available in a consistent 2026/27 machine-readable format were included.",
+    "The confidence interval is wide because there were only 35 qualified 1X selections."
+  ]
+}
