@@ -1,5 +1,5 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "effectiveDate": "2026-09-20",
   "timezone": "Africa/Johannesburg",
   "associationCount": 200,
@@ -12,13 +12,15 @@
     "topAssociationLimit": null,
     "providerCoverage": "best-effort",
     "selectionGate": "value-model-v1.3",
-    "fixtureSourceStrategy": "multi-source-global-board",
-    "minimumDistinctLeagues": 30,
-    "weekendTargetDistinctLeagues": 50,
-    "minimumFixturesBeforeRanking": 200,
-    "weekendTargetFixtures": 500,
+    "fixtureSourceStrategy": "multi-source-global-exhaustive",
+    "minimumDistinctLeagues": null,
+    "weekendTargetDistinctLeagues": null,
+    "minimumFixturesBeforeRanking": null,
+    "weekendTargetFixtures": null,
     "doNotStopAfterFirstCandidates": true,
-    "requireCoverageReport": true
+    "requireCoverageReport": true,
+    "scanAllAvailableLeagues": true,
+    "scanAllAvailableFixtures": true
   },
   "associations": [
     "England",
