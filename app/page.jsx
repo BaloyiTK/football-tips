@@ -134,7 +134,7 @@ export default function HomePage() {
           <div className="hero-card">
             <span>Daily process</span>
             <strong>06:00 SAST</strong>
-            <p>Maximum 6 Core picks, plus a football-qualified Watchlist when price confirmation is pending.</p>
+            <p>Every qualifying Core pick is published and rated, plus a football-qualified Watchlist when price confirmation is pending.</p>
           </div>
         </section>
 
@@ -172,6 +172,8 @@ export default function HomePage() {
                   <span><b>+{formatPercent(pick.value.edge)}</b><small>No-vig edge</small></span>
                   <span><b>+{formatPercent(pick.value.expectedValue)}</b><small>EV</small></span>
                   <span><b>{pick.heat}</b><small>Heat</small></span>
+                  <span><b>{pick.value.rating.toFixed(1)}</b><small>Rating /100</small></span>
+                  <span><b>{pick.value.ratingBand}</b><small>Grade</small></span>
                 </div>
                 <p>{pick.reason}</p>
               </article>
@@ -239,7 +241,7 @@ export default function HomePage() {
             <div><strong>01</strong><h3>Football First</h3><p>Form, home/away strength and xG/goals create the initial probability before price can remove a football-strong candidate.</p></div>
             <div><strong>02</strong><h3>Agreement & Floors</h3><p>Heat, model agreement, contradictions and selection floors decide whether a pick is Core-ready or stays on Watchlist.</p></div>
             <div><strong>03</strong><h3>Price Validation</h3><p>When a complete market snapshot exists, no-vig edge and EV decide whether a Core-ready football pick has enough price value.</p></div>
-            <div><strong>04</strong><h3>Three Grades</h3><p>CORE = football + value verified. WATCHLIST = football strong but confirmation pending. SKIP = football evidence itself is weak.</p></div>
+            <div><strong>04</strong><h3>Rate Every Core</h3><p>Every qualifying Core stays on the board and receives a 0–100 rating plus A+/A/B+/B/C band. WATCHLIST = football strong but confirmation pending. SKIP = football evidence itself is weak.</p></div>
           </div>
         </section>
 
