@@ -11,7 +11,7 @@
     ],
     "topAssociationLimit": null,
     "providerCoverage": "best-effort",
-    "selectionGate": "value-model-v1.4",
+    "selectionGate": "value-model-v1.5-1x-only",
     "fixtureSourceStrategy": "multi-source-global-exhaustive",
     "minimumDistinctLeagues": null,
     "weekendTargetDistinctLeagues": null,
@@ -20,7 +20,10 @@
     "doNotStopAfterFirstCandidates": true,
     "requireCoverageReport": true,
     "scanAllAvailableLeagues": true,
-    "scanAllAvailableFixtures": true
+    "scanAllAvailableFixtures": true,
+    "allowedMarkets": [
+      "1X"
+    ]
   },
   "associations": [
     "England",
