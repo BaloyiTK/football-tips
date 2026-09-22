@@ -1,35 +1,74 @@
 {
-  "date": "21 September 2026",
-  "dateISO": "2026-09-21",
+  "date": "22 September 2026",
+  "dateISO": "2026-09-22",
   "timezone": "Africa/Johannesburg",
   "modelVersion": "1.0",
   "publicationStatus": "published-open-ranking-best-effort",
   "runAtSAST": "06:00",
-  "editorialNote": "Open Ranking v1.0. No arbitrary rejection gates. Today starts the extended FIFA international window, so major domestic leagues are largely paused. Missing fields are reported rather than invented.",
+  "editorialNote": "Open Ranking v1.0. No arbitrary rejection gates. Extended FIFA international window leaves a reduced senior-men domestic-league board. Only fixtures still upcoming at the 06:00 SAST run are ranked. Missing evidence is reported, not invented.",
   "scanCoverage": {
     "configuredAssociations": 200,
-    "mode": "all-listed associations, all provider-supported domestic leagues, best-effort public-web discovery",
-    "fixturesAnalyzed": 1,
-    "coverageLimitations": "No connected structured global fixture/statistics provider is present in the repository. Public web indexing is incomplete across the configured associations, so exhaustive global coverage is not claimed."
+    "mode": "all-listed associations, all provider-supported domestic leagues, best-effort multi-source public-web discovery",
+    "leaguesDiscovered": 6,
+    "fixturesDiscovered": 11,
+    "fixturesAnalyzed": 3,
+    "coverageLimitations": "No connected structured global fixture/statistics provider is present. Public-web indexing is incomplete across the 200 configured associations. Cup, youth, women's and already-started/completed fixtures are excluded from the senior-men domestic-league ranked board; exhaustive global coverage is not claimed."
   },
   "candidates": [
     {
       "rank": 1,
-      "fixture": "Thimphu FC vs Ugyen Academy",
+      "fixture": "Dumbravita vs CSM Resita",
+      "association": "Romania",
+      "league": "Liga II",
+      "kickoff": "17:30 local Romania",
+      "market": "CSM Resita — Draw No Bet",
+      "classification": "RANKED",
+      "matchTeamForm": {"home":18.3,"away":56.0,"gap":-37.7,"homeOverallLast5":"D-D-L-L-L","homeVenueAvailable":"D-D-L-L (4 available)","awayOverallLast5":"W-L-W-W-L","awayVenueAvailable":"W-L-W (3 available)","note":"Venue samples contain fewer than five 2026 matches; available matches retain the specified recency weights and missing matches are not invented."},
+      "supportingMetrics": {"homeGoalsScored":0.8,"homeGoalsConceded":2.4,"awayGoalsScored":1.4,"awayGoalsConceded":1.4,"homeXG":0.91,"homeXGA":1.96,"awayXG":1.61,"awayXGA":1.28,"homeOpponentStrength":null,"awayOpponentStrength":null,"homeRecentTrend":33.3,"awayRecentTrend":-16.7},
+      "model": {"lambdaHome":1.095,"lambdaAway":1.785,"poissonHomeWin":0.232,"poissonDraw":0.233,"poissonAwayWin":0.535,"dnbAwayConditionalProbability":0.698,"probabilityEstimate":"69.8% CSM Resita DNB conditional win probability"},
+      "odds": null,
+      "score": 79.0,
+      "reason": "CSM Resita hold a 37.7-point available-sample Match Team Form advantage, materially stronger xG/xGA profile and 3-0-2 last-five record versus Dumbravita's 0-2-3. Poisson also leans away. DNB protects the substantial draw mass.",
+      "uncertainty": "Medium: venue samples have fewer than five 2026 matches; opponent-strength ratings, prices, market movement, team news, goalkeeper/set-piece and weather evidence were unavailable at publication time.",
+      "sources": ["https://nofluffpicks.com/uk/match/dumbravita-vs-csm-resita-2026-09-22","https://www.betclan.com/predictionsdetails/football/1602487/dumbr%C4%83vi%C5%A3a-v-csm-re%C5%9Fi%C5%A3a-prediction-h2h-tip-and-match-preview/"]
+    },
+    {
+      "rank": 2,
+      "fixture": "ASA Targu Mures vs CS Dinamo Bucuresti",
+      "association": "Romania",
+      "league": "Liga II",
+      "kickoff": "20:00 local Romania",
+      "market": "ASA Targu Mures or Draw — Double Chance",
+      "classification": "RANKED",
+      "matchTeamForm": {"home":48.3,"away":22.0,"gap":26.3,"homeOverallLast5":"D-W-L-W-D","homeVenueAvailable":"L-W-W (3 available)","awayOverallLast5":"L-W-L-L-L","awayVenueAvailable":"L-L-W-L (4 available)","note":"Venue samples contain fewer than five 2026 matches; available matches retain the specified recency weights and missing matches are not invented."},
+      "supportingMetrics": {"homeGoalsScored":1.4,"homeGoalsConceded":1.6,"awayGoalsScored":0.8,"awayGoalsConceded":3.2,"homeXG":1.19,"homeXGA":1.63,"awayXG":1.05,"awayXGA":1.91,"homeOpponentStrength":null,"awayOpponentStrength":null,"homeRecentTrend":22.2,"awayRecentTrend":50.0},
+      "model": {"lambdaHome":1.55,"lambdaAway":1.34,"poissonHomeWin":0.423,"poissonDraw":0.247,"poissonAwayWin":0.330,"probabilityEstimate":"67.0% home-or-draw from Poisson"},
+      "odds": null,
+      "score": 75.0,
+      "reason": "Targu Mures hold the available-sample form advantage, Dinamo have conceded 3.2 per match over their last five, and Targu Mures won both located recent H2Hs. Double Chance fits the model's meaningful draw probability.",
+      "uncertainty": "Medium: venue samples are incomplete; opponent-strength ratings, prices, market movement and several team-context fields unavailable.",
+      "sources": ["https://nofluffpicks.com/match/asa-targu-mures-vs-cs-dinamo-bucuresti-2026-09-22","https://www.telefootball.net/RO/Asa-Targu-Mures-CS-Dinamo-Bucuresti-2026-09-22-677971.html"]
+    },
+    {
+      "rank": 3,
+      "fixture": "RTC vs Tsirang",
       "association": "Bhutan",
       "league": "Bhutan Premier League",
-      "kickoff": "14:00 SAST",
-      "market": "Thimphu FC — Match Result",
-      "classification": "RANKED",
-      "matchTeamForm": {"home":72.0,"away":11.0,"gap":61.0,"homeOverallLast5":"W-W-W-W-L","homeVenueLast5":"W-W-L-D-L","awayOverallLast5":"L-L-L-L-L","awayVenueLast5":"L-D-L-L-W"},
-      "supportingMetrics": {"homeGoalsScored":2.09,"homeGoalsConceded":1.02,"awayGoalsScored":0.22,"awayGoalsConceded":4.25,"homeXG":null,"homeXGA":null,"awayXG":null,"awayXGA":null,"homeOpponentStrength":null,"awayOpponentStrength":null,"homeRecentTrend":33.3,"awayRecentTrend":0.0},
-      "model": {"lambdaHome":3.17,"lambdaAway":0.62,"poissonHomeWin":0.861,"poissonDraw":0.094,"poissonAwayWin":0.043,"probabilityEstimate":"86.1% home win"},
+      "kickoff": "22 September 2026",
+      "market": "RTC or Draw — Double Chance",
+      "classification": "RANKED_LOW_CONFIDENCE",
+      "matchTeamForm": {"home":null,"away":null,"gap":null,"homeOverallLast5":"D-W-L-L-L","homeVenueAvailable":null,"awayOverallLast5":"L-D-D-L-L","awayVenueAvailable":null,"note":"Reliable five-match home/away venue sequences were not located; final Match Team Form is therefore not fabricated."},
+      "supportingMetrics": {"homeGoalsScored":1.13,"homeGoalsConceded":1.13,"awayGoalsScored":1.56,"awayGoalsConceded":2.38,"homeXG":null,"homeXGA":null,"awayXG":null,"awayXGA":null,"homeOpponentStrength":null,"awayOpponentStrength":null,"homeRecentTrend":35.0,"awayRecentTrend":15.0},
+      "model": {"probabilityEstimate":null},
       "odds": null,
-      "score": 86.1,
-      "reason": "Thimphu carry a 61-point Match Team Form advantage. Their latest five verified league results are four wins and one loss; Ugyen's latest five are all losses. Ugyen recently lost 0-10 to Paro and 0-6 at Thimphu City. The located 2026 H2H was Ugyen Academy 2-4 Thimphu FC.",
-      "uncertainty": "Medium: xG/xGA, opponent-strength ratings, prices, team news, goalkeeper/set-piece data and market movement unavailable. Some feeds use Thimphu Raven FC while the match-specific source uses Thimphu FC.",
-      "sources": ["https://score808-pro.com/football/matches/2623134/thimphu-fc-vs-ugyen-academy","https://www.playmakerstats.com/match/2026-08-04-rtc-thimphu/12679744","https://www.rezilta.com/football/results/foot2955553.html","https://gioscore.com/football/match/transport-united-ugyen-academy/19880916"]
+      "score": 58.0,
+      "reason": "RTC sit above Tsirang, have the stronger recent overall result sequence, and are unbeaten in the five located H2Hs (2 wins, 3 draws). The protection market is preferred because three of those H2Hs were draws.",
+      "uncertainty": "High: venue-specific last-five, xG/xGA, prices and secondary team-context evidence unavailable.",
+      "sources": ["https://gioscore.com/football/match/rtc-tsirang/19880884","https://viasport.no/fotball/kamp/1636771"]
     }
   ],
-  "core": [{"rank":1,"fixture":"Thimphu FC vs Ugyen Academy","market":"Thimphu FC — Match Result","probability":"86.1%","uncertainty":"Medium"}]
+  "core": [
+    {"rank":1,"fixture":"Dumbravita vs CSM Resita","market":"CSM Resita — Draw No Bet","probability":"69.8% conditional DNB win","uncertainty":"Medium"},
+    {"rank":2,"fixture":"ASA Targu Mures vs CS Dinamo Bucuresti","market":"ASA Targu Mures or Draw","probability":"67.0%","uncertainty":"Medium"}
+  ]
 }
