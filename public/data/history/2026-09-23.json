@@ -1,0 +1,16 @@
+{
+  "date": "23 September 2026",
+  "dateISO": "2026-09-23",
+  "timezone": "Africa/Johannesburg",
+  "modelVersion": "1.0",
+  "publicationStatus": "published-open-ranking-best-effort",
+  "sourceCommit": "5f8561436a10168e6967230d0b5934c1d6a8560f",
+  "rankedBoard": [
+    {"rank":1,"fixture":"Thimphu City vs Transport United","league":"Bhutan Premier League","market":"Thimphu City or Draw","homeMatchTeamForm":93.33,"awayMatchTeamForm":61.00,"formGap":32.33,"probability":"77.9% Poisson 1X","score":88.0,"uncertainty":"Medium"},
+    {"rank":2,"fixture":"Bendel Insurance vs Ikorodu City","league":"Nigeria NPFL","market":"Bendel Insurance or Draw","homeMatchTeamForm":69.33,"awayMatchTeamForm":21.32,"formGap":48.01,"probability":"76% located pre-match 1X model","score":84.0,"uncertainty":"Medium"},
+    {"rank":3,"fixture":"Enugu Rangers vs Ranchers Bees","league":"Nigeria NPFL","market":"Enugu Rangers or Draw","homeMatchTeamForm":null,"awayMatchTeamForm":null,"formGap":null,"probability":"External models conflict; protected home side","score":73.0,"uncertainty":"High-medium"},
+    {"rank":4,"fixture":"Bregalnica Stip vs FK Skopje","league":"North Macedonia First League","market":"Bregalnica Stip or Draw","homeMatchTeamForm":null,"awayMatchTeamForm":null,"formGap":null,"probability":"External home-win models 64%-70%","score":70.0,"uncertainty":"High-medium"},
+    {"rank":5,"fixture":"Niger Tornadoes vs Warri Wolves","league":"Nigeria NPFL","market":"BTTS No","homeMatchTeamForm":null,"awayMatchTeamForm":null,"formGap":null,"probability":null,"score":63.0,"uncertainty":"High"}
+  ],
+  "coverageNote": "Best-effort public-web scan across the configured 200-association universe. No structured global fixture/statistics provider is connected, so exhaustive global coverage is not claimed."
+}
