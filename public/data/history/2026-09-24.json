@@ -1,0 +1,23 @@
+{
+  "date": "24 September 2026",
+  "dateISO": "2026-09-24",
+  "timezone": "Africa/Johannesburg",
+  "modelVersion": "1.0",
+  "publicationStatus": "published-open-ranking-best-effort",
+  "candidates": [
+    {
+      "rank": 1,
+      "fixture": "Ugyen Academy vs Drukpa FC",
+      "association": "Bhutan",
+      "league": "Bank of Bhutan Premier League",
+      "market": "Drukpa FC — Match Result",
+      "matchTeamForm": {"home":0.0,"away":47.0,"gap":-47.0,"homeOverallLast5":"L-L-L-L-L","homeLast5Home":"L-L-L-L-L","awayOverallLast5":"W-L-L-D-L","awayLast5Away":"W-L-W-D-L"},
+      "supportingMetrics": {"homeGoalsScored":0.42,"homeGoalsConceded":4.26,"awayGoalsScored":1.99,"awayGoalsConceded":1.84,"homeXG":null,"homeXGA":null,"awayXG":null,"awayXGA":null,"homeOpponentStrength":null,"awayOpponentStrength":null,"homeRecentTrend":0.0,"awayRecentTrend":38.9},
+      "probabilityEstimate":"76.6% Drukpa external pre-match model; 78.4% no-margin market",
+      "odds":{"home":9.90,"draw":7.30,"away":1.16},
+      "score":89.0,
+      "uncertainty":"Medium",
+      "sources":["https://www.footballstatscentral.com/country-bhutan-competition-premier-league-football-stats","https://www.betexplorer.com/football/team/ugyen-academy/dWbdNOyO/","https://www.betexplorer.com/football/team/drukpa/dzzrQvs2/","https://globalsportsarchive.com/en/soccer/team/namlha-fc/55238/matches","https://it.propickai.com/matches/football/butan-premer-liga/ugyen-academy-vs-drukpa-2026-09-24/"]
+    }
+  ]
+}
