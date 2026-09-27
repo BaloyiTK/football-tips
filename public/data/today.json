@@ -1,6 +1,6 @@
 {
-  "date": "24 September 2026",
-  "dateISO": "2026-09-24",
+  "date": "27 September 2026",
+  "dateISO": "2026-09-27",
   "timezone": "Africa/Johannesburg",
   "modelVersion": "1.0",
   "publicationStatus": "published-open-ranking-best-effort",
@@ -8,74 +8,127 @@
   "editorialNote": "Open Ranking v1.0. No arbitrary rejection gates. Senior-men domestic leagues only. Missing evidence lowers confidence and is shown as null rather than invented.",
   "scanCoverage": {
     "configuredAssociations": 200,
-    "mode": "all-listed associations, all publicly discoverable senior-men domestic leagues, best-effort multi-source web discovery",
-    "verifiedDomesticFixtures": 1,
-    "fixturesDeepAnalyzed": 1,
-    "coverageLimitations": "The extraordinary 20 September-10 October international window has paused many domestic leagues. No connected structured global fixture/statistics feed is available, so exhaustive coverage of all 200 configured associations cannot be guaranteed from public-web indexing. International, cup, youth and women's fixtures are excluded."
+    "mode": "all-listed associations; broad best-effort multi-source discovery across publicly indexed senior-men domestic leagues",
+    "fixturesDiscovered": 200,
+    "verifiedDomesticExamples": "MLS, NPFL, Bhutan Premier League, Liga MX, Liga de Expansion MX, Liga Panamena, Spain La Liga 2 and additional lower divisions",
+    "fixturesDeepAnalyzed": 2,
+    "coverageLimitations": "A global fixture page listed 200 matches today, but the project still has no connected structured global statistics provider. The extended international window also pauses many major domestic leagues. Discovery is broad but cannot be certified exhaustive across all 200 associations; international, cup, youth and women's fixtures are excluded."
   },
   "candidates": [
     {
       "rank": 1,
-      "fixture": "Ugyen Academy vs Drukpa FC",
-      "association": "Bhutan",
-      "league": "Bank of Bhutan Premier League",
-      "kickoff": "11:00 SAST (source times vary by listing; fixture verified for 24 Sep)",
-      "market": "Drukpa FC — Match Result",
+      "fixture": "Nashville SC vs Toronto FC",
+      "association": "United States",
+      "league": "Major League Soccer",
+      "kickoff": "02:30 SAST",
+      "market": "Nashville SC — Match Result",
       "classification": "RANKED",
       "matchTeamForm": {
-        "home": 0.0,
-        "away": 47.0,
-        "gap": -47.0,
-        "homeOverallLast5": "L-L-L-L-L",
-        "homeLast5Home": "L-L-L-L-L",
-        "awayOverallLast5": "W-L-L-D-L",
-        "awayLast5Away": "W-L-W-D-L"
+        "home": 78.66,
+        "away": 26.33,
+        "gap": 52.33,
+        "homeOverallLast5": "W-D-L-D-W",
+        "homeLast5Home": "W-W-W-W-W",
+        "awayOverallLast5": "L-L-W-D-D",
+        "awayLast5Away": "L-L-W-D-L"
       },
       "supportingMetrics": {
-        "homeGoalsScored": 0.42,
-        "homeGoalsConceded": 4.26,
-        "awayGoalsScored": 1.99,
-        "awayGoalsConceded": 1.84,
-        "homeXG": null,
+        "homeGoalsScored": 2.72,
+        "homeGoalsConceded": 0.69,
+        "awayGoalsScored": 1.07,
+        "awayGoalsConceded": 2.22,
+        "homeXG": 2.2,
         "homeXGA": null,
-        "awayXG": null,
+        "awayXG": 0.89,
         "awayXGA": null,
         "homeOpponentStrength": null,
         "awayOpponentStrength": null,
-        "homeRecentTrend": 0.0,
-        "awayRecentTrend": 38.9
+        "homeRecentTrend": 44.45,
+        "awayRecentTrend": -55.53
       },
       "model": {
-        "externalHomeWinProbability": 0.105,
-        "externalDrawProbability": 0.130,
-        "externalAwayWinProbability": 0.766,
-        "marketNoMarginAwayProbability": 0.784,
-        "probabilityEstimate": "76.6% Drukpa from located pre-match Glicko/model; market no-margin estimate 78.4%"
+        "probabilityEstimate": "67-74% Nashville win across located pre-match models; 86-88% 1X",
+        "externalHomeWinProbabilityRange": "0.67-0.74"
       },
       "odds": {
-        "home": 9.90,
-        "draw": 7.30,
-        "away": 1.16,
-        "source": "Leon consensus snapshot located pre-match"
+        "home": "1.36-1.50",
+        "draw": "4.75-4.90",
+        "away": "5.75-7.20"
       },
-      "score": 89.0,
-      "reason": "Ugyen Academy score 0.0 on compliant Match Team Form: five straight overall losses and five straight home losses. Drukpa score 47.0, producing a -47.0 home form gap. Weighted scoring diagnostics also favor Drukpa (1.99 scored vs Ugyen 0.42; Ugyen concede 4.26). Drukpa won the first 2026 H2H 4-0. The located pre-match model and no-margin market both put Drukpa around 77-78%.",
-      "uncertainty": "Medium: xG/xGA, opponent-strength ratings, detailed team news, goalkeeper/set-piece/weather inputs and opening-to-current market movement were not reliably available. Drukpa's recent overall form is mixed despite the strong matchup edge.",
+      "score": 92,
+      "reason": "Nashville have a +52.33 compliant Match Team Form gap and five straight home league wins in the located venue sample. Toronto have lost their two latest matches 3-1 and 3-0. Independent pre-match models cluster around 67-74% for Nashville, with market prices around 1.36-1.50.",
+      "uncertainty": "Medium. xGA, opponent-strength, goalkeeper/set-piece and complete opening-to-current market-move data were not consistently available.",
       "sources": [
-        "https://www.footballstatscentral.com/country-bhutan-competition-premier-league-football-stats",
-        "https://www.betexplorer.com/football/team/ugyen-academy/dWbdNOyO/",
-        "https://www.betexplorer.com/football/team/drukpa/dzzrQvs2/",
-        "https://globalsportsarchive.com/en/soccer/team/namlha-fc/55238/matches",
-        "https://it.propickai.com/matches/football/butan-premer-liga/ugyen-academy-vs-drukpa-2026-09-24/"
+        "https://www.skysports.com/football/nashville-sc-vs-toronto-fc/550613",
+        "https://www.thescore.com/uefa/teams/27-toronto-fc/schedule",
+        "https://footinsights.com/predictions/nashville-sc-vs-toronto-fc-2026-09-27/",
+        "https://www.telefootball.net/GB/Nashville-SC-Toronto-FC-2026-09-27-671750.html"
+      ]
+    },
+    {
+      "rank": 2,
+      "fixture": "Houston Dynamo vs Sporting Kansas City",
+      "association": "United States",
+      "league": "Major League Soccer",
+      "kickoff": "02:30 SAST",
+      "market": "Houston Dynamo — Match Result",
+      "classification": "RANKED",
+      "matchTeamForm": {
+        "home": 66.65,
+        "away": 22,
+        "gap": 44.65,
+        "homeOverallLast5": "D-L-W-D-D",
+        "homeLast5Home": "D-W-D-W-W",
+        "awayOverallLast5": "L-W-L-L-L",
+        "awayLast5Away": "L-L-L-L-L"
+      },
+      "supportingMetrics": {
+        "homeGoalsScored": 0.8,
+        "homeGoalsConceded": 0.8,
+        "awayGoalsScored": 2,
+        "awayGoalsConceded": 3,
+        "homeXG": 1.45,
+        "homeXGA": null,
+        "awayXG": 1.05,
+        "awayXGA": 2.06,
+        "homeOpponentStrength": null,
+        "awayOpponentStrength": null,
+        "homeRecentTrend": -11.13,
+        "awayRecentTrend": 50
+      },
+      "model": {
+        "probabilityEstimate": "61-69% Houston win across located market/model sources; 83-87% 1X",
+        "externalHomeWinProbabilityRange": "0.61-0.69"
+      },
+      "odds": {
+        "home": "1.42-1.60",
+        "draw": "4.00-4.65",
+        "away": "5.13-6.25"
+      },
+      "score": 88,
+      "reason": "Houston carry a +44.65 compliant Match Team Form gap. Sporting have lost five straight away league matches in the located data and their recent defensive profile is severe. Houston are 2nd in the West on 44 points versus Sporting 15th on 18. Models/market broadly agree on Houston as a strong favourite.",
+      "uncertainty": "Medium. Sporting's recent attack has improved, scoring nine across three matches, and Houston's latest overall form contains three draws; this prevents treating the home win as low-risk.",
+      "sources": [
+        "https://www.mutating.com/football-stats/match-preview-houston-dynamo-vs-sporting-kansas-city-stats-h2h-preview-and-prediction-bejafaf/",
+        "https://www.oddschecker.com/football/world/usa/mls/houston-dynamo-v-sporting-kansas-city/winner",
+        "https://footinsights.com/predictions/houston-dynamo-vs-sporting-kansas-city-2026-09-27/",
+        "https://oddslot.com/fr/football/match/major-league-soccer/houston-dynamo/sporting-kansas-city/27-sep-2026/"
       ]
     }
   ],
   "core": [
     {
       "rank": 1,
-      "fixture": "Ugyen Academy vs Drukpa FC",
-      "market": "Drukpa FC — Match Result",
-      "probability": "76.6% located pre-match model; 78.4% no-margin market",
+      "fixture": "Nashville SC vs Toronto FC",
+      "market": "Nashville SC — Match Result",
+      "probability": "67-74% located models",
+      "uncertainty": "Medium"
+    },
+    {
+      "rank": 2,
+      "fixture": "Houston Dynamo vs Sporting Kansas City",
+      "market": "Houston Dynamo — Match Result",
+      "probability": "61-69% located models",
       "uncertainty": "Medium"
     }
   ]
