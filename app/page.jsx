@@ -212,16 +212,16 @@ export default function HomePage() {
                 <h3>{pick.fixture}</h3>
                 <div className="market">{pick.market}</div>
                 <div className="metrics">
-                  <span><b>{pick.value.odds.toFixed(2)}</b><small>Odds</small></span>
-                  <span><b>{formatPercent(pick.value.modelProbability, 0)}</b><small>Model P</small></span>
-                  <span><b>{pick.value.fairOdds.toFixed(2)}</b><small>Fair odds</small></span>
-                  <span><b>+{formatPercent(pick.value.edge)}</b><small>No-vig edge</small></span>
-                  <span><b>+{formatPercent(pick.value.expectedValue)}</b><small>EV</small></span>
-                  <span><b>{pick.heat}</b><small>Heat</small></span>
-                  <span><b>{pick.value.footballStrength.toFixed(1)}</b><small>Football /100</small></span>
-                  <span><b>{pick.value.valueStrength.toFixed(1)}</b><small>Value /100</small></span>
-                  <span><b>{pick.value.rating.toFixed(1)}</b><small>Overall /100</small></span>
-                  <span><b>{pick.value.ratingBand}</b><small>Core rating</small></span>
+                  <span><b>{pick.value?.odds?.toFixed?.(2) ?? pick.odds ?? '—'}</b><small>Odds</small></span>
+                  <span><b>{pick.value?.modelProbability != null ? formatPercent(pick.value.modelProbability, 0) : displayProbability(pick.probability)}</b><small>Model P</small></span>
+                  <span><b>{pick.value?.fairOdds?.toFixed?.(2) ?? '—'}</b><small>Fair odds</small></span>
+                  <span><b>{pick.value?.edge != null ? `+${formatPercent(pick.value.edge)}` : '—'}</b><small>No-vig edge</small></span>
+                  <span><b>{pick.value?.expectedValue != null ? `+${formatPercent(pick.value.expectedValue)}` : '—'}</b><small>EV</small></span>
+                  <span><b>{pick.heat ?? '—'}</b><small>Heat</small></span>
+                  <span><b>{pick.value?.footballStrength?.toFixed?.(1) ?? pick.score ?? '—'}</b><small>Football /100</small></span>
+                  <span><b>{pick.value?.valueStrength?.toFixed?.(1) ?? '—'}</b><small>Value /100</small></span>
+                  <span><b>{pick.value?.rating?.toFixed?.(1) ?? pick.score ?? '—'}</b><small>Overall /100</small></span>
+                  <span><b>{pick.value?.ratingBand ?? pick.classification ?? '—'}</b><small>Core rating</small></span>
                 </div>
                 <p>{pick.reason}</p>
               </article>
