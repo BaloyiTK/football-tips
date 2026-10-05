@@ -89,16 +89,16 @@ function buildEmail(data) {
     .join('\n');
 
   return {
-    subject: `Football Tips — Core Picks — ${date}`,
+    subject: `FIH · Football Intelligence Hub — Core Picks — ${date}`,
     text:
-      `Football Tips — Core Picks — ${date}\n\n` +
+      `FIH · Football Intelligence Hub — Core Picks — ${date}\n\n` +
       (textLines || 'No Core picks were published today.') +
       '\n\nProbabilities are estimates, not guarantees. Bet responsibly.',
     html: `
       <div style="font-family:Arial,sans-serif;max-width:760px;margin:0 auto;color:#111827">
         <div style="background:#08101d;color:#ffffff;padding:24px;border-radius:14px 14px 0 0">
           <div style="font-size:12px;letter-spacing:.16em;color:#79ffa8;font-weight:800">
-            FOOTBALL TIPS · MODEL v${MODEL_VERSION}
+            FIH · FOOTBALL INTELLIGENCE HUB · MODEL v${MODEL_VERSION}
           </div>
           <h1 style="margin:8px 0 0;font-size:28px">Core Picks — ${escapeHtml(date)}</h1>
         </div>
@@ -119,7 +119,7 @@ function buildEmail(data) {
               : '<p>No Core picks were published today.</p>'
           }
           <p style="margin:18px 0 0;color:#6b7280;font-size:12px">
-            Selections are ranked by the current Football Tips three-pillar model; there are no automatic probability, EV or heat rejection gates.<br>
+            Selections are ranked by the current FIH three-pillar model; there are no automatic probability, EV or heat rejection gates.<br>
             Probabilities are estimates, not guarantees. Bet responsibly.
           </p>
         </div>
