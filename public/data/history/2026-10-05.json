@@ -1,0 +1,103 @@
+{
+  "date": "5 October 2026",
+  "dateISO": "2026-10-05",
+  "timezone": "Africa/Johannesburg",
+  "modelVersion": "1.0",
+  "publicationStatus": "published-manual-verified",
+  "runAtSAST": "06:00",
+  "editorialNote": "Frozen pre-match board recovered from the verified 5 October model run. Predictions are preserved; later actual results may be appended without changing the original picks.",
+  "candidates": [
+    {
+      "rank": 1,
+      "fixture": "Moss vs Kongsvinger",
+      "market": "Kongsvinger or Draw (X2)",
+      "kickoff": "—",
+      "classification": "RANKED",
+      "matchTeamForm": {
+        "home": 30.32,
+        "away": 67.33,
+        "gap": -37.01
+      },
+      "supportingMetrics": {
+        "homeGoalsScored": 1.8,
+        "homeGoalsConceded": 2.2,
+        "awayGoalsScored": 4.25,
+        "awayGoalsConceded": 1.35,
+        "homeXG": 1.34,
+        "homeXGA": 1.6,
+        "awayXG": 1.69,
+        "awayXGA": 1.41,
+        "homeRecentTrend": 5.57,
+        "awayRecentTrend": -11.12
+      },
+      "probability": 0.8264,
+      "odds": 1.21,
+      "score": 91,
+      "reason": "Kongsvinger held the much stronger Match Team Form profile in the verified pre-match run; X2 was selected to protect the draw while retaining the away-side edge.",
+      "sources": [
+        "NoFluffPicks",
+        "LiveScores Tips",
+        "ProfeGol",
+        "BetClan"
+      ]
+    },
+    {
+      "rank": 2,
+      "fixture": "Bogotá FC vs Envigado",
+      "market": "Under 2.5 Goals",
+      "kickoff": "—",
+      "classification": "RANKED",
+      "probability": "53–66%",
+      "odds": "1.47–1.74",
+      "score": 76,
+      "reason": "The verified pre-match evidence supported a lower-scoring profile, making Under 2.5 the preferred market.",
+      "sources": [
+        "NoFluffPicks",
+        "LiveScores Tips",
+        "ProfeGol",
+        "BetClan"
+      ]
+    },
+    {
+      "rank": 3,
+      "fixture": "Llaneros vs América de Cali",
+      "market": "América de Cali or Draw (X2)",
+      "kickoff": "—",
+      "classification": "RANKED",
+      "probability": "43–46% away win",
+      "odds": "2.10–2.22 away-win reference",
+      "score": 70,
+      "reason": "América carried the stronger side profile; X2 was used instead of forcing the away win.",
+      "sources": [
+        "NoFluffPicks",
+        "LiveScores Tips",
+        "ProfeGol",
+        "BetClan"
+      ]
+    }
+  ],
+  "core": [
+    {
+      "rank": 1,
+      "fixture": "Moss vs Kongsvinger",
+      "market": "Kongsvinger or Draw (X2)",
+      "probability": "82.64%",
+      "uncertainty": "Medium"
+    },
+    {
+      "rank": 2,
+      "fixture": "Bogotá FC vs Envigado",
+      "market": "Under 2.5 Goals",
+      "probability": "53–66%",
+      "uncertainty": "Medium"
+    },
+    {
+      "rank": 3,
+      "fixture": "Llaneros vs América de Cali",
+      "market": "América de Cali or Draw (X2)",
+      "probability": "43–46% away-win reference",
+      "uncertainty": "Medium"
+    }
+  ],
+  "resultsSummary": null
+}
