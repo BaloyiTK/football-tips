@@ -15,10 +15,12 @@ import {
   calculateH2HWithAge,
   calculateAttackDefence,
   calculateThreePillarPrediction,
+  calibrateSupportedSelection,
+  rateCalibratedSelection,
 } from '../lib/value-model.js';
 
-test('uses reset model v1.0', () => {
-  assert.equal(MODEL_VERSION, '1.0');
+test('uses calibrated selector model v2.4', () => {
+  assert.equal(MODEL_VERSION, '2.4.0-calibrated-selector');
 });
 
 test('WWWWW scores 100 percent', () => {
@@ -162,4 +164,90 @@ test('three-pillar prediction uses P3 xG then P1 and P2 adjustments', () => {
   assert.equal(result.finalXG.home,1.6);
   assert.equal(result.finalXG.away,1.88);
   assert.equal(result.predictedOutcome,'away');
+});
+
+
+test('v2.4 keeps Italy 1X strong without market override', () => {
+  const result = calibrateSupportedSelection({
+    rawProbability: 0.942,
+    reliability: 0.873,
+    confidence: 'low',
+    competitionType: 'international',
+    lambdaHome: 2.65,
+    lambdaAway: 0.61,
+  });
+  assert.equal(result.status, 'PUBLISH');
+  assert.equal(result.publishable, true);
+  assert.ok(result.calibratedProbability > 0.80);
+  assert.equal(rateCalibratedSelection(result.calibratedProbability), 'Strong');
+});
+
+test('v2.4 keeps Romania over 1.5 strong', () => {
+  const result = calibrateSupportedSelection({
+    rawProbability: 0.941,
+    reliability: 0.856,
+    confidence: 'low',
+    competitionType: 'international',
+    lambdaHome: 1.64,
+    lambdaAway: 2.81,
+  });
+  assert.equal(result.status, 'PUBLISH');
+  assert.ok(result.calibratedProbability > 0.78);
+});
+
+test('v2.4 keeps Japan 1X good with friendly uncertainty shrink', () => {
+  const result = calibrateSupportedSelection({
+    rawProbability: 0.845,
+    reliability: 0.873,
+    confidence: 'low',
+    competitionType: 'friendly',
+    lambdaHome: 2.25,
+    lambdaAway: 1.04,
+  });
+  assert.equal(result.status, 'PUBLISH');
+  assert.ok(result.calibratedProbability >= 0.70);
+  assert.equal(rateCalibratedSelection(result.calibratedProbability), 'Good');
+});
+
+test('v2.4 quarantines Gibraltar confidence when lambda and market diverge', () => {
+  const result = calibrateSupportedSelection({
+    rawProbability: 0.992,
+    reliability: 0.873,
+    confidence: 'low',
+    competitionType: 'friendly',
+    marketProbability: 0.79,
+    lambdaHome: 0.20,
+    lambdaAway: 3.25,
+  });
+  assert.equal(result.status, 'REVIEW');
+  assert.equal(result.publishable, false);
+  assert.equal(result.lambdaOutlier, true);
+  assert.ok(result.flags.includes('high-lambda'));
+  assert.ok(result.flags.includes('low-lambda'));
+  assert.ok(result.calibratedProbability < 0.86);
+});
+
+test('v2.4 uses WATCH before REVIEW for moderate market disagreement', () => {
+  const result = calibrateSupportedSelection({
+    rawProbability: 0.82,
+    reliability: 0.90,
+    confidence: 'medium',
+    competitionType: 'club',
+    marketProbability: 0.60,
+    lambdaHome: 1.8,
+    lambdaAway: 0.9,
+  });
+  assert.equal(result.status, 'WATCH');
+  assert.equal(result.publishable, true);
+  assert.ok(result.flags.includes('market-divergence'));
+});
+
+test('v2.4 makes poor data an explicit NO_BET', () => {
+  const result = calibrateSupportedSelection({
+    rawProbability: 0.90,
+    reliability: 0.90,
+    dataQuality: 'poor',
+  });
+  assert.equal(result.status, 'NO_BET');
+  assert.equal(result.publishable, false);
 });
