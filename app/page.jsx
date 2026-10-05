@@ -23,6 +23,8 @@ function displayProbability(value) {
 export default function HomePage() {
   const [data, setData] = useState(emptyData);
   const [loading, setLoading] = useState(true);
+  const [selectedDate, setSelectedDate] = useState(sastTodayKey());
+  const [historyError, setHistoryError] = useState('');
   const [email, setEmail] = useState('');
   const [consent, setConsent] = useState(false);
   const [subscribeState, setSubscribeState] = useState({
@@ -41,13 +43,23 @@ export default function HomePage() {
   const isStale = Boolean(data.dateISO && data.dateISO !== sastTodayKey());
 
   useEffect(() => {
-    fetch('/data/today.json', { cache: 'no-store' })
+    const today = sastTodayKey();
+    const source = selectedDate === today
+      ? '/data/today.json'
+      : `/data/history/${selectedDate}.json`;
+
+    setLoading(true);
+    setHistoryError('');
+    fetch(source, { cache: 'no-store' })
       .then((response) => {
-        if (!response.ok) throw new Error('Could not load today\'s picks.');
+        if (!response.ok) throw new Error(selectedDate === today ? 'Could not load today\'s picks.' : 'No archived prediction is available for this date.');
         return response.json();
       })
       .then(setData)
-      .catch(() => setData(emptyData))
+      .catch((error) => {
+        setData(emptyData);
+        setHistoryError(error instanceof Error ? error.message : 'Could not load prediction history.');
+      })
       .finally(() => setLoading(false));
 
     const params = new URLSearchParams(window.location.search);
@@ -69,7 +81,7 @@ export default function HomePage() {
         message: 'We could not confirm the subscription. Please try again.',
       });
     }
-  }, []);
+  }, [selectedDate]);
 
   async function handleSubscribe(event) {
     event.preventDefault();
@@ -149,10 +161,12 @@ export default function HomePage() {
               <span className="eyebrow">TODAY</span>
               <h2>{data.date || 'Daily Picks'}</h2>
             </div>
-            <span className="pill">v1.0 · OPEN RANKING MODEL</span>
+            <div className="date-picker"><label htmlFor="prediction-date">Prediction date</label><input id="prediction-date" type="date" value={selectedDate} max={sastTodayKey()} onChange={(event) => setSelectedDate(event.target.value)} /></div>
           </div>
 
           {loading ? <p className="muted">Loading picks…</p> : null}
+          {!loading && historyError ? <div className="status-banner warning"><strong>{historyError}</strong><span>Choose another archived date.</span></div> : null}
+          {!loading && data.resultsSummary ? <div className="status-banner"><strong>Results: {data.resultsSummary.wins ?? 0} wins / {data.resultsSummary.losses ?? 0} losses</strong><span>Win rate: {data.resultsSummary.winRate ?? '—'}</span></div> : null}
 
           {!loading && data.runAtSAST ? (
             <div className="status-banner">
