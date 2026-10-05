@@ -32,7 +32,10 @@ export default function HomePage() {
     message: '',
   });
   const candidates = data.candidates ?? [];
-  const computedSelection = useMemo(() => selectCorePicks(candidates), [candidates]);
+  const computedSelection = useMemo(() => {
+    const valueCandidates = candidates.filter((pick) => pick?.value && Number.isFinite(pick.value.odds));
+    return valueCandidates.length > 0 ? selectCorePicks(valueCandidates) : { core: [], watchlist: [], skip: [] };
+  }, [candidates]);
   const publishedCore = Array.isArray(data.core) ? data.core : [];
   const publishedWatchlist = candidates.filter((pick) => String(pick.classification || '').toUpperCase() === 'WATCHLIST');
   const valueSelection = {
