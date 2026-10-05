@@ -1,8 +1,8 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'Football Tips',
-  description: 'Daily football tips powered by a disciplined football-first model.',
+  title: 'FIH — Football Intelligence Hub',
+  description: 'Football Intelligence Hub: daily football predictions powered by the FIH three-pillar model.',
 };
 
 export default function RootLayout({ children }) {
