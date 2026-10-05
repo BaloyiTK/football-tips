@@ -46,8 +46,14 @@ function buildEmail(data) {
     : Array.isArray(data?.core)
       ? data.core
       : [];
-  const selection = selectCorePicks(candidates);
-  const core = selection.core;
+  const publishedCore = Array.isArray(data?.core) ? data.core : [];
+  const valueCandidates = candidates.filter(
+    (pick) => pick?.value && Number.isFinite(Number(pick.value.odds))
+  );
+  const selection = valueCandidates.length
+    ? selectCorePicks(valueCandidates)
+    : { core: [], rejected: [], belowCut: [] };
+  const core = publishedCore.length ? publishedCore : selection.core;
   const date = data?.date || sastDateKey();
 
   const rows = core
@@ -65,11 +71,9 @@ function buildEmail(data) {
             ${escapeHtml(pick.market)}
           </td>
           <td style="padding:12px;border-bottom:1px solid #e5e7eb;font-weight:700">
-            ${escapeHtml(pick.value.odds.toFixed(2))}<br>
+            ${escapeHtml(pick.value?.odds?.toFixed?.(2) ?? pick.odds ?? '—')}<br>
             <span style="color:#6b7280;font-weight:400">
-              Fair ${escapeHtml(pick.value.fairOdds.toFixed(2))} ·
-              Edge +${escapeHtml(formatPercent(pick.value.edge))} ·
-              EV +${escapeHtml(formatPercent(pick.value.expectedValue))}
+              Model ${escapeHtml(pick.value?.modelProbability != null ? formatPercent(pick.value.modelProbability, 0) : (pick.probability ?? '—'))}
             </span>
           </td>
         </tr>`
@@ -79,9 +83,8 @@ function buildEmail(data) {
   const textLines = core
     .map(
       (pick, index) =>
-        `${index + 1}. ${pick.fixture} — ${pick.market} @ ${pick.value.odds.toFixed(2)} — ` +
-        `Model ${formatPercent(pick.value.modelProbability, 0)} — Fair ${pick.value.fairOdds.toFixed(2)} — ` +
-        `Edge +${formatPercent(pick.value.edge)} — EV +${formatPercent(pick.value.expectedValue)} — ${pick.kickoff}`
+        `${index + 1}. ${pick.fixture} — ${pick.market} @ ${pick.value?.odds?.toFixed?.(2) ?? pick.odds ?? '—'} — ` +
+        `Model ${pick.value?.modelProbability != null ? formatPercent(pick.value.modelProbability, 0) : (pick.probability ?? '—')} — ${pick.kickoff ?? 'KO pending'}`
     )
     .join('\n');
 
@@ -116,7 +119,7 @@ function buildEmail(data) {
               : '<p>No Core picks were published today.</p>'
           }
           <p style="margin:18px 0 0;color:#6b7280;font-size:12px">
-            Only selections with at least 65% model probability, +4pp no-vig edge and +5% EV are published as Core.<br>
+            Selections are ranked by the current Football Tips three-pillar model; there are no automatic probability, EV or heat rejection gates.<br>
             Probabilities are estimates, not guarantees. Bet responsibly.
           </p>
         </div>
@@ -124,7 +127,7 @@ function buildEmail(data) {
     `,
     corePublished: core.length,
     candidatesChecked: candidates.length,
-    withheld: selection.rejected.length + selection.belowCut.length,
+    withheld: (selection.rejected?.length ?? 0) + (selection.belowCut?.length ?? 0),
   };
 }
 
