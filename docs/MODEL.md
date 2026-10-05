@@ -1,4 +1,4 @@
-# Football Tips v1.0 — Three-Pillar xG Model
+# FIH v1.0 — Three-Pillar xG Model
 
 The model has exactly three predictive pillars and one final prediction path.
 
@@ -38,3 +38,11 @@ The three-pillar rating is no longer used to declare a winner.
 
 ## Backtesting
 Historical tests reconstruct only information available before kickoff, using the requested 06:00 SAST snapshot. Final results are used only for grading. Formulas are frozen before viewing backtest performance.
+
+
+## FIH project boundary
+FIH is an independent football-intelligence project. Rules, limits, thresholds, staking logic, ticket formats, or selection caps from other betting workflows are not part of FIH unless they are explicitly added to this repository and tested here.
+
+There is no fixed maximum number of daily predictions. The daily board preserves every fixture that the FIH pipeline successfully models, while No Bet / No Model states remain visible when applicable. Missing data must never be replaced with invented inputs.
+
+The daily publication contract is: verified fixture board -> P1 Team Form -> P2 H2H -> P3 Attack vs Defence -> adjusted xG -> Poisson -> prediction/ranking -> dated history -> today.json -> production verification -> subscriber delivery.
