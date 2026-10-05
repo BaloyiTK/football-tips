@@ -133,7 +133,7 @@ export default function HomePage() {
   return (
     <div className="site-shell">
       <header className="topbar">
-        <a href="#top" className="brand">FOOTBALL TIPS</a>
+        <a href="#top" className="brand">FIH</a>
         <nav>
           <a href="#picks">Today's Picks</a>
           <a href="#method">Model</a>
@@ -145,9 +145,9 @@ export default function HomePage() {
         <section className="hero">
           <div>
             <span className="eyebrow">FOOTBALL-FIRST ANALYSIS</span>
-            <h1>Daily football analysis ranked from strongest to weakest.</h1>
+            <h1>Football Intelligence Hub — daily modelled football analysis ranked from strongest to weakest.</h1>
             <p>
-              Football Tips v1.0 has no hard rejection rules. We analyze the available board, compare form, team strength, goals/xG, prices and context, then rank the strongest opportunities.
+              FIH v1.0 has no hard rejection rules. We analyze the available board, compare form, team strength, goals/xG, prices and context, then rank the strongest opportunities.
             </p>
             <a className="cta" href="#picks">View today's ranked picks</a>
           </div>
@@ -295,7 +295,7 @@ export default function HomePage() {
 
         <section id="method" className="section model-section">
           <span className="eyebrow">THE MODEL</span>
-          <h2>Football Tips v1.0</h2>
+          <h2>FIH v1.0</h2>
           <div className="model-grid">
             <div><strong>01</strong><h3>No Hard Market Rule</h3><p>Any football market may be considered when the data supports it.</p></div>
             <div><strong>02</strong><h3>No Automatic Reject Gates</h3><p>No fixed probability, EV, heat, contradiction, away-threat or model-agreement threshold automatically removes a match.</p></div>
@@ -366,7 +366,7 @@ export default function HomePage() {
       </main>
 
       <footer>
-        <span>Football Tips</span>
+        <span>FIH · Football Intelligence Hub</span>
         <p>Probabilities are estimates, not guarantees. Bet responsibly.</p>
       </footer>
     </div>
