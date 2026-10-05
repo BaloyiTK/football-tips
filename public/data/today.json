@@ -1,135 +1,103 @@
 {
-  "date": "27 September 2026",
-  "dateISO": "2026-09-27",
+  "date": "5 October 2026",
+  "dateISO": "2026-10-05",
   "timezone": "Africa/Johannesburg",
   "modelVersion": "1.0",
-  "publicationStatus": "published-open-ranking-best-effort",
+  "publicationStatus": "published-manual-verified",
   "runAtSAST": "06:00",
-  "editorialNote": "Open Ranking v1.0. No arbitrary rejection gates. Senior-men domestic leagues only. Missing evidence lowers confidence and is shown as null rather than invented.",
-  "scanCoverage": {
-    "configuredAssociations": 200,
-    "mode": "all-listed associations; broad best-effort multi-source discovery across publicly indexed senior-men domestic leagues",
-    "fixturesDiscovered": 200,
-    "verifiedDomesticExamples": "MLS, NPFL, Bhutan Premier League, Liga MX, Liga de Expansion MX, Liga Panamena, Spain La Liga 2 and additional lower divisions",
-    "fixturesDeepAnalyzed": 2,
-    "coverageLimitations": "A global fixture page listed 200 matches today, but the project still has no connected structured global statistics provider. The extended international window also pauses many major domestic leagues. Discovery is broad but cannot be certified exhaustive across all 200 associations; international, cup, youth and women's fixtures are excluded."
-  },
+  "editorialNote": "Frozen pre-match board recovered from the verified 5 October model run. Predictions are preserved; later actual results may be appended without changing the original picks.",
   "candidates": [
     {
       "rank": 1,
-      "fixture": "Nashville SC vs Toronto FC",
-      "association": "United States",
-      "league": "Major League Soccer",
-      "kickoff": "02:30 SAST",
-      "market": "Nashville SC — Match Result",
+      "fixture": "Moss vs Kongsvinger",
+      "market": "Kongsvinger or Draw (X2)",
+      "kickoff": "—",
       "classification": "RANKED",
       "matchTeamForm": {
-        "home": 78.66,
-        "away": 26.33,
-        "gap": 52.33,
-        "homeOverallLast5": "W-D-L-D-W",
-        "homeLast5Home": "W-W-W-W-W",
-        "awayOverallLast5": "L-L-W-D-D",
-        "awayLast5Away": "L-L-W-D-L"
+        "home": 30.32,
+        "away": 67.33,
+        "gap": -37.01
       },
       "supportingMetrics": {
-        "homeGoalsScored": 2.72,
-        "homeGoalsConceded": 0.69,
-        "awayGoalsScored": 1.07,
-        "awayGoalsConceded": 2.22,
-        "homeXG": 2.2,
-        "homeXGA": null,
-        "awayXG": 0.89,
-        "awayXGA": null,
-        "homeOpponentStrength": null,
-        "awayOpponentStrength": null,
-        "homeRecentTrend": 44.45,
-        "awayRecentTrend": -55.53
+        "homeGoalsScored": 1.8,
+        "homeGoalsConceded": 2.2,
+        "awayGoalsScored": 4.25,
+        "awayGoalsConceded": 1.35,
+        "homeXG": 1.34,
+        "homeXGA": 1.6,
+        "awayXG": 1.69,
+        "awayXGA": 1.41,
+        "homeRecentTrend": 5.57,
+        "awayRecentTrend": -11.12
       },
-      "model": {
-        "probabilityEstimate": "67-74% Nashville win across located pre-match models; 86-88% 1X",
-        "externalHomeWinProbabilityRange": "0.67-0.74"
-      },
-      "odds": {
-        "home": "1.36-1.50",
-        "draw": "4.75-4.90",
-        "away": "5.75-7.20"
-      },
-      "score": 92,
-      "reason": "Nashville have a +52.33 compliant Match Team Form gap and five straight home league wins in the located venue sample. Toronto have lost their two latest matches 3-1 and 3-0. Independent pre-match models cluster around 67-74% for Nashville, with market prices around 1.36-1.50.",
-      "uncertainty": "Medium. xGA, opponent-strength, goalkeeper/set-piece and complete opening-to-current market-move data were not consistently available.",
+      "probability": 0.8264,
+      "odds": 1.21,
+      "score": 91,
+      "reason": "Kongsvinger held the much stronger Match Team Form profile in the verified pre-match run; X2 was selected to protect the draw while retaining the away-side edge.",
       "sources": [
-        "https://www.skysports.com/football/nashville-sc-vs-toronto-fc/550613",
-        "https://www.thescore.com/uefa/teams/27-toronto-fc/schedule",
-        "https://footinsights.com/predictions/nashville-sc-vs-toronto-fc-2026-09-27/",
-        "https://www.telefootball.net/GB/Nashville-SC-Toronto-FC-2026-09-27-671750.html"
+        "NoFluffPicks",
+        "LiveScores Tips",
+        "ProfeGol",
+        "BetClan"
       ]
     },
     {
       "rank": 2,
-      "fixture": "Houston Dynamo vs Sporting Kansas City",
-      "association": "United States",
-      "league": "Major League Soccer",
-      "kickoff": "02:30 SAST",
-      "market": "Houston Dynamo — Match Result",
+      "fixture": "Bogotá FC vs Envigado",
+      "market": "Under 2.5 Goals",
+      "kickoff": "—",
       "classification": "RANKED",
-      "matchTeamForm": {
-        "home": 66.65,
-        "away": 22,
-        "gap": 44.65,
-        "homeOverallLast5": "D-L-W-D-D",
-        "homeLast5Home": "D-W-D-W-W",
-        "awayOverallLast5": "L-W-L-L-L",
-        "awayLast5Away": "L-L-L-L-L"
-      },
-      "supportingMetrics": {
-        "homeGoalsScored": 0.8,
-        "homeGoalsConceded": 0.8,
-        "awayGoalsScored": 2,
-        "awayGoalsConceded": 3,
-        "homeXG": 1.45,
-        "homeXGA": null,
-        "awayXG": 1.05,
-        "awayXGA": 2.06,
-        "homeOpponentStrength": null,
-        "awayOpponentStrength": null,
-        "homeRecentTrend": -11.13,
-        "awayRecentTrend": 50
-      },
-      "model": {
-        "probabilityEstimate": "61-69% Houston win across located market/model sources; 83-87% 1X",
-        "externalHomeWinProbabilityRange": "0.61-0.69"
-      },
-      "odds": {
-        "home": "1.42-1.60",
-        "draw": "4.00-4.65",
-        "away": "5.13-6.25"
-      },
-      "score": 88,
-      "reason": "Houston carry a +44.65 compliant Match Team Form gap. Sporting have lost five straight away league matches in the located data and their recent defensive profile is severe. Houston are 2nd in the West on 44 points versus Sporting 15th on 18. Models/market broadly agree on Houston as a strong favourite.",
-      "uncertainty": "Medium. Sporting's recent attack has improved, scoring nine across three matches, and Houston's latest overall form contains three draws; this prevents treating the home win as low-risk.",
+      "probability": "53–66%",
+      "odds": "1.47–1.74",
+      "score": 76,
+      "reason": "The verified pre-match evidence supported a lower-scoring profile, making Under 2.5 the preferred market.",
       "sources": [
-        "https://www.mutating.com/football-stats/match-preview-houston-dynamo-vs-sporting-kansas-city-stats-h2h-preview-and-prediction-bejafaf/",
-        "https://www.oddschecker.com/football/world/usa/mls/houston-dynamo-v-sporting-kansas-city/winner",
-        "https://footinsights.com/predictions/houston-dynamo-vs-sporting-kansas-city-2026-09-27/",
-        "https://oddslot.com/fr/football/match/major-league-soccer/houston-dynamo/sporting-kansas-city/27-sep-2026/"
+        "NoFluffPicks",
+        "LiveScores Tips",
+        "ProfeGol",
+        "BetClan"
+      ]
+    },
+    {
+      "rank": 3,
+      "fixture": "Llaneros vs América de Cali",
+      "market": "América de Cali or Draw (X2)",
+      "kickoff": "—",
+      "classification": "RANKED",
+      "probability": "43–46% away win",
+      "odds": "2.10–2.22 away-win reference",
+      "score": 70,
+      "reason": "América carried the stronger side profile; X2 was used instead of forcing the away win.",
+      "sources": [
+        "NoFluffPicks",
+        "LiveScores Tips",
+        "ProfeGol",
+        "BetClan"
       ]
     }
   ],
   "core": [
     {
       "rank": 1,
-      "fixture": "Nashville SC vs Toronto FC",
-      "market": "Nashville SC — Match Result",
-      "probability": "67-74% located models",
+      "fixture": "Moss vs Kongsvinger",
+      "market": "Kongsvinger or Draw (X2)",
+      "probability": "82.64%",
       "uncertainty": "Medium"
     },
     {
       "rank": 2,
-      "fixture": "Houston Dynamo vs Sporting Kansas City",
-      "market": "Houston Dynamo — Match Result",
-      "probability": "61-69% located models",
+      "fixture": "Bogotá FC vs Envigado",
+      "market": "Under 2.5 Goals",
+      "probability": "53–66%",
+      "uncertainty": "Medium"
+    },
+    {
+      "rank": 3,
+      "fixture": "Llaneros vs América de Cali",
+      "market": "América de Cali or Draw (X2)",
+      "probability": "43–46% away-win reference",
       "uncertainty": "Medium"
     }
-  ]
+  ],
+  "resultsSummary": null
 }
